@@ -67,7 +67,7 @@
             <column name="orders_id" type="int" >
                 <constraints nullable="false" primaryKey="true"/>
             </column>
-            <column name="books_id" type="varchar(13)" >
+            <column name="books_id" type="varchar(14)" >
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="quantity" type="int">
