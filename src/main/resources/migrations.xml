@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="1" author="max">
+        <!--create tables -->
+        <createTable tableName="users">
+            <column name="id" type="varchar(255)" >
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="email" type="varchar(80)">
+                <constraints nullable="false" />
+            </column>
+            <column name="pwd" type="varchar(20)">
+                <constraints nullable="false" />
+            </column>
+            <column name="personnal_adr_id" type="int"/>
+        </createTable>
+
+        <createTable tableName="mailing_addresses">
+            <column name="id" type="int" autoIncrement="true" >
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="zip" type="varchar(10)">
+                <constraints nullable="false" />
+            </column>
+            <column name="city" type="varchar(45)">
+                <constraints nullable="false" />
+            </column>
+            <column name="line1" type="varchar(80)">
+                <constraints nullable="false" />
+            </column>
+            <column name="line2" type="varchar(80)"/>
+            <column name="line3" type="varchar(80)"/>
+        </createTable>
+
+        <createTable tableName="authors">
+            <column name="id" type="int" autoIncrement="true" >
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="first_name" type="varchar(35)">
+                <constraints nullable="false" />
+            </column>
+            <column name="last_name" type="varchar(35)">
+                <constraints nullable="false" />
+            </column>
+            <column name="birth_date" type="date"/>
+        </createTable>
+
+        <createTable tableName="books">
+            <column name="isbn13" type="varchar(14)" >
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="title" type="varchar(50)">
+                <constraints nullable="false" />
+            </column>
+            <column name="unit_price" type="decimal(9,2)"/>
+            <column name="editor" type="varchar(20)"/>
+            <column name="authors_id" type="int"/>
+        </createTable>
+
+        <createTable tableName="order_lines">
+            <column name="orders_id" type="int" >
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="books_id" type="varchar(13)" >
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="quantity" type="int">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+
+        <createTable tableName="orders">
+            <column name="id" type="int" autoIncrement="true" >
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="users_login" type="varchar(30)" />
+            <column name="order_date" type="timestamp" />
+            <column name="shipping_adr_id" type="int" />
+        </createTable>
+
+        <!--insert datas-->
+        <insert tableName="authors">
+            <column name="id" value="1"/>
+            <column name="first_name" value="Schincariol"/>
+            <column name="last_name" value="Merick"/>
+            <column name="birth_date" value="1981-12-28"/>
+        </insert>
+        <insert tableName="authors">
+            <column name="id" value="2"/>
+            <column name="first_name" value="Keith"/>
+            <column name="last_name" value="Mike"/>
+            <column name="birth_date" value="1978-01-01"/>
+        </insert>
+        <insert tableName="authors">
+            <column name="id" value="3"/>
+            <column name="first_name" value="Bradbury"/>
+            <column name="last_name" value="Ray"/>
+            <column name="birth_date" value="1920-08-22"/>
+        </insert>
+        <insert tableName="authors">
+            <column name="id" value="4"/>
+            <column name="first_name" value="Poe"/>
+            <column name="last_name" value="Edgar Allan"/>
+            <column name="birth_date" value="1809-01-19"/>
+        </insert>
+        <insert tableName="authors">
+            <column name="id" value="5"/>
+            <column name="first_name" value="Baudelaire"/>
+            <column name="last_name" value="Charles"/>
+            <column name="birth_date" value="1821-04-09"/>
+        </insert>
+        <insert tableName="authors">
+            <column name="id" value="6"/>
+            <column name="first_name" value="Sennesal"/>
+            <column name="last_name" value="Francois-Xavier"/>
+            <column name="birth_date" />
+        </insert>
+
+        <insert tableName="books">
+            <column name="isbn13" value="978-1430219569"/>
+            <column name="title" value="Pro JPA 2: Mastering the Java Persistence API"/>
+            <column name="unit_price" value="40.84"/>
+            <column name="editor" value="APress"/>
+            <column name="authors_id" value="1"/>
+        </insert>
+        <insert tableName="books">
+            <column name="isbn13" value="978-1932394887"/>
+            <column name="title" value="Java Persistence with Hibernate"/>
+            <column name="unit_price" value="47.03"/>
+            <column name="editor" value="Manning Publications"/>
+            <column name="authors_id" value="2"/>
+        </insert>
+        <insert tableName="books">
+            <column name="isbn13" value="978-2070415731"/>
+            <column name="title" value="Fahrenheit 451"/>
+            <column name="unit_price" value="5.04"/>
+            <column name="editor" value="Gallimard"/>
+            <column name="authors_id" value="3"/>
+        </insert>
+        <insert tableName="books">
+            <column name="isbn13" value="978-2841030385"/>
+            <column name="title" value="Le Corbeau"/>
+            <column name="unit_price" value="14"/>
+            <column name="editor" value="William Blake"/>
+            <column name="authors_id" value="4"/>
+        </insert>
+        <insert tableName="books">
+            <column name="isbn13" value="978-2290340868"/>
+            <column name="title" value="Le Spleen de Paris"/>
+            <column name="unit_price" value="1.9"/>
+            <column name="editor" value="Librio"/>
+            <column name="authors_id" value="5"/>
+        </insert>
+        <insert tableName="books">
+            <column name="isbn13" value="978-2035861566"/>
+            <column name="title" value="Les fleurs du mal"/>
+            <column name="unit_price" value="3.33"/>
+            <column name="editor" value="Larousse"/>
+            <column name="authors_id" value="5"/>
+        </insert>
+        <insert tableName="books">
+            <column name="isbn13" value="978-2746054646"/>
+            <column name="title" value="JSF mis en pratique avec Eclipse"/>
+            <column name="unit_price" value="32.76"/>
+            <column name="editor" value="Editions ENI"/>
+            <column name="authors_id" value="6"/>
+        </insert>
+
+    </changeSet>
+</databaseChangeLog>
