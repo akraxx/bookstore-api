@@ -2,8 +2,8 @@ package fr.flst.jee.mmarie.resources.api;
 
 import com.codahale.metrics.annotation.Timed;
 import com.google.inject.Inject;
-import fr.flst.jee.mmarie.core.Author;
-import fr.flst.jee.mmarie.services.AuthorService;
+import fr.flst.jee.mmarie.core.Order;
+import fr.flst.jee.mmarie.services.OrderService;
 import io.dropwizard.hibernate.UnitOfWork;
 import io.dropwizard.jersey.params.IntParam;
 
@@ -16,21 +16,21 @@ import javax.ws.rs.core.MediaType;
 /**
  * Created by Maximilien on 19/10/2014.
  */
-@Path("/api/author")
-public class AuthorResource {
-    private AuthorService authorService;
+@Path("/api/order")
+public class OrderResource {
+    private OrderService orderService;
 
     @Inject
-    public AuthorResource(AuthorService authorService) {
-        this.authorService = authorService;
+    public OrderResource(OrderService orderService) {
+        this.orderService = orderService;
     }
 
     @GET
     @Timed
-    @Path("{authorId}")
+    @Path("{orderId}")
     @UnitOfWork
     @Produces(MediaType.APPLICATION_JSON+"; charset=UTF-8")
-    public Author findById(@PathParam("authorId") IntParam authorId) {
-        return authorService.findById(authorId);
+    public Order findById(@PathParam("orderId") IntParam orderId) {
+        return orderService.findById(orderId);
     }
 }

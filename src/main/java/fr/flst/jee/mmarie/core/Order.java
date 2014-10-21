@@ -1,5 +1,6 @@
 package fr.flst.jee.mmarie.core;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -35,5 +36,6 @@ public class Order {
     private String login;
 
     @Column(name = "ORDER_DATE", nullable = false)
+    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd, HH:mm", timezone = "CET")
     private Date orderDate;
 }

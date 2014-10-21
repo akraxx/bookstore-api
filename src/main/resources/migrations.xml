@@ -99,7 +99,7 @@
         </insert>
 
         <insert tableName="users">
-            <column name="login" value="2"/>
+            <column name="login" value="yhovart"/>
             <column name="email" value="yhovart@gmail.com"/>
             <column name="pwd" value="yh0vart"/>
             <column name="personnal_adr_id" value="1"/>

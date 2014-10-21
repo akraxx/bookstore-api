@@ -7,9 +7,6 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Builder;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
 /**
  * Created by Maximilien on 21/10/2014.
  */

@@ -5,9 +5,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.sun.jersey.api.NotFoundException;
 import fr.flst.jee.mmarie.core.Author;
-import fr.flst.jee.mmarie.core.Book;
 import fr.flst.jee.mmarie.db.dao.interfaces.AuthorDAO;
-import fr.flst.jee.mmarie.db.dao.interfaces.BookDAO;
 import io.dropwizard.jersey.params.IntParam;
 
 /**
@@ -30,7 +28,7 @@ public class AuthorService {
         this.authorDAO = authorDAO;
     }
 
-    public Author getAuthorById(IntParam authorId) {
+    public Author findById(IntParam authorId) {
         return findSafely(authorId.get());
     }
 }
