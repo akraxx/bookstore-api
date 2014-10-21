@@ -1,13 +1,9 @@
 package fr.flst.jee.mmarie.db.dao.hibernate;
 
 import com.codahale.metrics.annotation.Timed;
-import com.google.common.base.Optional;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import fr.flst.jee.mmarie.core.Author;
-import fr.flst.jee.mmarie.core.Book;
 import fr.flst.jee.mmarie.core.OrderLine;
-import fr.flst.jee.mmarie.db.dao.interfaces.AuthorDAO;
 import fr.flst.jee.mmarie.db.dao.interfaces.OrderLineDAO;
 import io.dropwizard.hibernate.AbstractDAO;
 import org.hibernate.SessionFactory;

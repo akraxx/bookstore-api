@@ -1,12 +1,8 @@
 package fr.flst.jee.mmarie.services;
 
-import com.google.common.base.Optional;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.sun.jersey.api.NotFoundException;
-import fr.flst.jee.mmarie.core.Author;
 import fr.flst.jee.mmarie.core.OrderLine;
-import fr.flst.jee.mmarie.db.dao.interfaces.AuthorDAO;
 import fr.flst.jee.mmarie.db.dao.interfaces.OrderLineDAO;
 import io.dropwizard.jersey.params.IntParam;
 

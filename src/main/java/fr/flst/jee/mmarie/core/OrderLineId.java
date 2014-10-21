@@ -1,7 +1,5 @@
 package fr.flst.jee.mmarie.core;
 
-import fr.flst.jee.mmarie.core.Book;
-import fr.flst.jee.mmarie.core.Order;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
