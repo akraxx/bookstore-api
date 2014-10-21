@@ -7,11 +7,13 @@ import fr.flst.jee.mmarie.db.dao.hibernate.HibernateAuthorDAO;
 import fr.flst.jee.mmarie.db.dao.hibernate.HibernateBookDAO;
 import fr.flst.jee.mmarie.db.dao.hibernate.HibernateMailingAddressDAO;
 import fr.flst.jee.mmarie.db.dao.hibernate.HibernateOrderDAO;
+import fr.flst.jee.mmarie.db.dao.hibernate.HibernateOrderLineDAO;
 import fr.flst.jee.mmarie.db.dao.hibernate.HibernateUserDAO;
 import fr.flst.jee.mmarie.db.dao.interfaces.AuthorDAO;
 import fr.flst.jee.mmarie.db.dao.interfaces.BookDAO;
 import fr.flst.jee.mmarie.db.dao.interfaces.MailingAddressDAO;
 import fr.flst.jee.mmarie.db.dao.interfaces.OrderDAO;
+import fr.flst.jee.mmarie.db.dao.interfaces.OrderLineDAO;
 import fr.flst.jee.mmarie.db.dao.interfaces.UserDAO;
 import io.dropwizard.hibernate.HibernateBundle;
 import io.dropwizard.setup.Bootstrap;
@@ -41,6 +43,7 @@ public class HibernateModule extends AbstractModule {
         bind(MailingAddressDAO.class).to(HibernateMailingAddressDAO.class);
         bind(OrderDAO.class).to(HibernateOrderDAO.class);
         bind(UserDAO.class).to(HibernateUserDAO.class);
+        bind(OrderLineDAO.class).to(HibernateOrderLineDAO.class);
     }
 
     @Provides

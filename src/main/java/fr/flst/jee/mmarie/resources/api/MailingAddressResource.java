@@ -1,6 +1,8 @@
 package fr.flst.jee.mmarie.resources.api;
 
 import com.codahale.metrics.annotation.Timed;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.jaxrs.annotation.JacksonFeatures;
 import com.google.inject.Inject;
 import fr.flst.jee.mmarie.core.MailingAddress;
 import fr.flst.jee.mmarie.services.MailingAddressService;
@@ -17,6 +19,7 @@ import javax.ws.rs.core.MediaType;
  * Created by Maximilien on 19/10/2014.
  */
 @Path("/api/mailingAddress")
+@Produces(MediaType.APPLICATION_JSON+"; charset=UTF-8")
 public class MailingAddressResource {
     private MailingAddressService mailingAddressService;
 
@@ -29,7 +32,7 @@ public class MailingAddressResource {
     @Timed
     @Path("{mailingAddressId}")
     @UnitOfWork
-    @Produces(MediaType.APPLICATION_JSON+"; charset=UTF-8")
+    @JacksonFeatures(serializationEnable =  { SerializationFeature.INDENT_OUTPUT })
     public MailingAddress findById(@PathParam("mailingAddressId") IntParam mailingAddressId) {
         return mailingAddressService.findById(mailingAddressId);
     }

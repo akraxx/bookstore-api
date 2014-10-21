@@ -6,6 +6,7 @@ import fr.flst.jee.mmarie.core.Author;
 import fr.flst.jee.mmarie.core.Book;
 import fr.flst.jee.mmarie.core.MailingAddress;
 import fr.flst.jee.mmarie.core.Order;
+import fr.flst.jee.mmarie.core.OrderLine;
 import fr.flst.jee.mmarie.core.User;
 import fr.flst.jee.mmarie.db.modules.HibernateModule;
 import fr.flst.jee.mmarie.instrumentation.InstrumentationModule;
@@ -22,7 +23,7 @@ import io.dropwizard.setup.Environment;
 public class BookstoreApplication extends Application<BookstoreConfiguration> {
 
     private final HibernateBundle<BookstoreConfiguration> hibernateBundle =
-            new HibernateBundle<BookstoreConfiguration>(Book.class, Author.class, MailingAddress.class, Order.class, User.class) {
+            new HibernateBundle<BookstoreConfiguration>(Book.class, Author.class, MailingAddress.class, Order.class, User.class, OrderLine.class) {
                 @Override
                 public DataSourceFactory getDataSourceFactory(BookstoreConfiguration configuration) {
                     return configuration.getDatabase();
