@@ -9,7 +9,7 @@
     <changeSet id="1" author="max">
         <!--create tables -->
         <createTable tableName="users">
-            <column name="id" type="varchar(255)" >
+            <column name="login" type="varchar(255)" >
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="email" type="varchar(80)">
@@ -85,6 +85,26 @@
         </createTable>
 
         <!--insert datas-->
+        <insert tableName="mailing_addresses">
+            <column name="id" value="1"/>
+            <column name="line1" value="666, rue des tekos"/>
+            <column name="zip" value="59790"/>
+            <column name="city" value="RONCHIN"/>
+        </insert>
+        <insert tableName="mailing_addresses">
+            <column name="id" value="2"/>
+            <column name="line1" value="7777, avenue sans fin"/>
+            <column name="zip" value="59790"/>
+            <column name="city" value="RONCHIN"/>
+        </insert>
+
+        <insert tableName="users">
+            <column name="login" value="2"/>
+            <column name="email" value="yhovart@gmail.com"/>
+            <column name="pwd" value="yh0vart"/>
+            <column name="personnal_adr_id" value="1"/>
+        </insert>
+
         <insert tableName="authors">
             <column name="id" value="1"/>
             <column name="first_name" value="Schincariol"/>
@@ -172,5 +192,53 @@
             <column name="authors_id" value="6"/>
         </insert>
 
+        <insert tableName="orders">
+            <column name="id" value="1"/>
+            <column name="order_date" value="now()" />
+            <column name="users_login" value="yhovart"/>
+            <column name="shipping_adr_id" value="1"/>
+        </insert>
+        <insert tableName="orders">
+            <column name="id" value="2"/>
+            <column name="order_date" value="now()" />
+            <column name="users_login" value="yhovart"/>
+            <column name="shipping_adr_id" value="2"/>
+        </insert>
+
+        <insert tableName="order_lines">
+            <column name="orders_id" value="1"/>
+            <column name="books_id" value="978-2746054646" />
+            <column name="quantity" value="6"/>
+        </insert>
+        <insert tableName="order_lines">
+            <column name="orders_id" value="1"/>
+            <column name="books_id" value="978-1932394887" />
+            <column name="quantity" value="6"/>
+        </insert>
+        <insert tableName="order_lines">
+            <column name="orders_id" value="1"/>
+            <column name="books_id" value="978-1430219569" />
+            <column name="quantity" value="1"/>
+        </insert>
+        <insert tableName="order_lines">
+            <column name="orders_id" value="2"/>
+            <column name="books_id" value="978-2070415731" />
+            <column name="quantity" value="1"/>
+        </insert>
+        <insert tableName="order_lines">
+            <column name="orders_id" value="2"/>
+            <column name="books_id" value="978-2841030385" />
+            <column name="quantity" value="1"/>
+        </insert>
+        <insert tableName="order_lines">
+            <column name="orders_id" value="2"/>
+            <column name="books_id" value="978-2290340868" />
+            <column name="quantity" value="1"/>
+        </insert>
+        <insert tableName="order_lines">
+            <column name="orders_id" value="2"/>
+            <column name="books_id" value="978-2035861566" />
+            <column name="quantity" value="1"/>
+        </insert>
     </changeSet>
 </databaseChangeLog>
