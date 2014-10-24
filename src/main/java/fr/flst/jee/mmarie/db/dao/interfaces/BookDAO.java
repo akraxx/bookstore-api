@@ -12,4 +12,6 @@ public interface BookDAO {
     Optional<Book> findById(String isbn13);
 
     List<Book> findByAuthorId(Integer authorId);
+
+    List<Book> findAll();
 }

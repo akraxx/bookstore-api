@@ -31,6 +31,15 @@ public class BookResource {
 
     @GET
     @Timed
+    @Path("/")
+    @UnitOfWork
+    @JacksonFeatures(serializationEnable =  { SerializationFeature.INDENT_OUTPUT })
+    public List<Book> findAll() {
+        return bookService.findAll();
+    }
+
+    @GET
+    @Timed
     @Path("{bookIsbn13}")
     @UnitOfWork
     @JacksonFeatures(serializationEnable =  { SerializationFeature.INDENT_OUTPUT })

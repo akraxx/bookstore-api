@@ -37,4 +37,9 @@ public class HibernateBookDAO extends AbstractDAO<Book> implements BookDAO {
         return list(namedQuery(Book.FIND_BY_AUTHOR_ID).setParameter("authorId", authorId));
     }
 
+    @Override
+    public List<Book> findAll() {
+        return list(namedQuery(Book.FIND_ALL));
+    }
+
 }

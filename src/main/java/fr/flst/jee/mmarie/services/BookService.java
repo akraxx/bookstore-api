@@ -37,4 +37,8 @@ public class BookService {
     public List<Book> findByAuthorId(IntParam authorId) {
         return bookDAO.findByAuthorId(authorId.get());
     }
+
+    public List<Book> findAll() {
+        return bookDAO.findAll();
+    }
 }

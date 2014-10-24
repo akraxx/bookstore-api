@@ -9,6 +9,7 @@ import fr.flst.jee.mmarie.core.Order;
 import fr.flst.jee.mmarie.core.OrderLine;
 import fr.flst.jee.mmarie.core.User;
 import fr.flst.jee.mmarie.db.modules.HibernateModule;
+import fr.flst.jee.mmarie.filters.CrossDomainFilter;
 import fr.flst.jee.mmarie.instrumentation.InstrumentationModule;
 import io.dropwizard.Application;
 import io.dropwizard.db.DataSourceFactory;
@@ -16,6 +17,9 @@ import io.dropwizard.hibernate.HibernateBundle;
 import io.dropwizard.migrations.MigrationsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+
+import javax.servlet.DispatcherType;
+import java.util.EnumSet;
 
 /**
  * Created by Maximilien on 19/10/2014.
@@ -52,7 +56,7 @@ public class BookstoreApplication extends Application<BookstoreConfiguration> {
 
     @Override
     public void run(BookstoreConfiguration configuration, Environment environment) throws Exception {
-
+        environment.jersey().getResourceConfig().getContainerResponseFilters().add(new CrossDomainFilter());
     }
 
     public static void main(String[] args) throws Exception {

@@ -36,10 +36,15 @@ import java.util.Set;
         @NamedQuery(
                 name = Book.FIND_BY_AUTHOR_ID,
                 query = "SELECT b FROM Book b WHERE b.author.id = :authorId"
+        ),
+        @NamedQuery(
+                name = Book.FIND_ALL,
+                query = "SELECT b FROM Book b"
         )
 })
 public class Book {
-    public static final String FIND_BY_AUTHOR_ID = "fr.flst.jee.mmarie.core.findByAuthorId";
+    public static final String FIND_BY_AUTHOR_ID = "fr.flst.jee.mmarie.core.Book.findByAuthorId";
+    public static final String FIND_ALL = "fr.flst.jee.mmarie.core.Book.findAll";
 
     @Id
     @Column(name = "ISBN13", nullable = false)
