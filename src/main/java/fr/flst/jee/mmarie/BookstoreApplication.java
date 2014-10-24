@@ -18,9 +18,6 @@ import io.dropwizard.migrations.MigrationsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 
-import javax.servlet.DispatcherType;
-import java.util.EnumSet;
-
 /**
  * Created by Maximilien on 19/10/2014.
  */

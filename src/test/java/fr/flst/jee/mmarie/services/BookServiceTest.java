@@ -1,15 +1,13 @@
-package fr.flst.jee.mmarie.resources.api;
+package fr.flst.jee.mmarie.services;
 
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.GenericType;
+import com.google.common.base.Optional;
+import com.sun.jersey.api.NotFoundException;
 import fr.flst.jee.mmarie.core.Author;
 import fr.flst.jee.mmarie.core.Book;
-import fr.flst.jee.mmarie.services.BookService;
+import fr.flst.jee.mmarie.db.dao.interfaces.BookDAO;
 import io.dropwizard.jersey.params.IntParam;
-import io.dropwizard.testing.junit.ResourceTestRule;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.ClassRule;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -18,7 +16,6 @@ import java.util.List;
 import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.reset;
@@ -28,14 +25,8 @@ import static org.mockito.Mockito.when;
 /**
  * Created by Maximilien on 24/10/2014.
  */
-public class BookResourceTest {
-
-    private static final BookService bookService = mock(BookService.class);
-
-    @ClassRule
-    public static final ResourceTestRule resources = ResourceTestRule.builder()
-            .addResource(new BookResource(bookService))
-            .build();
+public class BookServiceTest {
+    private static final BookDAO bookDAO = mock(BookDAO.class);
 
     private Book book1 = Book.builder()
             .editor("Editor1")
@@ -58,45 +49,47 @@ public class BookResourceTest {
             .title("Title3")
             .build();
 
+    private BookService bookService = new BookService(bookDAO);
 
     @Before
     public void setup() {
-        when(bookService.findAll()).thenReturn(Arrays.asList(book1, book2, book3));
-        when(bookService.findById("ISBN-1")).thenReturn(book1);
-        when(bookService.findByAuthorId(new IntParam("2"))).thenReturn(Arrays.asList(book2, book3));
+        when(bookDAO.findAll()).thenReturn(Arrays.asList(book1, book2, book3));
+        when(bookDAO.findById("ISBN-1")).thenReturn(Optional.of(book1));
+        when(bookDAO.findById("NOT-EXISTING")).thenReturn(Optional.absent());
+        when(bookDAO.findByAuthorId(2)).thenReturn(Arrays.asList(book2, book3));
     }
 
     @After
     public void tearDown() {
-        reset(bookService);
+        reset(bookDAO);
     }
 
     @Test
     public void testGetAllBooks() {
-        List<Book> books = resources.client().resource("/api/book").get(new GenericType<List<Book>>() {});
+        List<Book> books = bookService.findAll();
         assertThat(books, hasSize(3));
         assertThat(books, hasItems(book1, book2, book3));
-        verify(bookService).findAll();
+        verify(bookDAO).findAll();
     }
 
     @Test
     public void testGetBook() {
-        assertThat(resources.client().resource("/api/book/ISBN-1").get(Book.class),
+        assertThat(bookService.findById("ISBN-1"),
                 is(book1));
-        verify(bookService).findById("ISBN-1");
+        verify(bookDAO).findById("ISBN-1");
     }
 
-    @Test
+    @Test(expected = NotFoundException.class)
     public void testGetBookNotExisting() {
-        assertEquals(204, resources.client().resource("/api/book/NOT-EXISTING").get(ClientResponse.class).getStatus());
-        verify(bookService).findById("NOT-EXISTING");
+        bookService.findById("NOT-EXISTING");
     }
 
     @Test
     public void testGetBooksByAuthorId() {
-        List<Book> books = resources.client().resource("/api/book/byAuthor/2").get(new GenericType<List<Book>>() {});
+        List<Book> books = bookService.findByAuthorId(new IntParam("2"));
         assertThat(books, hasSize(2));
         assertThat(books, hasItems(book2, book3));
-        verify(bookService).findByAuthorId(new IntParam("2"));
+        verify(bookDAO).findByAuthorId(2);
     }
+    
 }
