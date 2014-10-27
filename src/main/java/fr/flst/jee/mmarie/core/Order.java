@@ -3,6 +3,7 @@ package fr.flst.jee.mmarie.core;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -31,6 +32,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(exclude = {"orderDate"})
 @ToString(exclude = "orderLines")
 @Builder
 @Entity
@@ -45,7 +47,7 @@ public class Order {
     private User user;
 
     @Column(name = "ORDER_DATE", nullable = false)
-    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd, HH:mm", timezone = "CET")
+    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd, HH:mm:ss", timezone = "CET")
     private Date orderDate;
 
     @OneToOne

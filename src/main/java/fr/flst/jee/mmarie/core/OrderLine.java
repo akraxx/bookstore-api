@@ -2,6 +2,7 @@ package fr.flst.jee.mmarie.core;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -27,6 +28,7 @@ import java.beans.Transient;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@EqualsAndHashCode
 @Builder
 @Entity
 @Table(name = "ORDER_LINES")
@@ -58,19 +60,31 @@ public class OrderLine {
 
     @Transient
     public Book getBook() {
-        return pk.getBook();
+        if(pk != null) {
+            return pk.getBook();
+        } else {
+            return null;
+        }
     }
 
     public void setBook(Book book) {
-        pk.setBook(book);
+        if(pk != null) {
+            pk.setBook(book);
+        }
     }
 
     @Transient
     public Order getOrder() {
-        return pk.getOrder();
+        if(pk != null) {
+            return pk.getOrder();
+        } else {
+            return null;
+        }
     }
 
     public void setOrder(Order order) {
-        pk.setOrder(order);
+        if(pk != null) {
+            pk.setOrder(order);
+        }
     }
 }

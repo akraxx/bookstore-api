@@ -2,6 +2,7 @@ package fr.flst.jee.mmarie.core;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -25,6 +26,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(exclude = "orders")
+@EqualsAndHashCode
 @Builder
 @Entity
 @Table(name = "USERS")

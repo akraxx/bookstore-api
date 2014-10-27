@@ -91,5 +91,5 @@ public class BookServiceTest {
         assertThat(books, hasItems(book2, book3));
         verify(bookDAO).findByAuthorId(2);
     }
-    
+
 }
