@@ -4,12 +4,8 @@ import com.google.common.base.Optional;
 import com.sun.jersey.api.NotFoundException;
 import fr.flst.jee.mmarie.core.User;
 import fr.flst.jee.mmarie.db.dao.interfaces.UserDAO;
-import fr.flst.jee.mmarie.resources.api.UserResource;
-import io.dropwizard.jersey.params.IntParam;
-import io.dropwizard.testing.junit.ResourceTestRule;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.ClassRule;
 import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;

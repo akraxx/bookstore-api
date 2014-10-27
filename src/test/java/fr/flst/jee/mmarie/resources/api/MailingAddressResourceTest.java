@@ -1,9 +1,7 @@
 package fr.flst.jee.mmarie.resources.api;
 
 import fr.flst.jee.mmarie.core.MailingAddress;
-import fr.flst.jee.mmarie.core.User;
 import fr.flst.jee.mmarie.services.MailingAddressService;
-import fr.flst.jee.mmarie.services.UserService;
 import io.dropwizard.jersey.params.IntParam;
 import io.dropwizard.testing.junit.ResourceTestRule;
 import org.junit.After;

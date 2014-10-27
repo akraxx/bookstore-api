@@ -1,11 +1,7 @@
 package fr.flst.jee.mmarie.resources.api;
 
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.GenericType;
 import fr.flst.jee.mmarie.core.Author;
-import fr.flst.jee.mmarie.core.Book;
 import fr.flst.jee.mmarie.services.AuthorService;
-import fr.flst.jee.mmarie.services.BookService;
 import io.dropwizard.jersey.params.IntParam;
 import io.dropwizard.testing.junit.ResourceTestRule;
 import org.junit.After;
@@ -13,13 +9,7 @@ import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.List;
-
-import static org.hamcrest.Matchers.hasItems;
-import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.reset;

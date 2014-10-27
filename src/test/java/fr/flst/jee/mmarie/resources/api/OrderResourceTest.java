@@ -1,8 +1,6 @@
 package fr.flst.jee.mmarie.resources.api;
 
-import fr.flst.jee.mmarie.core.Author;
 import fr.flst.jee.mmarie.core.Order;
-import fr.flst.jee.mmarie.services.AuthorService;
 import fr.flst.jee.mmarie.services.OrderService;
 import io.dropwizard.jersey.params.IntParam;
 import io.dropwizard.testing.junit.ResourceTestRule;

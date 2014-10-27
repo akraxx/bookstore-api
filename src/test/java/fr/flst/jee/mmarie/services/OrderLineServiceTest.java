@@ -1,27 +1,20 @@
 package fr.flst.jee.mmarie.services;
 
-import com.sun.jersey.api.client.GenericType;
 import fr.flst.jee.mmarie.core.Author;
 import fr.flst.jee.mmarie.core.Book;
 import fr.flst.jee.mmarie.core.Order;
 import fr.flst.jee.mmarie.core.OrderLine;
 import fr.flst.jee.mmarie.core.OrderLineId;
 import fr.flst.jee.mmarie.db.dao.interfaces.OrderLineDAO;
-import fr.flst.jee.mmarie.resources.api.OrderLineResource;
 import io.dropwizard.jersey.params.IntParam;
-import io.dropwizard.testing.junit.ResourceTestRule;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.ClassRule;
 import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.reset;

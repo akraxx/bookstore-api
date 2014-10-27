@@ -1,16 +1,12 @@
 package fr.flst.jee.mmarie.resources.api;
 
-import fr.flst.jee.mmarie.core.Order;
 import fr.flst.jee.mmarie.core.User;
 import fr.flst.jee.mmarie.services.UserService;
-import io.dropwizard.jersey.params.IntParam;
 import io.dropwizard.testing.junit.ResourceTestRule;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Test;
-
-import java.util.Date;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
