@@ -52,6 +52,7 @@ public class BookstoreApplication extends Application<BookstoreConfiguration> {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public void run(BookstoreConfiguration configuration, Environment environment) throws Exception {
         environment.jersey().getResourceConfig().getContainerResponseFilters().add(new CrossDomainFilter());
     }
