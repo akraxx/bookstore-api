@@ -17,11 +17,14 @@ import io.dropwizard.hibernate.HibernateBundle;
 import io.dropwizard.migrations.MigrationsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import io.federecio.dropwizard.swagger.SwaggerDropwizard;
 
 /**
  * Created by Maximilien on 19/10/2014.
  */
 public class BookstoreApplication extends Application<BookstoreConfiguration> {
+
+    private final SwaggerDropwizard swaggerDropwizard = new SwaggerDropwizard();
 
     private final HibernateBundle<BookstoreConfiguration> hibernateBundle =
             new HibernateBundle<BookstoreConfiguration>(Book.class, Author.class, MailingAddress.class, Order.class, User.class, OrderLine.class) {
@@ -49,12 +52,15 @@ public class BookstoreApplication extends Application<BookstoreConfiguration> {
                 .build(Stage.DEVELOPMENT);
 
         bootstrap.addBundle(guiceBundle);
+
+        swaggerDropwizard.onInitialize(bootstrap);
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public void run(BookstoreConfiguration configuration, Environment environment) throws Exception {
         environment.jersey().getResourceConfig().getContainerResponseFilters().add(new CrossDomainFilter());
+        swaggerDropwizard.onRun(configuration, environment, "localhost");
     }
 
     public static void main(String[] args) throws Exception {

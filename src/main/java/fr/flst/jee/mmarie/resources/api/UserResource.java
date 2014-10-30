@@ -4,6 +4,8 @@ import com.codahale.metrics.annotation.Timed;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.jaxrs.annotation.JacksonFeatures;
 import com.google.inject.Inject;
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
 import fr.flst.jee.mmarie.core.User;
 import fr.flst.jee.mmarie.services.UserService;
 import io.dropwizard.hibernate.UnitOfWork;
@@ -18,6 +20,7 @@ import javax.ws.rs.core.MediaType;
  * Created by Maximilien on 19/10/2014.
  */
 @Path("/api/user")
+@Api("/api/user")
 @Produces(MediaType.APPLICATION_JSON+"; charset=UTF-8")
 public class UserResource {
     private UserService userService;
@@ -28,6 +31,7 @@ public class UserResource {
     }
 
     @GET
+    @ApiOperation("Get user by login")
     @Timed
     @Path("{userLogin}")
     @UnitOfWork

@@ -4,6 +4,8 @@ import com.codahale.metrics.annotation.Timed;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.jaxrs.annotation.JacksonFeatures;
 import com.google.inject.Inject;
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
 import fr.flst.jee.mmarie.core.Order;
 import fr.flst.jee.mmarie.services.OrderService;
 import io.dropwizard.hibernate.UnitOfWork;
@@ -21,6 +23,7 @@ import javax.ws.rs.core.MediaType;
  * Created by Maximilien on 19/10/2014.
  */
 @Path("/api/order")
+@Api("/api/order")
 @Produces(MediaType.APPLICATION_JSON+"; charset=UTF-8")
 public class OrderResource {
     private static final Logger LOGGER = LoggerFactory.getLogger(OrderResource.class);
@@ -33,6 +36,7 @@ public class OrderResource {
     }
 
     @GET
+    @ApiOperation("Get order by id")
     @Timed
     @Path("{orderId}")
     @UnitOfWork
