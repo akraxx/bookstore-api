@@ -23,7 +23,7 @@ import java.util.List;
  */
 @Path("/api/book")
 @Api("/api/book")
-@Produces(MediaType.APPLICATION_JSON+"; charset=UTF-8")
+@Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
 public class BookResource {
     private BookService bookService;
 
@@ -36,7 +36,7 @@ public class BookResource {
     @ApiOperation("Get all books")
     @Timed
     @UnitOfWork
-    @JacksonFeatures(serializationEnable =  { SerializationFeature.INDENT_OUTPUT })
+    @JacksonFeatures(serializationEnable = {SerializationFeature.INDENT_OUTPUT})
     public List<Book> findAll() {
         return bookService.findAll();
     }
@@ -46,7 +46,7 @@ public class BookResource {
     @Timed
     @Path("/{bookIsbn13}")
     @UnitOfWork
-    @JacksonFeatures(serializationEnable =  { SerializationFeature.INDENT_OUTPUT })
+    @JacksonFeatures(serializationEnable = {SerializationFeature.INDENT_OUTPUT})
     public Book findById(@PathParam("bookIsbn13") String bookIsbn13) {
         return bookService.findById(bookIsbn13);
     }
@@ -56,7 +56,7 @@ public class BookResource {
     @Timed
     @Path("/byAuthor/{authorId}")
     @UnitOfWork
-    @JacksonFeatures(serializationEnable =  { SerializationFeature.INDENT_OUTPUT })
+    @JacksonFeatures(serializationEnable = {SerializationFeature.INDENT_OUTPUT})
     public List<Book> findByAuthorId(@PathParam("authorId") IntParam authorId) {
         return bookService.findByAuthorId(authorId);
     }

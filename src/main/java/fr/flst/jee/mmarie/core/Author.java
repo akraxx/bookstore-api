@@ -45,7 +45,7 @@ public class Author {
     private String lastName;
 
     @Column(name = "BIRTH_DATE")
-    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date birthDate;
 
     @OneToMany(mappedBy = "author")

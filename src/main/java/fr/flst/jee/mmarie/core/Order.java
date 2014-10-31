@@ -47,7 +47,7 @@ public class Order {
     private User user;
 
     @Column(name = "ORDER_DATE", nullable = false)
-    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd, HH:mm:ss", timezone = "CET")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd, HH:mm:ss", timezone = "CET")
     private Date orderDate;
 
     @OneToOne

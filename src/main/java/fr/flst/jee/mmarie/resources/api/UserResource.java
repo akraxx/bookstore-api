@@ -21,7 +21,7 @@ import javax.ws.rs.core.MediaType;
  */
 @Path("/api/user")
 @Api("/api/user")
-@Produces(MediaType.APPLICATION_JSON+"; charset=UTF-8")
+@Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
 public class UserResource {
     private UserService userService;
 
@@ -35,7 +35,7 @@ public class UserResource {
     @Timed
     @Path("/{userLogin}")
     @UnitOfWork
-    @JacksonFeatures(serializationEnable =  { SerializationFeature.INDENT_OUTPUT })
+    @JacksonFeatures(serializationEnable = {SerializationFeature.INDENT_OUTPUT})
     public User findByLogin(@PathParam("userLogin") String userLogin) {
         return userService.findByLogin(userLogin);
     }

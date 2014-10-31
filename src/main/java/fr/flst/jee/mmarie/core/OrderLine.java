@@ -36,7 +36,7 @@ import java.beans.Transient;
         @AssociationOverride(name = "pk.book",
                 joinColumns = @JoinColumn(name = "BOOKS_ID")),
         @AssociationOverride(name = "pk.order",
-                joinColumns = @JoinColumn(name = "ORDERS_ID")) })
+                joinColumns = @JoinColumn(name = "ORDERS_ID"))})
 @NamedQueries(value = {
         @NamedQuery(
                 name = OrderLine.FIND_BY_BOOK_ISBN13,
@@ -60,7 +60,7 @@ public class OrderLine {
 
     @Transient
     public Book getBook() {
-        if(pk != null) {
+        if (pk != null) {
             return pk.getBook();
         } else {
             return null;
@@ -68,14 +68,14 @@ public class OrderLine {
     }
 
     public void setBook(Book book) {
-        if(pk != null) {
+        if (pk != null) {
             pk.setBook(book);
         }
     }
 
     @Transient
     public Order getOrder() {
-        if(pk != null) {
+        if (pk != null) {
             return pk.getOrder();
         } else {
             return null;
@@ -83,7 +83,7 @@ public class OrderLine {
     }
 
     public void setOrder(Order order) {
-        if(pk != null) {
+        if (pk != null) {
             pk.setOrder(order);
         }
     }

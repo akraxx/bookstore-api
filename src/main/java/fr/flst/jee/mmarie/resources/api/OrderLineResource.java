@@ -23,7 +23,7 @@ import java.util.List;
  */
 @Path("/api/orderLine")
 @Api("/api/orderLine")
-@Produces(MediaType.APPLICATION_JSON+"; charset=UTF-8")
+@Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
 public class OrderLineResource {
     private OrderLineService orderLineService;
 
@@ -37,7 +37,7 @@ public class OrderLineResource {
     @Timed
     @Path("/byBook/{bookIsbn13}")
     @UnitOfWork
-    @JacksonFeatures(serializationEnable =  { SerializationFeature.INDENT_OUTPUT })
+    @JacksonFeatures(serializationEnable = {SerializationFeature.INDENT_OUTPUT})
     public List<OrderLine> findByBookIsbn13(@PathParam("bookIsbn13") String bookIsbn13) {
         return orderLineService.findByBookIsbn13(bookIsbn13);
     }
@@ -47,7 +47,7 @@ public class OrderLineResource {
     @Timed
     @Path("/byOrder/{orderId}")
     @UnitOfWork
-    @JacksonFeatures(serializationEnable =  { SerializationFeature.INDENT_OUTPUT })
+    @JacksonFeatures(serializationEnable = {SerializationFeature.INDENT_OUTPUT})
     public List<OrderLine> findByOrderId(@PathParam("orderId") IntParam orderId) {
         return orderLineService.findByOrderId(orderId);
     }

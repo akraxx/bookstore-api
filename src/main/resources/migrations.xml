@@ -9,54 +9,54 @@
     <changeSet id="1" author="max">
         <!--create tables -->
         <createTable tableName="users">
-            <column name="login" type="varchar(255)" >
+            <column name="login" type="varchar(255)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="email" type="varchar(80)">
-                <constraints nullable="false" />
+                <constraints nullable="false"/>
             </column>
             <column name="pwd" type="varchar(20)">
-                <constraints nullable="false" />
+                <constraints nullable="false"/>
             </column>
             <column name="personnal_adr_id" type="int"/>
         </createTable>
 
         <createTable tableName="mailing_addresses">
-            <column name="id" type="int" autoIncrement="true" >
+            <column name="id" type="int" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="zip" type="varchar(10)">
-                <constraints nullable="false" />
+                <constraints nullable="false"/>
             </column>
             <column name="city" type="varchar(45)">
-                <constraints nullable="false" />
+                <constraints nullable="false"/>
             </column>
             <column name="line1" type="varchar(80)">
-                <constraints nullable="false" />
+                <constraints nullable="false"/>
             </column>
             <column name="line2" type="varchar(80)"/>
             <column name="line3" type="varchar(80)"/>
         </createTable>
 
         <createTable tableName="authors">
-            <column name="id" type="int" autoIncrement="true" >
+            <column name="id" type="int" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="first_name" type="varchar(35)">
-                <constraints nullable="false" />
+                <constraints nullable="false"/>
             </column>
             <column name="last_name" type="varchar(35)">
-                <constraints nullable="false" />
+                <constraints nullable="false"/>
             </column>
             <column name="birth_date" type="date"/>
         </createTable>
 
         <createTable tableName="books">
-            <column name="isbn13" type="varchar(14)" >
+            <column name="isbn13" type="varchar(14)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="title" type="varchar(50)">
-                <constraints nullable="false" />
+                <constraints nullable="false"/>
             </column>
             <column name="unit_price" type="decimal(9,2)"/>
             <column name="editor" type="varchar(20)"/>
@@ -64,24 +64,24 @@
         </createTable>
 
         <createTable tableName="order_lines">
-            <column name="orders_id" type="int" >
+            <column name="orders_id" type="int">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
-            <column name="books_id" type="varchar(14)" >
+            <column name="books_id" type="varchar(14)">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="quantity" type="int">
-                <constraints nullable="false" />
+                <constraints nullable="false"/>
             </column>
         </createTable>
 
         <createTable tableName="orders">
-            <column name="id" type="int" autoIncrement="true" >
+            <column name="id" type="int" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
-            <column name="users_login" type="varchar(30)" />
-            <column name="order_date" type="timestamp" />
-            <column name="shipping_adr_id" type="int" />
+            <column name="users_login" type="varchar(30)"/>
+            <column name="order_date" type="timestamp"/>
+            <column name="shipping_adr_id" type="int"/>
         </createTable>
 
         <!--insert datas-->
@@ -139,7 +139,7 @@
             <column name="id" value="6"/>
             <column name="first_name" value="Sennesal"/>
             <column name="last_name" value="Francois-Xavier"/>
-            <column name="birth_date" />
+            <column name="birth_date"/>
         </insert>
 
         <insert tableName="books">
@@ -194,50 +194,50 @@
 
         <insert tableName="orders">
             <column name="id" value="1"/>
-            <column name="order_date" value="now()" />
+            <column name="order_date" value="now()"/>
             <column name="users_login" value="yhovart"/>
             <column name="shipping_adr_id" value="1"/>
         </insert>
         <insert tableName="orders">
             <column name="id" value="2"/>
-            <column name="order_date" value="now()" />
+            <column name="order_date" value="now()"/>
             <column name="users_login" value="yhovart"/>
             <column name="shipping_adr_id" value="2"/>
         </insert>
 
         <insert tableName="order_lines">
             <column name="orders_id" value="1"/>
-            <column name="books_id" value="978-2746054646" />
+            <column name="books_id" value="978-2746054646"/>
             <column name="quantity" value="6"/>
         </insert>
         <insert tableName="order_lines">
             <column name="orders_id" value="1"/>
-            <column name="books_id" value="978-1932394887" />
+            <column name="books_id" value="978-1932394887"/>
             <column name="quantity" value="6"/>
         </insert>
         <insert tableName="order_lines">
             <column name="orders_id" value="1"/>
-            <column name="books_id" value="978-1430219569" />
+            <column name="books_id" value="978-1430219569"/>
             <column name="quantity" value="1"/>
         </insert>
         <insert tableName="order_lines">
             <column name="orders_id" value="2"/>
-            <column name="books_id" value="978-2070415731" />
+            <column name="books_id" value="978-2070415731"/>
             <column name="quantity" value="1"/>
         </insert>
         <insert tableName="order_lines">
             <column name="orders_id" value="2"/>
-            <column name="books_id" value="978-2841030385" />
+            <column name="books_id" value="978-2841030385"/>
             <column name="quantity" value="1"/>
         </insert>
         <insert tableName="order_lines">
             <column name="orders_id" value="2"/>
-            <column name="books_id" value="978-2290340868" />
+            <column name="books_id" value="978-2290340868"/>
             <column name="quantity" value="1"/>
         </insert>
         <insert tableName="order_lines">
             <column name="orders_id" value="2"/>
-            <column name="books_id" value="978-2035861566" />
+            <column name="books_id" value="978-2035861566"/>
             <column name="quantity" value="1"/>
         </insert>
     </changeSet>

@@ -3,6 +3,7 @@ package fr.flst.jee.mmarie.filters;
 import com.sun.jersey.spi.container.ContainerRequest;
 import com.sun.jersey.spi.container.ContainerResponse;
 import com.sun.jersey.spi.container.ContainerResponseFilter;
+
 /**
  * Created by Maximilien on 23/10/2014.
  */

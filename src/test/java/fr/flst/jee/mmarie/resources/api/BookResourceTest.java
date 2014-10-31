@@ -73,7 +73,8 @@ public class BookResourceTest {
 
     @Test
     public void testGetAllBooks() {
-        List<Book> books = resources.client().resource("/api/book").get(new GenericType<List<Book>>() {});
+        List<Book> books = resources.client().resource("/api/book").get(new GenericType<List<Book>>() {
+        });
         assertThat(books, hasSize(3));
         assertThat(books, hasItems(book1, book2, book3));
         verify(bookService).findAll();
@@ -94,7 +95,8 @@ public class BookResourceTest {
 
     @Test
     public void testGetBooksByAuthorId() {
-        List<Book> books = resources.client().resource("/api/book/byAuthor/2").get(new GenericType<List<Book>>() {});
+        List<Book> books = resources.client().resource("/api/book/byAuthor/2").get(new GenericType<List<Book>>() {
+        });
         assertThat(books, hasSize(2));
         assertThat(books, hasItems(book2, book3));
         verify(bookService).findByAuthorId(new IntParam("2"));

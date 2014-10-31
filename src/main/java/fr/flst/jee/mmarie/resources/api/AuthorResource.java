@@ -22,7 +22,7 @@ import javax.ws.rs.core.MediaType;
  */
 @Path("/api/author")
 @Api(value = "/api/author")
-@Produces(MediaType.APPLICATION_JSON+"; charset=UTF-8")
+@Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
 public class AuthorResource {
     private AuthorService authorService;
 
@@ -36,7 +36,7 @@ public class AuthorResource {
     @Timed
     @Path("/{authorId}")
     @UnitOfWork
-    @JacksonFeatures(serializationEnable =  { SerializationFeature.INDENT_OUTPUT })
+    @JacksonFeatures(serializationEnable = {SerializationFeature.INDENT_OUTPUT})
     public Author findById(@PathParam("authorId") IntParam authorId) {
         return authorService.findById(authorId);
     }

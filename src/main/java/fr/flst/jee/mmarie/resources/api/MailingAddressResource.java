@@ -22,7 +22,7 @@ import javax.ws.rs.core.MediaType;
  */
 @Path("/api/mailingAddress")
 @Api("/api/mailingAddress")
-@Produces(MediaType.APPLICATION_JSON+"; charset=UTF-8")
+@Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
 public class MailingAddressResource {
     private MailingAddressService mailingAddressService;
 
@@ -36,7 +36,7 @@ public class MailingAddressResource {
     @Timed
     @Path("/{mailingAddressId}")
     @UnitOfWork
-    @JacksonFeatures(serializationEnable =  { SerializationFeature.INDENT_OUTPUT })
+    @JacksonFeatures(serializationEnable = {SerializationFeature.INDENT_OUTPUT})
     public MailingAddress findById(@PathParam("mailingAddressId") IntParam mailingAddressId) {
         return mailingAddressService.findById(mailingAddressId);
     }

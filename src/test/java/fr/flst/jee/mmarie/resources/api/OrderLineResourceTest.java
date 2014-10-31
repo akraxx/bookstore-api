@@ -90,14 +90,16 @@ public class OrderLineResourceTest {
 
     @Test
     public void testGetByOrderId() {
-        assertThat(resources.client().resource("/api/orderLine/byOrder/1").get(new GenericType<List<OrderLine>>() {}),
+        assertThat(resources.client().resource("/api/orderLine/byOrder/1").get(new GenericType<List<OrderLine>>() {
+        }),
                 hasSize(1));
         verify(orderLineService).findByOrderId(new IntParam("1"));
     }
 
     @Test
     public void testGetByBookIsbn13() {
-        assertThat(resources.client().resource("/api/orderLine/byBook/ISBN-2").get(new GenericType<List<OrderLine>>() {}),
+        assertThat(resources.client().resource("/api/orderLine/byBook/ISBN-2").get(new GenericType<List<OrderLine>>() {
+        }),
                 hasSize(1));
         verify(orderLineService).findByBookIsbn13("ISBN-2");
     }
