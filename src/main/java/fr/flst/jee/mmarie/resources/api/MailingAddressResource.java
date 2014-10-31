@@ -34,7 +34,7 @@ public class MailingAddressResource {
     @GET
     @ApiOperation("Get a mailing address by id")
     @Timed
-    @Path("{mailingAddressId}")
+    @Path("/{mailingAddressId}")
     @UnitOfWork
     @JacksonFeatures(serializationEnable =  { SerializationFeature.INDENT_OUTPUT })
     public MailingAddress findById(@PathParam("mailingAddressId") IntParam mailingAddressId) {

@@ -44,7 +44,7 @@ public class BookResource {
     @GET
     @ApiOperation("Get a book by isbn13")
     @Timed
-    @Path("{bookIsbn13}")
+    @Path("/{bookIsbn13}")
     @UnitOfWork
     @JacksonFeatures(serializationEnable =  { SerializationFeature.INDENT_OUTPUT })
     public Book findById(@PathParam("bookIsbn13") String bookIsbn13) {

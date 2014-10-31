@@ -35,7 +35,7 @@ public class OrderLineResource {
     @GET
     @ApiOperation("Get order lines by book isbn13")
     @Timed
-    @Path("byBook/{bookIsbn13}")
+    @Path("/byBook/{bookIsbn13}")
     @UnitOfWork
     @JacksonFeatures(serializationEnable =  { SerializationFeature.INDENT_OUTPUT })
     public List<OrderLine> findByBookIsbn13(@PathParam("bookIsbn13") String bookIsbn13) {
@@ -45,7 +45,7 @@ public class OrderLineResource {
     @GET
     @ApiOperation("Get order lines by order id")
     @Timed
-    @Path("byOrder/{orderId}")
+    @Path("/byOrder/{orderId}")
     @UnitOfWork
     @JacksonFeatures(serializationEnable =  { SerializationFeature.INDENT_OUTPUT })
     public List<OrderLine> findByOrderId(@PathParam("orderId") IntParam orderId) {

@@ -33,7 +33,7 @@ public class UserResource {
     @GET
     @ApiOperation("Get user by login")
     @Timed
-    @Path("{userLogin}")
+    @Path("/{userLogin}")
     @UnitOfWork
     @JacksonFeatures(serializationEnable =  { SerializationFeature.INDENT_OUTPUT })
     public User findByLogin(@PathParam("userLogin") String userLogin) {

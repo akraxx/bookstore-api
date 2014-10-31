@@ -38,7 +38,7 @@ public class OrderResource {
     @GET
     @ApiOperation("Get order by id")
     @Timed
-    @Path("{orderId}")
+    @Path("/{orderId}")
     @UnitOfWork
     @JacksonFeatures(serializationEnable =  { SerializationFeature.INDENT_OUTPUT })
     public Order findById(@PathParam("orderId") IntParam orderId) {

@@ -21,7 +21,7 @@ import javax.ws.rs.core.MediaType;
  * Created by Maximilien on 19/10/2014.
  */
 @Path("/api/author")
-@Api("/api/author")
+@Api(value = "/api/author")
 @Produces(MediaType.APPLICATION_JSON+"; charset=UTF-8")
 public class AuthorResource {
     private AuthorService authorService;
