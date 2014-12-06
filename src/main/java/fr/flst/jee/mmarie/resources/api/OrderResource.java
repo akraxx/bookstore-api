@@ -22,8 +22,8 @@ import javax.ws.rs.core.MediaType;
 /**
  * Created by Maximilien on 19/10/2014.
  */
-@Path("/api/order")
-@Api("/api/order")
+@Path("/order")
+@Api("/order")
 @Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
 public class OrderResource {
     private static final Logger LOGGER = LoggerFactory.getLogger(OrderResource.class);

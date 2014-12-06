@@ -6,7 +6,7 @@ import com.fasterxml.jackson.jaxrs.annotation.JacksonFeatures;
 import com.google.inject.Inject;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
-import fr.flst.jee.mmarie.core.Book;
+import fr.flst.jee.mmarie.dto.BookDto;
 import fr.flst.jee.mmarie.services.BookService;
 import io.dropwizard.hibernate.UnitOfWork;
 import io.dropwizard.jersey.params.IntParam;
@@ -21,8 +21,8 @@ import java.util.List;
 /**
  * Created by Maximilien on 19/10/2014.
  */
-@Path("/api/book")
-@Api("/api/book")
+@Path("/book")
+@Api("/book")
 @Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
 public class BookResource {
     private BookService bookService;
@@ -37,7 +37,7 @@ public class BookResource {
     @Timed
     @UnitOfWork
     @JacksonFeatures(serializationEnable = {SerializationFeature.INDENT_OUTPUT})
-    public List<Book> findAll() {
+    public List<BookDto> findAll() {
         return bookService.findAll();
     }
 
@@ -47,7 +47,7 @@ public class BookResource {
     @Path("/{bookIsbn13}")
     @UnitOfWork
     @JacksonFeatures(serializationEnable = {SerializationFeature.INDENT_OUTPUT})
-    public Book findById(@PathParam("bookIsbn13") String bookIsbn13) {
+    public BookDto findById(@PathParam("bookIsbn13") String bookIsbn13) {
         return bookService.findById(bookIsbn13);
     }
 
@@ -57,7 +57,7 @@ public class BookResource {
     @Path("/byAuthor/{authorId}")
     @UnitOfWork
     @JacksonFeatures(serializationEnable = {SerializationFeature.INDENT_OUTPUT})
-    public List<Book> findByAuthorId(@PathParam("authorId") IntParam authorId) {
+    public List<BookDto> findByAuthorId(@PathParam("authorId") IntParam authorId) {
         return bookService.findByAuthorId(authorId);
     }
 

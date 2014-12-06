@@ -20,8 +20,8 @@ import javax.ws.rs.core.MediaType;
 /**
  * Created by Maximilien on 19/10/2014.
  */
-@Path("/api/mailingAddress")
-@Api("/api/mailingAddress")
+@Path("/mailingAddress")
+@Api("/mailingAddress")
 @Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
 public class MailingAddressResource {
     private MailingAddressService mailingAddressService;

@@ -48,7 +48,7 @@ public class OrderResourceTest {
 
     @Test
     public void testGetOrder() {
-        assertThat(resources.client().resource("/api/order/1").get(Order.class),
+        assertThat(resources.client().resource("/order/1").get(Order.class),
                 is(order1));
         verify(orderService).findById(new IntParam("1"));
     }

@@ -47,7 +47,7 @@ public class MailingAddressResourceTest {
 
     @Test
     public void testGetMailingAddress() {
-        assertThat(resources.client().resource("/api/mailingAddress/1").get(MailingAddress.class),
+        assertThat(resources.client().resource("/mailingAddress/1").get(MailingAddress.class),
                 is(mailingAddress1));
         verify(mailingAddressService).findById(new IntParam("1"));
     }

@@ -29,7 +29,7 @@ import javax.persistence.Table;
 @Table(name = "MAILING_ADDRESSES")
 public class MailingAddress {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private int id;
 

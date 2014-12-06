@@ -6,6 +6,7 @@ import io.dropwizard.db.DataSourceFactory;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -21,4 +22,9 @@ public class BookstoreConfiguration extends Configuration {
     @NotNull
     @JsonProperty("database")
     private DataSourceFactory database = new DataSourceFactory();
+
+    @Valid
+    @JsonProperty
+    @NotEmpty
+    private String bearerRealm;
 }

@@ -6,6 +6,8 @@ import com.google.inject.Singleton;
 import com.sun.jersey.api.NotFoundException;
 import fr.flst.jee.mmarie.core.Author;
 import fr.flst.jee.mmarie.db.dao.interfaces.AuthorDAO;
+import fr.flst.jee.mmarie.dto.AuthorDto;
+import fr.flst.jee.mmarie.misc.DtoMappingService;
 import io.dropwizard.jersey.params.IntParam;
 
 /**
@@ -13,7 +15,9 @@ import io.dropwizard.jersey.params.IntParam;
  */
 @Singleton
 public class AuthorService {
-    private AuthorDAO authorDAO;
+    private final AuthorDAO authorDAO;
+
+    private final DtoMappingService dtoMappingService;
 
     public Author findSafely(Integer id) {
         final Optional<Author> author = authorDAO.findById(id);
@@ -24,11 +28,12 @@ public class AuthorService {
     }
 
     @Inject
-    public AuthorService(AuthorDAO authorDAO) {
+    public AuthorService(AuthorDAO authorDAO, DtoMappingService dtoMappingService) {
         this.authorDAO = authorDAO;
+        this.dtoMappingService = dtoMappingService;
     }
 
-    public Author findById(IntParam authorId) {
-        return findSafely(authorId.get());
+    public AuthorDto findById(IntParam authorId) {
+        return dtoMappingService.convertsToDto(findSafely(authorId.get()), AuthorDto.class);
     }
 }

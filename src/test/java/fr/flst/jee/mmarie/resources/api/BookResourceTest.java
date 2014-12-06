@@ -4,6 +4,7 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.GenericType;
 import fr.flst.jee.mmarie.core.Author;
 import fr.flst.jee.mmarie.core.Book;
+import fr.flst.jee.mmarie.dto.BookDto;
 import fr.flst.jee.mmarie.services.BookService;
 import io.dropwizard.jersey.params.IntParam;
 import io.dropwizard.testing.junit.ResourceTestRule;
@@ -58,12 +59,33 @@ public class BookResourceTest {
             .title("Title3")
             .build();
 
+    private BookDto bookDto1 = BookDto.builder()
+            .editor("Editor1")
+            .authorId(1)
+            .isbn13("ISBN-1")
+            .title("Title1")
+            .build();
+
+    private BookDto bookDto2 = BookDto.builder()
+            .editor("Editor2")
+            .authorId(2)
+            .isbn13("ISBN-2")
+            .title("Title2")
+            .build();
+
+    private BookDto bookDto3 = BookDto.builder()
+            .editor("Editor3")
+            .authorId(2)
+            .isbn13("ISBN-3")
+            .title("Title3")
+            .build();
+
 
     @Before
     public void setup() {
-        when(bookService.findAll()).thenReturn(Arrays.asList(book1, book2, book3));
-        when(bookService.findById("ISBN-1")).thenReturn(book1);
-        when(bookService.findByAuthorId(new IntParam("2"))).thenReturn(Arrays.asList(book2, book3));
+        when(bookService.findAll()).thenReturn(Arrays.asList(bookDto1, bookDto2, bookDto3));
+        when(bookService.findById("ISBN-1")).thenReturn(bookDto1);
+        when(bookService.findByAuthorId(new IntParam("2"))).thenReturn(Arrays.asList(bookDto2, bookDto3));
     }
 
     @After
@@ -73,32 +95,32 @@ public class BookResourceTest {
 
     @Test
     public void testGetAllBooks() {
-        List<Book> books = resources.client().resource("/api/book").get(new GenericType<List<Book>>() {
+        List<BookDto> books = resources.client().resource("/book").get(new GenericType<List<BookDto>>() {
         });
         assertThat(books, hasSize(3));
-        assertThat(books, hasItems(book1, book2, book3));
+        assertThat(books, hasItems(bookDto1, bookDto2, bookDto3));
         verify(bookService).findAll();
     }
 
     @Test
     public void testGetBook() {
-        assertThat(resources.client().resource("/api/book/ISBN-1").get(Book.class),
-                is(book1));
+        assertThat(resources.client().resource("/book/ISBN-1").get(BookDto.class),
+                is(bookDto1));
         verify(bookService).findById("ISBN-1");
     }
 
     @Test
     public void testGetBookNotExisting() {
-        assertEquals(204, resources.client().resource("/api/book/NOT-EXISTING").get(ClientResponse.class).getStatus());
+        assertEquals(204, resources.client().resource("/book/NOT-EXISTING").get(ClientResponse.class).getStatus());
         verify(bookService).findById("NOT-EXISTING");
     }
 
     @Test
     public void testGetBooksByAuthorId() {
-        List<Book> books = resources.client().resource("/api/book/byAuthor/2").get(new GenericType<List<Book>>() {
+        List<BookDto> books = resources.client().resource("/book/byAuthor/2").get(new GenericType<List<BookDto>>() {
         });
         assertThat(books, hasSize(2));
-        assertThat(books, hasItems(book2, book3));
+        assertThat(books, hasItems(bookDto2, bookDto3));
         verify(bookService).findByAuthorId(new IntParam("2"));
     }
 }

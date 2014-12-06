@@ -21,8 +21,8 @@ import java.util.List;
 /**
  * Created by Maximilien on 19/10/2014.
  */
-@Path("/api/orderLine")
-@Api("/api/orderLine")
+@Path("/orderLine")
+@Api("/orderLine")
 @Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
 public class OrderLineResource {
     private OrderLineService orderLineService;

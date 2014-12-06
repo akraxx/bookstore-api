@@ -8,4 +8,6 @@ import fr.flst.jee.mmarie.core.MailingAddress;
  */
 public interface MailingAddressDAO {
     Optional<MailingAddress> findById(Integer id);
+
+    MailingAddress insert(MailingAddress mailingAddress);
 }

@@ -6,6 +6,8 @@ import com.google.inject.Singleton;
 import com.sun.jersey.api.NotFoundException;
 import fr.flst.jee.mmarie.core.Book;
 import fr.flst.jee.mmarie.db.dao.interfaces.BookDAO;
+import fr.flst.jee.mmarie.dto.BookDto;
+import fr.flst.jee.mmarie.misc.DtoMappingService;
 import io.dropwizard.jersey.params.IntParam;
 
 import java.util.List;
@@ -15,7 +17,9 @@ import java.util.List;
  */
 @Singleton
 public class BookService {
-    private BookDAO bookDAO;
+    private final BookDAO bookDAO;
+
+    private final DtoMappingService dtoMappingService;
 
     public Book findSafely(String isbn13) {
         final Optional<Book> book = bookDAO.findById(isbn13);
@@ -26,19 +30,20 @@ public class BookService {
     }
 
     @Inject
-    public BookService(BookDAO bookDAO) {
+    public BookService(BookDAO bookDAO, DtoMappingService dtoMappingService) {
         this.bookDAO = bookDAO;
+        this.dtoMappingService = dtoMappingService;
     }
 
-    public Book findById(String isbn13) {
-        return findSafely(isbn13);
+    public BookDto findById(String isbn13) {
+        return dtoMappingService.convertsToDto(findSafely(isbn13), BookDto.class);
     }
 
-    public List<Book> findByAuthorId(IntParam authorId) {
-        return bookDAO.findByAuthorId(authorId.get());
+    public List<BookDto> findByAuthorId(IntParam authorId) {
+        return dtoMappingService.convertsListToDto(bookDAO.findByAuthorId(authorId.get()), BookDto.class);
     }
 
-    public List<Book> findAll() {
-        return bookDAO.findAll();
+    public List<BookDto> findAll() {
+        return dtoMappingService.convertsListToDto(bookDAO.findAll(), BookDto.class);
     }
 }

@@ -19,15 +19,12 @@ import io.dropwizard.hibernate.HibernateBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import org.hibernate.SessionFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Created by Maximilien on 17/10/2014.
  */
 
 public class HibernateModule extends AbstractModule {
-    private static final Logger LOGGER = LoggerFactory.getLogger(HibernateModule.class);
 
     private final HibernateBundle hibernateBundle;
 

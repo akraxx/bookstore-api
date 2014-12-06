@@ -8,4 +8,8 @@ import fr.flst.jee.mmarie.core.User;
  */
 public interface UserDAO {
     Optional<User> findByLogin(String login);
+
+    User insert(User user);
+
+    Optional<User> findByUsernameAndPassword(String username, String password);
 }

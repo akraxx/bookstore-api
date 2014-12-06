@@ -1,6 +1,7 @@
 package fr.flst.jee.mmarie.resources.api;
 
 import fr.flst.jee.mmarie.core.Author;
+import fr.flst.jee.mmarie.dto.AuthorDto;
 import fr.flst.jee.mmarie.services.AuthorService;
 import io.dropwizard.jersey.params.IntParam;
 import io.dropwizard.testing.junit.ResourceTestRule;
@@ -34,10 +35,16 @@ public class AuthorResourceTest {
             .lastName("LastName 1")
             .build();
 
+    private AuthorDto authorDto1 = AuthorDto.builder()
+            .id(1)
+            .firstName("FirstName 1")
+            .lastName("LastName 1")
+            .build();
+
 
     @Before
     public void setup() {
-        when(authorService.findById(new IntParam("1"))).thenReturn(author1);
+        when(authorService.findById(new IntParam("1"))).thenReturn(authorDto1);
     }
 
     @After
@@ -47,8 +54,8 @@ public class AuthorResourceTest {
 
     @Test
     public void testGetAuthor() {
-        assertThat(resources.client().resource("/api/author/1").get(Author.class),
-                is(author1));
+        assertThat(resources.client().resource("/author/1").get(AuthorDto.class),
+                is(authorDto1));
         verify(authorService).findById(new IntParam("1"));
     }
 }

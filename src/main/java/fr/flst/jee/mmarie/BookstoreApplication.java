@@ -2,18 +2,17 @@ package fr.flst.jee.mmarie;
 
 import com.google.inject.Stage;
 import com.hubspot.dropwizard.guice.GuiceBundle;
-import fr.flst.jee.mmarie.core.Author;
-import fr.flst.jee.mmarie.core.Book;
-import fr.flst.jee.mmarie.core.MailingAddress;
-import fr.flst.jee.mmarie.core.Order;
-import fr.flst.jee.mmarie.core.OrderLine;
-import fr.flst.jee.mmarie.core.User;
+import fr.flst.jee.mmarie.auth.AuthModule;
 import fr.flst.jee.mmarie.db.modules.HibernateModule;
-import fr.flst.jee.mmarie.filters.CrossDomainFilter;
+import fr.flst.jee.mmarie.governator.GovernatorInjectorFactory;
 import fr.flst.jee.mmarie.instrumentation.InstrumentationModule;
+import fr.flst.jee.mmarie.misc.MiscModule;
+import fr.flst.jee.mmarie.providers.ResourceConfigurationSourceProvider;
 import io.dropwizard.Application;
+import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.hibernate.HibernateBundle;
+import io.dropwizard.hibernate.ScanningHibernateBundle;
 import io.dropwizard.migrations.MigrationsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
@@ -27,7 +26,7 @@ public class BookstoreApplication extends Application<BookstoreConfiguration> {
     private final SwaggerDropwizard swaggerDropwizard = new SwaggerDropwizard();
 
     private final HibernateBundle<BookstoreConfiguration> hibernateBundle =
-            new HibernateBundle<BookstoreConfiguration>(Book.class, Author.class, MailingAddress.class, Order.class, User.class, OrderLine.class) {
+            new ScanningHibernateBundle<BookstoreConfiguration>(getClass().getPackage().getName()) {
                 @Override
                 public DataSourceFactory getDataSourceFactory(BookstoreConfiguration configuration) {
                     return configuration.getDatabase();
@@ -47,20 +46,28 @@ public class BookstoreApplication extends Application<BookstoreConfiguration> {
         GuiceBundle<BookstoreConfiguration> guiceBundle = GuiceBundle.<BookstoreConfiguration>newBuilder()
                 .addModule(new InstrumentationModule(bootstrap.getMetricRegistry()))
                 .addModule(new HibernateModule(bootstrap, hibernateBundle))
+                .addModule(new AuthModule())
+                .addModule(new MiscModule())
                 .enableAutoConfig(getClass().getPackage().getName())
                 .setConfigClass(BookstoreConfiguration.class)
-                .build(Stage.DEVELOPMENT);
+                .setInjectorFactory(new GovernatorInjectorFactory())
+                .build(Stage.PRODUCTION);
 
         bootstrap.addBundle(guiceBundle);
 
+        bootstrap.setConfigurationSourceProvider(new ResourceConfigurationSourceProvider());
+
         swaggerDropwizard.onInitialize(bootstrap);
+
+        bootstrap.addBundle(new AssetsBundle("/assets/webapp", "/", "index.html", "static"));
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public void run(BookstoreConfiguration configuration, Environment environment) throws Exception {
-        environment.jersey().getResourceConfig().getContainerResponseFilters().add(new CrossDomainFilter());
         swaggerDropwizard.onRun(configuration, environment, "localhost");
+
+        environment.jersey().setUrlPattern("/api/*");
     }
 
     public static void main(String[] args) throws Exception {

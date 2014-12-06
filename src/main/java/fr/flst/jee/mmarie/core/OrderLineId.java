@@ -9,7 +9,9 @@ import lombok.ToString;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Embeddable;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import java.io.Serializable;
 
 /**
@@ -27,6 +29,7 @@ public class OrderLineId implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL)
     private Order order;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "BOOKS_ID")
     private Book book;
 }
