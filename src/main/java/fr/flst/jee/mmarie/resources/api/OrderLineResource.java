@@ -7,6 +7,7 @@ import com.google.inject.Inject;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import fr.flst.jee.mmarie.core.OrderLine;
+import fr.flst.jee.mmarie.dto.OrderLineDto;
 import fr.flst.jee.mmarie.services.OrderLineService;
 import io.dropwizard.hibernate.UnitOfWork;
 import io.dropwizard.jersey.params.IntParam;
@@ -38,7 +39,7 @@ public class OrderLineResource {
     @Path("/byBook/{bookIsbn13}")
     @UnitOfWork
     @JacksonFeatures(serializationEnable = {SerializationFeature.INDENT_OUTPUT})
-    public List<OrderLine> findByBookIsbn13(@PathParam("bookIsbn13") String bookIsbn13) {
+    public List<OrderLineDto> findByBookIsbn13(@PathParam("bookIsbn13") String bookIsbn13) {
         return orderLineService.findByBookIsbn13(bookIsbn13);
     }
 
@@ -48,7 +49,7 @@ public class OrderLineResource {
     @Path("/byOrder/{orderId}")
     @UnitOfWork
     @JacksonFeatures(serializationEnable = {SerializationFeature.INDENT_OUTPUT})
-    public List<OrderLine> findByOrderId(@PathParam("orderId") IntParam orderId) {
+    public List<OrderLineDto> findByOrderId(@PathParam("orderId") IntParam orderId) {
         return orderLineService.findByOrderId(orderId);
     }
 }

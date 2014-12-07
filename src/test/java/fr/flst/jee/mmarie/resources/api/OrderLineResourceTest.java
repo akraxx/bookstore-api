@@ -6,6 +6,7 @@ import fr.flst.jee.mmarie.core.Book;
 import fr.flst.jee.mmarie.core.Order;
 import fr.flst.jee.mmarie.core.OrderLine;
 import fr.flst.jee.mmarie.core.OrderLineId;
+import fr.flst.jee.mmarie.dto.OrderLineDto;
 import fr.flst.jee.mmarie.services.OrderLineService;
 import io.dropwizard.jersey.params.IntParam;
 import io.dropwizard.testing.junit.ResourceTestRule;
@@ -71,6 +72,17 @@ public class OrderLineResourceTest {
             .quantity(2)
             .build();
 
+    private OrderLineDto orderLineDto1 = OrderLineDto.builder()
+            .bookIsbn13("ISBN-1")
+            .orderId(1)
+            .quantity(1)
+            .build();
+
+    private OrderLineDto orderLineDto2 = OrderLineDto.builder()
+            .bookIsbn13("ISBN-2")
+            .orderId(2)
+            .quantity(1)
+            .build();
 
     @Before
     public void setup() {
@@ -79,8 +91,8 @@ public class OrderLineResourceTest {
 
         orderLine2.setBook(book2);
         orderLine2.setOrder(order2);
-        when(orderLineService.findByOrderId(new IntParam("1"))).thenReturn(Arrays.asList(orderLine1));
-        when(orderLineService.findByBookIsbn13("ISBN-2")).thenReturn(Arrays.asList(orderLine2));
+        when(orderLineService.findByOrderId(new IntParam("1"))).thenReturn(Arrays.asList(orderLineDto1));
+        when(orderLineService.findByBookIsbn13("ISBN-2")).thenReturn(Arrays.asList(orderLineDto2));
     }
 
     @After
@@ -90,7 +102,7 @@ public class OrderLineResourceTest {
 
     @Test
     public void testGetByOrderId() {
-        assertThat(resources.client().resource("/orderLine/byOrder/1").get(new GenericType<List<OrderLine>>() {
+        assertThat(resources.client().resource("/orderLine/byOrder/1").get(new GenericType<List<OrderLineDto>>() {
         }),
                 hasSize(1));
         verify(orderLineService).findByOrderId(new IntParam("1"));
@@ -98,7 +110,7 @@ public class OrderLineResourceTest {
 
     @Test
     public void testGetByBookIsbn13() {
-        assertThat(resources.client().resource("/orderLine/byBook/ISBN-2").get(new GenericType<List<OrderLine>>() {
+        assertThat(resources.client().resource("/orderLine/byBook/ISBN-2").get(new GenericType<List<OrderLineDto>>() {
         }),
                 hasSize(1));
         verify(orderLineService).findByBookIsbn13("ISBN-2");
