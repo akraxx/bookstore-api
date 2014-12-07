@@ -6,6 +6,8 @@ import com.google.inject.Singleton;
 import com.sun.jersey.api.NotFoundException;
 import fr.flst.jee.mmarie.core.Order;
 import fr.flst.jee.mmarie.db.dao.interfaces.OrderDAO;
+import fr.flst.jee.mmarie.dto.OrderDto;
+import fr.flst.jee.mmarie.misc.DtoMappingService;
 import io.dropwizard.jersey.params.IntParam;
 
 /**
@@ -13,7 +15,9 @@ import io.dropwizard.jersey.params.IntParam;
  */
 @Singleton
 public class OrderService {
-    private OrderDAO orderDAO;
+    private final OrderDAO orderDAO;
+
+    private final DtoMappingService dtoMappingService;
 
     public Order findSafely(Integer id) {
         final Optional<Order> order = orderDAO.findById(id);
@@ -24,11 +28,12 @@ public class OrderService {
     }
 
     @Inject
-    public OrderService(OrderDAO orderDAO) {
+    public OrderService(OrderDAO orderDAO, DtoMappingService dtoMappingService) {
         this.orderDAO = orderDAO;
+        this.dtoMappingService = dtoMappingService;
     }
 
-    public Order findById(IntParam orderId) {
-        return findSafely(orderId.get());
+    public OrderDto findById(IntParam orderId) {
+        return dtoMappingService.convertsToDto(findSafely(orderId.get()), OrderDto.class);
     }
 }

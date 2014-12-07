@@ -1,6 +1,9 @@
 package fr.flst.jee.mmarie.resources.api;
 
+import fr.flst.jee.mmarie.core.MailingAddress;
 import fr.flst.jee.mmarie.core.Order;
+import fr.flst.jee.mmarie.core.User;
+import fr.flst.jee.mmarie.dto.OrderDto;
 import fr.flst.jee.mmarie.services.OrderService;
 import io.dropwizard.jersey.params.IntParam;
 import io.dropwizard.testing.junit.ResourceTestRule;
@@ -32,13 +35,22 @@ public class OrderResourceTest {
 
     private Order order1 = Order.builder()
             .id(1)
+            .mailingAddress(MailingAddress.builder().id(1).build())
+            .user(User.builder().login("login").build())
+            .orderDate(new Date())
+            .build();
+
+    private OrderDto orderDto1 = OrderDto.builder()
+            .id(1)
+            .mailingAddressId(1)
+            .userLogin("login")
             .orderDate(new Date())
             .build();
 
 
     @Before
     public void setup() {
-        when(orderService.findById(new IntParam("1"))).thenReturn(order1);
+        when(orderService.findById(new IntParam("1"))).thenReturn(orderDto1);
     }
 
     @After
@@ -48,8 +60,8 @@ public class OrderResourceTest {
 
     @Test
     public void testGetOrder() {
-        assertThat(resources.client().resource("/order/1").get(Order.class),
-                is(order1));
+        assertThat(resources.client().resource("/order/1").get(OrderDto.class),
+                is(orderDto1));
         verify(orderService).findById(new IntParam("1"));
     }
 }

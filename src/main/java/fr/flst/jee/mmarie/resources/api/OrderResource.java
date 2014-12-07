@@ -7,6 +7,7 @@ import com.google.inject.Inject;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import fr.flst.jee.mmarie.core.Order;
+import fr.flst.jee.mmarie.dto.OrderDto;
 import fr.flst.jee.mmarie.services.OrderService;
 import io.dropwizard.hibernate.UnitOfWork;
 import io.dropwizard.jersey.params.IntParam;
@@ -26,7 +27,6 @@ import javax.ws.rs.core.MediaType;
 @Api("/order")
 @Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
 public class OrderResource {
-    private static final Logger LOGGER = LoggerFactory.getLogger(OrderResource.class);
 
     private OrderService orderService;
 
@@ -41,10 +41,7 @@ public class OrderResource {
     @Path("/{orderId}")
     @UnitOfWork
     @JacksonFeatures(serializationEnable = {SerializationFeature.INDENT_OUTPUT})
-    public Order findById(@PathParam("orderId") IntParam orderId) {
-
-        Order order = orderService.findById(orderId);
-        LOGGER.info("Order lines [{}]", order.getOrderLines());
-        return order;
+    public OrderDto findById(@PathParam("orderId") IntParam orderId) {
+        return orderService.findById(orderId);
     }
 }
