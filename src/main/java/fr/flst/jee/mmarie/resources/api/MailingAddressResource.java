@@ -7,6 +7,7 @@ import com.google.inject.Inject;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import fr.flst.jee.mmarie.core.MailingAddress;
+import fr.flst.jee.mmarie.dto.MailingAddressDto;
 import fr.flst.jee.mmarie.services.MailingAddressService;
 import io.dropwizard.hibernate.UnitOfWork;
 import io.dropwizard.jersey.params.IntParam;
@@ -37,7 +38,7 @@ public class MailingAddressResource {
     @Path("/{mailingAddressId}")
     @UnitOfWork
     @JacksonFeatures(serializationEnable = {SerializationFeature.INDENT_OUTPUT})
-    public MailingAddress findById(@PathParam("mailingAddressId") IntParam mailingAddressId) {
+    public MailingAddressDto findById(@PathParam("mailingAddressId") IntParam mailingAddressId) {
         return mailingAddressService.findById(mailingAddressId);
     }
 }

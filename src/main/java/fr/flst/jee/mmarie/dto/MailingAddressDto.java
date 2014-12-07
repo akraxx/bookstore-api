@@ -1,5 +1,6 @@
 package fr.flst.jee.mmarie.dto;
 
+import fr.flst.jee.mmarie.core.MailingAddress;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -18,7 +19,7 @@ import lombok.experimental.Builder;
 @ToString
 @EqualsAndHashCode
 @Builder
-public class MailingAddressDto {
+public class MailingAddressDto implements Dto<MailingAddress> {
     private int id;
 
     private String zip;

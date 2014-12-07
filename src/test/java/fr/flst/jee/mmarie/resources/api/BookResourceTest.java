@@ -38,27 +38,6 @@ public class BookResourceTest {
             .addResource(new BookResource(bookService))
             .build();
 
-    private Book book1 = Book.builder()
-            .editor("Editor1")
-            .author(Author.builder().id(1).build())
-            .isbn13("ISBN-1")
-            .title("Title1")
-            .build();
-
-    private Book book2 = Book.builder()
-            .editor("Editor2")
-            .author(Author.builder().id(2).build())
-            .isbn13("ISBN-2")
-            .title("Title2")
-            .build();
-
-    private Book book3 = Book.builder()
-            .editor("Editor3")
-            .author(Author.builder().id(2).build())
-            .isbn13("ISBN-3")
-            .title("Title3")
-            .build();
-
     private BookDto bookDto1 = BookDto.builder()
             .editor("Editor1")
             .authorId(1)

@@ -29,18 +29,11 @@ public class AuthorResourceTest {
             .addResource(new AuthorResource(authorService))
             .build();
 
-    private Author author1 = Author.builder()
-            .id(1)
-            .firstName("FirstName 1")
-            .lastName("LastName 1")
-            .build();
-
     private AuthorDto authorDto1 = AuthorDto.builder()
             .id(1)
             .firstName("FirstName 1")
             .lastName("LastName 1")
             .build();
-
 
     @Before
     public void setup() {

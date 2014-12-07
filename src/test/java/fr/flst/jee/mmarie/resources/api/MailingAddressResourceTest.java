@@ -1,6 +1,7 @@
 package fr.flst.jee.mmarie.resources.api;
 
 import fr.flst.jee.mmarie.core.MailingAddress;
+import fr.flst.jee.mmarie.dto.MailingAddressDto;
 import fr.flst.jee.mmarie.services.MailingAddressService;
 import io.dropwizard.jersey.params.IntParam;
 import io.dropwizard.testing.junit.ResourceTestRule;
@@ -28,16 +29,15 @@ public class MailingAddressResourceTest {
             .addResource(new MailingAddressResource(mailingAddressService))
             .build();
 
-    private MailingAddress mailingAddress1 = MailingAddress.builder()
+    private MailingAddressDto mailingAddressDto1 = MailingAddressDto.builder()
             .id(1)
             .city("city")
             .line1("line1")
             .build();
 
-
     @Before
     public void setup() {
-        when(mailingAddressService.findById(new IntParam("1"))).thenReturn(mailingAddress1);
+        when(mailingAddressService.findById(new IntParam("1"))).thenReturn(mailingAddressDto1);
     }
 
     @After
@@ -47,8 +47,8 @@ public class MailingAddressResourceTest {
 
     @Test
     public void testGetMailingAddress() {
-        assertThat(resources.client().resource("/mailingAddress/1").get(MailingAddress.class),
-                is(mailingAddress1));
+        assertThat(resources.client().resource("/mailingAddress/1").get(MailingAddressDto.class),
+                is(mailingAddressDto1));
         verify(mailingAddressService).findById(new IntParam("1"));
     }
 }

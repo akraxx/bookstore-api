@@ -6,6 +6,8 @@ import com.google.inject.Singleton;
 import com.sun.jersey.api.NotFoundException;
 import fr.flst.jee.mmarie.core.MailingAddress;
 import fr.flst.jee.mmarie.db.dao.interfaces.MailingAddressDAO;
+import fr.flst.jee.mmarie.dto.MailingAddressDto;
+import fr.flst.jee.mmarie.misc.DtoMappingService;
 import io.dropwizard.jersey.params.IntParam;
 
 /**
@@ -13,7 +15,9 @@ import io.dropwizard.jersey.params.IntParam;
  */
 @Singleton
 public class MailingAddressService {
-    private MailingAddressDAO mailingAddressDAO;
+    private final MailingAddressDAO mailingAddressDAO;
+
+    private final DtoMappingService dtoMappingService;
 
     public MailingAddress findSafely(Integer id) {
         final Optional<MailingAddress> mailingAddress = mailingAddressDAO.findById(id);
@@ -24,11 +28,12 @@ public class MailingAddressService {
     }
 
     @Inject
-    public MailingAddressService(MailingAddressDAO mailingAddressDAO) {
+    public MailingAddressService(MailingAddressDAO mailingAddressDAO, DtoMappingService dtoMappingService) {
         this.mailingAddressDAO = mailingAddressDAO;
+        this.dtoMappingService = dtoMappingService;
     }
 
-    public MailingAddress findById(IntParam mailingAddressId) {
-        return findSafely(mailingAddressId.get());
+    public MailingAddressDto findById(IntParam mailingAddressId) {
+        return dtoMappingService.convertsToDto(findSafely(mailingAddressId.get()), MailingAddressDto.class);
     }
 }
