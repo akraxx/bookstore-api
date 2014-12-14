@@ -1,6 +1,5 @@
 package fr.flst.jee.mmarie.resources.api;
 
-import fr.flst.jee.mmarie.core.Author;
 import fr.flst.jee.mmarie.dto.AuthorDto;
 import fr.flst.jee.mmarie.services.AuthorService;
 import io.dropwizard.jersey.params.IntParam;

@@ -2,8 +2,6 @@ package fr.flst.jee.mmarie.resources.api;
 
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.GenericType;
-import fr.flst.jee.mmarie.core.Author;
-import fr.flst.jee.mmarie.core.Book;
 import fr.flst.jee.mmarie.dto.BookDto;
 import fr.flst.jee.mmarie.services.BookService;
 import io.dropwizard.jersey.params.IntParam;

@@ -6,7 +6,6 @@ import com.fasterxml.jackson.jaxrs.annotation.JacksonFeatures;
 import com.google.inject.Inject;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
-import fr.flst.jee.mmarie.core.OrderLine;
 import fr.flst.jee.mmarie.dto.OrderLineDto;
 import fr.flst.jee.mmarie.services.OrderLineService;
 import io.dropwizard.hibernate.UnitOfWork;

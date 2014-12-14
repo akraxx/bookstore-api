@@ -6,13 +6,10 @@ import com.fasterxml.jackson.jaxrs.annotation.JacksonFeatures;
 import com.google.inject.Inject;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
-import fr.flst.jee.mmarie.core.Order;
 import fr.flst.jee.mmarie.dto.OrderDto;
 import fr.flst.jee.mmarie.services.OrderService;
 import io.dropwizard.hibernate.UnitOfWork;
 import io.dropwizard.jersey.params.IntParam;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

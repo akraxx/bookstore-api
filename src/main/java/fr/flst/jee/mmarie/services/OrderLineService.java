@@ -2,7 +2,6 @@ package fr.flst.jee.mmarie.services;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import fr.flst.jee.mmarie.core.OrderLine;
 import fr.flst.jee.mmarie.db.dao.interfaces.OrderLineDAO;
 import fr.flst.jee.mmarie.dto.OrderLineDto;
 import fr.flst.jee.mmarie.misc.DtoMappingService;

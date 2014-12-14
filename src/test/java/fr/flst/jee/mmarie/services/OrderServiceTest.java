@@ -6,7 +6,6 @@ import fr.flst.jee.mmarie.core.MailingAddress;
 import fr.flst.jee.mmarie.core.Order;
 import fr.flst.jee.mmarie.core.User;
 import fr.flst.jee.mmarie.db.dao.interfaces.OrderDAO;
-import fr.flst.jee.mmarie.dto.MailingAddressDto;
 import fr.flst.jee.mmarie.dto.OrderDto;
 import fr.flst.jee.mmarie.misc.DtoMappingService;
 import io.dropwizard.jersey.params.IntParam;
@@ -21,7 +20,6 @@ import java.util.Date;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
