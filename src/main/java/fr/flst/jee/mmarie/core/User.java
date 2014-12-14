@@ -31,7 +31,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude = "orders")
+@ToString(of = "login")
 @EqualsAndHashCode
 @Builder
 @Entity
