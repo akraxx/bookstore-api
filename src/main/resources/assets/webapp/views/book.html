@@ -1,60 +1,74 @@
-<div class="row marketing"> <h4>Books</h4> <table ng-table="tableParams" show-filter="true" class="table"> <tr ng-repeat="book in books"> <td data-title="'ISBN13'" filter="{ 'isbn13': 'text' }" sortable="'isbn13'"> {{book.isbn13}}  <td data-title="'Title'" filter="{ 'title': 'text' }" sortable="'title'"> {{book.title}}  <td data-title="'Unit Price'"> {{book.unitPrice}}  <td data-title="'Editor'" filter="{ 'editor': 'text' }" sortable="'editor'"> {{book.editor}}  <td data-title="'Author'"> {{book.author.lastName + " " + book.author.firstName}}  <td> <button class="btn btn-default" ng-click="openDetails(book, 'lg')">More</button>   </table> <script type="text/ng-template" id="modalBookDetails.html"><div class="modal-header">
-            <h3 class="modal-title">{{ book.title }}</h3>
-        </div>
-        <div class="modal-body">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="row">
-                        <div class="col-lg-4">
-                            <b>ISBN13 :</b>
-                        </div>
-                        <div class="col-lg-8">
-                            <b>{{ book.isbn13 }}</b>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-4">
-                            <b>Editor :</b>
-                        </div>
-                        <div class="col-lg-8">
-                            <b>{{ book.editor }} !    </b>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">Author</div>
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <b>Last name :</b>
-                                </div>
-                                <div class="col-lg-8">
-                                    <b>{{ book.author.lastName }}</b>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <b>First name :</b>
-                                </div>
-                                <div class="col-lg-8">
-                                    <b>{{ book.author.firstName }}</b>
-                                </div>
-                            </div>
-                            <div class="row" ng-if="book.author.birthDate">
-                                <div class="col-lg-4">
-                                    <b>Birth date :</b>
-                                </div>
-                                <div class="col-lg-8">
-                                    <b>{{ book.author.birthDate }}</b>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<div class="row marketing"> <h4>Books</h4> <table ng-table="tableParams" show-filter="true" class="table"> <tr ng-repeat="book in books"> <td data-title="'ISBN13'" filter="{ 'isbn13': 'text' }" sortable="'isbn13'"> {{book.isbn13}}  <td data-title="'Title'" filter="{ 'title': 'text' }" sortable="'title'"> {{book.title}}  <td data-title="'Unit Price'" filter="{ 'unitPrice': 'unitPrice' }" sortable="'unitPrice'"> {{book.unitPrice}}  <td data-title="'Editor'" filter="{ 'editor': 'text' }" sortable="'editor'"> {{book.editor}}  <td data-title="'Author'" filter="{ 'author': 'text' }" sortable="'author.fullName'"> {{book.author.fullName}}  <td> <button class="btn btn-default" ng-click="openDetails(book, 'lg')">More</button>   </table> <script type="text/ng-template" id="ng-table/filters/unitPrice.html"><div class="row">
+      <div class="col-lg-5">
+        <select name="filter-unitPrice" class="form-control" ng-model="params.operatorPrice"
+                ng-change="reassessUnitPriceFilter()">
+          <option value=""></option>
+          <option value=">">></option>
+          <option value="<"><</option>
+          <option value="=">=</option>
+        </select>
+      </div>
+      <div class="col-lg-7">
+        <input type="text" name="{{column.filterName}}" ng-model="params.limitPrice" class="input-filter form-control"
+               ng-change="reassessUnitPriceFilter()"/>
+      </div>
+    </div></script> <script type="text/ng-template" id="modalBookDetails.html"><div class="modal-header">
+      <h3 class="modal-title">{{ book.title }}</h3>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="row">
+            <div class="col-lg-4">
+              <b>ISBN13 :</b>
             </div>
+            <div class="col-lg-8">
+              <b>{{ book.isbn13 }}</b>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-4">
+              <b>Editor :</b>
+            </div>
+            <div class="col-lg-8">
+              <b>{{ book.editor }}</b>
+            </div>
+          </div>
         </div>
-        <div class="modal-footer">
-            <button class="btn btn-default" ng-click="cancel()">Add to basket</button>
-            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
-        </div></script> </div>
+        <div class="col-lg-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">Author</div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-lg-4">
+                  <b>Last name :</b>
+                </div>
+                <div class="col-lg-8">
+                  <b>{{ book.author.lastName }}</b>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-4">
+                  <b>First name :</b>
+                </div>
+                <div class="col-lg-8">
+                  <b>{{ book.author.firstName }}</b>
+                </div>
+              </div>
+              <div class="row" ng-if="book.author.birthDate">
+                <div class="col-lg-4">
+                  <b>Birth date :</b>
+                </div>
+                <div class="col-lg-8">
+                  <b>{{ book.author.birthDate }}</b>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-default" ng-click="cancel()">Add to basket</button>
+      <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div></script> </div>
