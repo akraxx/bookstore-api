@@ -2,6 +2,7 @@ package fr.flst.jee.mmarie.services;
 
 import com.google.common.base.Optional;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import com.sun.jersey.api.NotFoundException;
 import fr.flst.jee.mmarie.core.MailingAddress;
 import fr.flst.jee.mmarie.core.User;
@@ -14,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
  * Created by Maximilien on 19/10/2014.
  */
 @Slf4j
+@Singleton
 public class UserService {
     private final UserDAO userDAO;
 
