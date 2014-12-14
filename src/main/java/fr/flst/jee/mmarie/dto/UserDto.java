@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Builder;
+import org.dozer.Mapping;
 
 /**
  * Created by Maximilien on 21/10/2014.
@@ -26,5 +27,6 @@ public class UserDto implements Dto<User> {
 
     private String password;
 
+    @Mapping("mailingAddress.id")
     private Integer mailingAddressId;
 }

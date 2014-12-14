@@ -18,6 +18,8 @@ public class UserService {
 
     private final DtoMappingService dtoMappingService;
 
+    private final AccessTokenService accessTokenService;
+
     public User findSafely(String login) {
         final Optional<User> user = userDAO.findByLogin(login);
         if (!user.isPresent()) {
@@ -27,10 +29,11 @@ public class UserService {
     }
 
     @Inject
-    public UserService(UserDAO userDAO, DtoMappingService dtoMappingService) {
+    public UserService(UserDAO userDAO, DtoMappingService dtoMappingService, AccessTokenService accessTokenService) {
         log.info("Initialize '{}'", getClass().getName());
         this.userDAO = userDAO;
         this.dtoMappingService = dtoMappingService;
+        this.accessTokenService = accessTokenService;
     }
 
     public UserDto findByLogin(String login) {
@@ -41,10 +44,21 @@ public class UserService {
         if(userDAO.findByLogin(user.getLogin()).isPresent()) {
             throw new IllegalArgumentException(String.format("Username %s already exists", user.getLogin()));
         }
-        return dtoMappingService.convertsToDto(userDAO.insert(user), UserDto.class);
+        return dtoMappingService.convertsToDto(userDAO.persist(user), UserDto.class);
+    }
+
+    public UserDto updateEmail(User user, String email) {
+        User userDb = findSafely(user.getLogin());
+        userDb.setEmail(email);
+        accessTokenService.updatedUser(userDb);
+        return dtoMappingService.convertsToDto(userDb, UserDto.class);
     }
 
     public Optional<User> findByUsernameAndPassword(String username, String password) {
         return userDAO.findByUsernameAndPassword(username, password);
+    }
+
+    public UserDto findMe(User user) {
+        return dtoMappingService.convertsToDto(user, UserDto.class);
     }
 }

@@ -84,7 +84,7 @@
             <column name="shipping_adr_id" type="int"/>
         </createTable>
 
-        <!--insert datas-->
+        <!--persist datas-->
         <insert tableName="mailing_addresses">
             <column name="id" value="1"/>
             <column name="line1" value="666, rue des tekos"/>

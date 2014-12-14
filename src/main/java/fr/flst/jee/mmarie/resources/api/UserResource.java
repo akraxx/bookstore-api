@@ -16,6 +16,7 @@ import fr.flst.jee.mmarie.services.UserService;
 import io.dropwizard.auth.Auth;
 import io.dropwizard.hibernate.UnitOfWork;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.validator.constraints.Email;
 import org.joda.time.DateTime;
 
 import javax.validation.Valid;
@@ -23,6 +24,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -56,6 +58,32 @@ public class UserResource {
     @JacksonFeatures(serializationEnable = {SerializationFeature.INDENT_OUTPUT})
     public UserDto findByLogin(@Auth User user, @PathParam("userLogin") String userLogin) {
         return userService.findByLogin(userLogin);
+    }
+
+    @GET
+    @ApiOperation("Get own informations")
+    @Timed
+    @Path("/me")
+    @UnitOfWork
+    @JacksonFeatures(serializationEnable = {SerializationFeature.INDENT_OUTPUT})
+    public UserDto findByLogin(@Auth User user) {
+        return userService.findMe(user);
+    }
+
+    @PUT
+    @ApiOperation("Update a user")
+    @Timed
+    @Path("/updateEmail")
+    @UnitOfWork
+    @JacksonFeatures(serializationEnable = {SerializationFeature.INDENT_OUTPUT})
+    public Response updateEmail(@Auth User loggedUser, @Valid @Email String email) {
+        log.info("Update email {}, {}", loggedUser, email);
+        if(loggedUser.getEmail().equals(email)) {
+            return Response.status(304).build();
+        }
+
+        userService.updateEmail(loggedUser, email);
+        return Response.status(204).build();
     }
 
     @POST

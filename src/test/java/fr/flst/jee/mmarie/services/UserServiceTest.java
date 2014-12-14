@@ -52,7 +52,7 @@ public class UserServiceTest {
 
         when(dtoMappingService.convertsToDto(user1, UserDto.class)).thenReturn(userDto1);
 
-        userService = new UserService(userDAO, dtoMappingService);
+        userService = new UserService(userDAO, dtoMappingService, null);
     }
 
     @After

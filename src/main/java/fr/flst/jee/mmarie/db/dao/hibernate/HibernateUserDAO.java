@@ -33,7 +33,7 @@ public class HibernateUserDAO extends AbstractDAO<User> implements UserDAO {
     }
 
     @Override
-    public User insert(User user) {
+    public User persist(User user) {
         log.info(user.toString());
         return persist(user);
     }
