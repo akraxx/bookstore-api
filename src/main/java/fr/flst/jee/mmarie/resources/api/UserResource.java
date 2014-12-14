@@ -20,6 +20,7 @@ import org.hibernate.validator.constraints.Email;
 import org.joda.time.DateTime;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Size;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
@@ -76,14 +77,22 @@ public class UserResource {
     @Path("/updateEmail")
     @UnitOfWork
     @JacksonFeatures(serializationEnable = {SerializationFeature.INDENT_OUTPUT})
-    public Response updateEmail(@Auth User loggedUser, @Valid @Email String email) {
-        log.info("Update email {}, {}", loggedUser, email);
-        if(loggedUser.getEmail().equals(email)) {
-            return Response.status(304).build();
-        }
+    public UserDto updateEmail(@Auth User loggedUser, @Valid @Email String email) {
+        log.info("[{}] - Update email {}", loggedUser, email);
 
-        userService.updateEmail(loggedUser, email);
-        return Response.status(204).build();
+        return userService.updateEmail(loggedUser, email);
+    }
+
+    @PUT
+    @ApiOperation("Update the password of the logged user")
+    @Timed
+    @Path("/updatePassword")
+    @UnitOfWork
+    @JacksonFeatures(serializationEnable = {SerializationFeature.INDENT_OUTPUT})
+    public UserDto updatePassword(@Auth User loggedUser, @Valid @Size(min = 6, max = 20) String password) {
+        log.info("[{}] - Update password {}", loggedUser, password);
+
+        return userService.updatePassword(loggedUser, password);
     }
 
     @POST

@@ -57,6 +57,13 @@ public class UserService {
         return dtoMappingService.convertsToDto(userDb, UserDto.class);
     }
 
+    public UserDto updatePassword(User user, String password) {
+        User userDb = findSafely(user.getLogin());
+        userDb.setPassword(password);
+        accessTokenService.updatedUser(userDb);
+        return dtoMappingService.convertsToDto(userDb, UserDto.class);
+    }
+
     public UserDto updateMailingAddress(User user, MailingAddress mailingAddress) {
         User userDb = findSafely(user.getLogin());
         userDb.setMailingAddress(mailingAddress);
