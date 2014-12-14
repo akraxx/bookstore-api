@@ -33,7 +33,21 @@ public class MailingAddressService {
         this.dtoMappingService = dtoMappingService;
     }
 
+    public MailingAddressDto findById(Integer mailingAddressId) {
+        return dtoMappingService.convertsToDto(findSafely(mailingAddressId), MailingAddressDto.class);
+    }
+
     public MailingAddressDto findById(IntParam mailingAddressId) {
-        return dtoMappingService.convertsToDto(findSafely(mailingAddressId.get()), MailingAddressDto.class);
+        return findById(mailingAddressId.get());
+    }
+
+    public MailingAddress persist(MailingAddressDto mailingAddressDto) {
+        MailingAddress address = dtoMappingService.convertsToModel(mailingAddressDto, MailingAddress.class);
+
+        return mailingAddressDAO.persist(address);
+    }
+
+    public MailingAddressDto converts(MailingAddress mailingAddress) {
+        return dtoMappingService.convertsToDto(mailingAddress, MailingAddressDto.class);
     }
 }

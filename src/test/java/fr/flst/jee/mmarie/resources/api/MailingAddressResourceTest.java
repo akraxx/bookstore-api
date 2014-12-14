@@ -1,6 +1,5 @@
 package fr.flst.jee.mmarie.resources.api;
 
-import fr.flst.jee.mmarie.core.MailingAddress;
 import fr.flst.jee.mmarie.dto.MailingAddressDto;
 import fr.flst.jee.mmarie.services.MailingAddressService;
 import io.dropwizard.jersey.params.IntParam;
@@ -26,7 +25,7 @@ public class MailingAddressResourceTest {
 
     @ClassRule
     public static final ResourceTestRule resources = ResourceTestRule.builder()
-            .addResource(new MailingAddressResource(mailingAddressService))
+            .addResource(new MailingAddressResource(mailingAddressService, null))
             .build();
 
     private MailingAddressDto mailingAddressDto1 = MailingAddressDto.builder()

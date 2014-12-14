@@ -33,6 +33,7 @@ logging:
   # Logger-specific levels.
   loggers:
     org.hibernate.SQL: ALL
+    org.hibernate.engine.internal: WARN
 
   appenders:
     - type: console

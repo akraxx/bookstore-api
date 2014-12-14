@@ -3,6 +3,7 @@ package fr.flst.jee.mmarie.services;
 import com.google.common.base.Optional;
 import com.google.inject.Inject;
 import com.sun.jersey.api.NotFoundException;
+import fr.flst.jee.mmarie.core.MailingAddress;
 import fr.flst.jee.mmarie.core.User;
 import fr.flst.jee.mmarie.db.dao.interfaces.UserDAO;
 import fr.flst.jee.mmarie.dto.UserDto;
@@ -50,6 +51,13 @@ public class UserService {
     public UserDto updateEmail(User user, String email) {
         User userDb = findSafely(user.getLogin());
         userDb.setEmail(email);
+        accessTokenService.updatedUser(userDb);
+        return dtoMappingService.convertsToDto(userDb, UserDto.class);
+    }
+
+    public UserDto updateMailingAddress(User user, MailingAddress mailingAddress) {
+        User userDb = findSafely(user.getLogin());
+        userDb.setMailingAddress(mailingAddress);
         accessTokenService.updatedUser(userDb);
         return dtoMappingService.convertsToDto(userDb, UserDto.class);
     }

@@ -35,5 +35,8 @@ public class DtoMappingService {
         return dtos;
     }
 
+    public <T, D extends Dto<T>> T convertsToModel(D objectToMap, Class<T> dtoClass) {
+        return mapper.map(objectToMap, dtoClass);
+    }
 
 }

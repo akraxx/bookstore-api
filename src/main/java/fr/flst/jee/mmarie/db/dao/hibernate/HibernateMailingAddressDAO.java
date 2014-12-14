@@ -31,8 +31,8 @@ public class HibernateMailingAddressDAO extends AbstractDAO<MailingAddress> impl
     }
 
     @Override
-    public MailingAddress insert(MailingAddress mailingAddress) {
-        return persist(mailingAddress);
+    public MailingAddress persist(MailingAddress mailingAddress) {
+        return super.persist(mailingAddress);
     }
 
 }
