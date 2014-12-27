@@ -1,5 +1,6 @@
 package fr.flst.jee.mmarie.resources.api;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.jersey.api.client.ClientHandlerException;
 import com.sun.jersey.api.client.ClientRequest;
 import com.sun.jersey.api.client.ClientResponse;
@@ -13,6 +14,8 @@ import java.util.List;
  * Created by Maximilien on 06/12/2014.
  */
 public class ResourceTest {
+
+    protected ObjectMapper objectMapper = new ObjectMapper();
 
     public void setTokenAuthorization(ResourceTestRule resources, String token) {
         resources.client().addFilter(new ClientFilter() {

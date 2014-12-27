@@ -99,6 +99,7 @@ public class UserResource {
     @ApiOperation("Create a user")
     @Timed
     @UnitOfWork
+    @Consumes(MediaType.APPLICATION_JSON)
     @JacksonFeatures(serializationEnable = {SerializationFeature.INDENT_OUTPUT})
     public UserDto insert(@ApiParam(value = "User login", required = true)
                        @Valid User user) {

@@ -1,7 +1,6 @@
 package fr.flst.jee.mmarie.resources.api;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.flst.jee.mmarie.core.MailingAddress;
 import fr.flst.jee.mmarie.dto.MailingAddressDto;
 import fr.flst.jee.mmarie.services.MailingAddressService;
@@ -18,7 +17,6 @@ import javax.ws.rs.core.MediaType;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.times;
@@ -46,8 +44,6 @@ public class MailingAddressResourceTest extends ResourceTest {
             .city("city")
             .line1("line1")
             .build();
-
-    private ObjectMapper objectMapper = new ObjectMapper();
 
     @Before
     public void setup() {
