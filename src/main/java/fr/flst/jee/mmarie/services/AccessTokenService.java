@@ -4,6 +4,7 @@ import com.google.common.base.Optional;
 import com.google.inject.Singleton;
 import fr.flst.jee.mmarie.core.AccessToken;
 import fr.flst.jee.mmarie.core.User;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.joda.time.DateTime;
 
@@ -17,6 +18,7 @@ import java.util.UUID;
 @Singleton
 @Slf4j
 public class AccessTokenService {
+    @Getter
     private static Map<UUID, AccessToken> accessTokens = new HashMap<>();
 
     public Optional<AccessToken> findAccessTokenById(final UUID accessTokenId) {
