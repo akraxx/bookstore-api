@@ -19,7 +19,7 @@ import static org.mockito.Mockito.when;
 /**
  * Created by Maximilien on 24/10/2014.
  */
-public class AuthorResourceTest {
+public class AuthorResourceTest extends ResourceTest {
 
     private static final AuthorService authorService = mock(AuthorService.class);
 
@@ -36,12 +36,14 @@ public class AuthorResourceTest {
 
     @Before
     public void setup() {
+        setTokenAuthorization(resources, "good-token");
         when(authorService.findById(new IntParam("1"))).thenReturn(authorDto1);
     }
 
     @After
     public void tearDown() {
         reset(authorService);
+        resources.client().removeAllFilters();
     }
 
     @Test
