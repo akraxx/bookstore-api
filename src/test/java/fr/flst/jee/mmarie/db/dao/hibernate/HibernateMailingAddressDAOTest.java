@@ -5,6 +5,8 @@ import fr.flst.jee.mmarie.core.MailingAddress;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -21,6 +23,10 @@ public class HibernateMailingAddressDAOTest extends AbstractDAOTestCase {
     public void testFindById() throws Exception {
         Optional<MailingAddress> addressOptional = hibernateMailingAddressDAO.findById(1);
         assertThat(addressOptional.isPresent(), is(true));
+        assertThat(addressOptional.get(), allOf(hasProperty("zip", is("59000")),
+                hasProperty("city", is("Lille")),
+                hasProperty("line1", is("41 bd vauban"))));
+
     }
 
     @Test
