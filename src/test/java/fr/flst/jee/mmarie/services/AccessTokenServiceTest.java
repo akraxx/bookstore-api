@@ -1,6 +1,5 @@
 package fr.flst.jee.mmarie.services;
 
-import com.google.common.base.Optional;
 import fr.flst.jee.mmarie.core.AccessToken;
 import fr.flst.jee.mmarie.core.User;
 import org.joda.time.DateTime;
@@ -13,7 +12,7 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.isA;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.Matchers.nullValue;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 public class AccessTokenServiceTest {
 
