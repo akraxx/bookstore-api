@@ -26,9 +26,9 @@ import org.hibernate.SessionFactory;
 
 public class HibernateModule extends AbstractModule {
 
-    private final HibernateBundle hibernateBundle;
+    private final HibernateBundle<BookstoreConfiguration> hibernateBundle;
 
-    public HibernateModule(Bootstrap<BookstoreConfiguration> bootstrap, HibernateBundle hibernateBundle) {
+    public HibernateModule(Bootstrap<BookstoreConfiguration> bootstrap, HibernateBundle<BookstoreConfiguration> hibernateBundle) {
         this.hibernateBundle = hibernateBundle;
         bootstrap.addBundle(hibernateBundle);
     }
@@ -44,8 +44,7 @@ public class HibernateModule extends AbstractModule {
     }
 
     @Provides
-    public SessionFactory provideSessionFactory(BookstoreConfiguration configuration,
-                                                Environment environment) {
+    public SessionFactory provideSessionFactory() {
         return hibernateBundle.getSessionFactory();
     }
 }
