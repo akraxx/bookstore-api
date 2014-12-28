@@ -1,0 +1,59 @@
+<!DOCTYPE dataset>
+
+<dataset>
+    <!--<table name="USERS">-->
+        <!--<column>LOGIN</column>-->
+        <!--<column>EMAIL</column>-->
+        <!--<column>PWD</column>-->
+        <!--<row>-->
+            <!--<value>yhovart</value>-->
+            <!--<value>yhovart@gmail.com</value>-->
+            <!--<value>yhovartpwd</value>-->
+        <!--</row>-->
+    <!--</table>-->
+
+    <table name="AUTHORS">
+        <column>FIRST_NAME</column>
+        <column>LAST_NAME</column>
+        <column>BIRTH_DATE</column>
+        <row>
+            <value>Merick</value>
+            <value>Schincariol</value>
+            <value>1981-12-28</value>
+        </row>
+        <row>
+            <value>Mike</value>
+            <value>Keith</value>
+            <value>1978-01-01</value>
+        </row>
+    </table>
+
+    <table name="BOOKS">
+        <column>ISBN13</column>
+        <column>TITLE</column>
+        <column>UNIT_PRICE</column>
+        <column>EDITOR</column>
+        <column>AUTHORS_ID</column>
+        <row>
+            <value>978-1430219569</value>
+            <value>Pro JPA 2: Mastering the Java Persistence API</value>
+            <value>40.84</value>
+            <value>APress</value>
+            <value>2</value>
+        </row>
+        <row>
+            <value>978-1932394887</value>
+            <value>Java Persistence with Hibernate</value>
+            <value>47.03</value>
+            <null/>
+            <value>1</value>
+        </row>
+        <row>
+            <value>978-2070415731</value>
+            <value>Fahrenheit 451</value>
+            <value>5.04</value>
+            <null/>
+            <null/>
+        </row>
+    </table>
+</dataset>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="1.0"
+             xmlns="http://java.sun.com/xml/ns/persistence">
+
+    <!-- Persistence unit named BookstorePU -->
+    <persistence-unit name="BookstorePU"
+          transaction-type="RESOURCE_LOCAL">
+
+        <!-- An antity -->
+        <class>fr.flst.jee.mmarie.core.Author</class>
+        <class>fr.flst.jee.mmarie.core.Book</class>
+        <class>fr.flst.jee.mmarie.core.OrderLine</class>
+        <class>fr.flst.jee.mmarie.core.Order</class>
+        <class>fr.flst.jee.mmarie.core.OrderLineId</class>
+        <class>fr.flst.jee.mmarie.core.MailingAddress</class>
+        <class>fr.flst.jee.mmarie.core.User</class>
+
+        <properties>
+            <!-- Eclipselink specific properties -->
+            <property name="javax.persistence.jdbc.driver"
+                  value="org.apache.derby.jdbc.EmbeddedDriver" />
+            <property name="javax.persistence.jdbc.url"
+                  value="jdbc:derby:memory:BookStoreDB;create=true" />
+
+            <property name="javax.persistence.jdbc.user" value="" />
+            <property name="javax.persistence.jdbc.password" value="" />
+
+            <!-- EclipseLink should create the database schema automatically -->
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.current_session_context_class" value="thread" />
+            <!--<property name="hibernate.current_session_context_class">org.hibernate.context.internal.ThreadLocalSessionContext</property>-->
+            <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+        </properties>
+
+    </persistence-unit>
+
+</persistence>

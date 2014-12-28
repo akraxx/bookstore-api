@@ -47,3 +47,4 @@ target
 *.classpath
 *.project
 *.prefs
+*.log
