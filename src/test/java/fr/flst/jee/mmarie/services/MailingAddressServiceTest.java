@@ -17,6 +17,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -50,8 +51,10 @@ public class MailingAddressServiceTest {
     public void setup() {
         when(mailingAddressDAO.findById(1)).thenReturn(Optional.of(mailingAddress1));
         when(mailingAddressDAO.findById(0)).thenReturn(Optional.absent());
+        when(mailingAddressDAO.persist(mailingAddress1)).thenReturn(mailingAddress1);
 
         when(dtoMappingService.convertsToDto(mailingAddress1, MailingAddressDto.class)).thenReturn(mailingAddressDto1);
+        when(dtoMappingService.convertsToModel(mailingAddressDto1, MailingAddress.class)).thenReturn(mailingAddress1);
 
         mailingAddressService = new MailingAddressService(mailingAddressDAO, dtoMappingService);
     }
@@ -71,5 +74,19 @@ public class MailingAddressServiceTest {
     @Test(expected = NotFoundException.class)
     public void testGetMailingAddressNotExisting() {
         mailingAddressService.findById(new IntParam("0"));
+    }
+
+    @Test
+    public void testPersist() {
+        assertThat(mailingAddressService.persist(mailingAddressDto1), is(mailingAddress1));
+
+        verify(mailingAddressDAO, times(1)).persist(mailingAddress1);
+    }
+
+    @Test
+    public void testConverts() {
+        assertThat(mailingAddressService.converts(mailingAddress1), is(mailingAddressDto1));
+
+        verify(dtoMappingService, times(1)).convertsToDto(mailingAddress1, MailingAddressDto.class);
     }
 }
