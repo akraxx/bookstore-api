@@ -9,12 +9,9 @@ import java.text.SimpleDateFormat;
 
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.comparesEqualTo;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 public class HibernateOrderDAOTest extends AbstractDAOTestCase {
 
