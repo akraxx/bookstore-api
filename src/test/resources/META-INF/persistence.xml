@@ -28,9 +28,10 @@
             <!-- EclipseLink should create the database schema automatically -->
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.current_session_context_class" value="thread" />
-            <!--<property name="hibernate.current_session_context_class">org.hibernate.context.internal.ThreadLocalSessionContext</property>-->
             <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+
         </properties>
+
 
     </persistence-unit>
 
