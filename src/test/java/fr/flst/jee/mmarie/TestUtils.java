@@ -37,7 +37,7 @@ public class TestUtils {
     public static void reloadDbUnitData() throws Exception {
         Connection connection = getJDBCConnection();
 
-        String[] tables = {"AUTHORS", "MAILING_ADDRESSES"};
+        String[] tables = {"AUTHORS", "MAILING_ADDRESSES", "ORDERS"};
         for (String table : tables) {
             PreparedStatement stmt = connection
                     .prepareStatement("ALTER TABLE "+table+" ALTER COLUMN id RESTART WITH 1");

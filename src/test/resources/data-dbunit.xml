@@ -1,17 +1,6 @@
 <!DOCTYPE dataset>
 
 <dataset>
-    <!--<table name="USERS">-->
-        <!--<column>LOGIN</column>-->
-        <!--<column>EMAIL</column>-->
-        <!--<column>PWD</column>-->
-        <!--<row>-->
-            <!--<value>yhovart</value>-->
-            <!--<value>yhovart@gmail.com</value>-->
-            <!--<value>yhovartpwd</value>-->
-        <!--</row>-->
-    <!--</table>-->
-
     <table name="AUTHORS">
         <column>FIRST_NAME</column>
         <column>LAST_NAME</column>
@@ -46,7 +35,7 @@
             <value>Java Persistence with Hibernate</value>
             <value>47.03</value>
             <null/>
-            <value>1</value>5900
+            <value>1</value>
         </row>
         <row>
             <value>978-2070415731</value>
@@ -83,6 +72,30 @@
             <value>41 rue maréchal Leclerc</value>
             <null />
             <null />
+        </row>
+    </table>
+
+    <table name="USERS">
+        <column>LOGIN</column>
+        <column>EMAIL</column>
+        <column>PWD</column>
+        <column>PERSONNAL_ADR_ID</column>
+        <row>
+            <value>yhovart</value>
+            <value>yhovart@gmail.com</value>
+            <value>yhovartpwd</value>
+            <value>1</value>
+        </row>
+    </table>
+
+    <table name="ORDERS">
+        <column>USERS_LOGIN</column>
+        <column>ORDER_DATE</column>
+        <column>SHIPPING_ADR_ID</column>
+        <row>
+            <value>yhovart</value>
+            <value>2014-12-26 14:15:00</value>
+            <value>2</value>
         </row>
     </table>
 </dataset>
