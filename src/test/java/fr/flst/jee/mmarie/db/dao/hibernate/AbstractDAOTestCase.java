@@ -17,8 +17,8 @@ import javax.persistence.Persistence;
 /**
  * Created by Maximilien on 01/10/2014.
  */
-public class AbstractTestCase {
-    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractTestCase.class);
+public class AbstractDAOTestCase {
+    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractDAOTestCase.class);
 
     protected static EntityManagerFactory emf;
     protected static EntityManager em;

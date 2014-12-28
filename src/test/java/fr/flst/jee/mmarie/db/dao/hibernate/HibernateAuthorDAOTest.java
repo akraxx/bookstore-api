@@ -2,7 +2,6 @@ package fr.flst.jee.mmarie.db.dao.hibernate;
 
 import com.google.common.base.Optional;
 import fr.flst.jee.mmarie.core.Author;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,19 +9,13 @@ import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
-public class HibernateAuthorDAOTest extends AbstractTestCase {
+public class HibernateAuthorDAOTest extends AbstractDAOTestCase {
 
     private HibernateAuthorDAO hibernateAuthorDAO;
 
     @Before
     public void setUp() throws Exception {
-        System.out.println(sessionFactory.toString());
         hibernateAuthorDAO = new HibernateAuthorDAO(sessionFactory);
-    }
-
-    @After
-    public void tearDown() throws Exception {
-
     }
 
     @Test
