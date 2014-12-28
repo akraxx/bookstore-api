@@ -46,7 +46,7 @@
             <value>Java Persistence with Hibernate</value>
             <value>47.03</value>
             <null/>
-            <value>1</value>
+            <value>1</value>5900
         </row>
         <row>
             <value>978-2070415731</value>
@@ -54,6 +54,35 @@
             <value>5.04</value>
             <null/>
             <null/>
+        </row>
+    </table>
+
+    <table name="MAILING_ADDRESSES">
+        <column>ZIP</column>
+        <column>CITY</column>
+        <column>LINE1</column>
+        <column>LINE2</column>
+        <column>LINE3</column>
+        <row>
+            <value>59000</value>
+            <value>Lille</value>
+            <value>41 bd vauban</value>
+            <null />
+            <null />
+        </row>
+        <row>
+            <value>59000</value>
+            <value>Lille</value>
+            <value>41 rue du port</value>
+            <null />
+            <null />
+        </row>
+        <row>
+            <value>59152</value>
+            <value>Tressin</value>
+            <value>41 rue maréchal Leclerc</value>
+            <null />
+            <null />
         </row>
     </table>
 </dataset>

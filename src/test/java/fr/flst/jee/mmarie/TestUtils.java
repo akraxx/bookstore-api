@@ -37,10 +37,14 @@ public class TestUtils {
     public static void reloadDbUnitData() throws Exception {
         Connection connection = getJDBCConnection();
 
-        PreparedStatement stmt = connection
-                .prepareStatement("ALTER TABLE AUTHORS ALTER COLUMN id RESTART WITH 1");
-        stmt.execute();
-        stmt.close();
+        String[] tables = {"AUTHORS", "MAILING_ADDRESSES"};
+        for (String table : tables) {
+            PreparedStatement stmt = connection
+                    .prepareStatement("ALTER TABLE "+table+" ALTER COLUMN id RESTART WITH 1");
+            stmt.execute();
+            stmt.close();
+        }
+
 
 		/* load the first time only */
         if (dbUnitDataset == null){

@@ -28,9 +28,10 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "MAILING_ADDRESSES")
 public class MailingAddress {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID", nullable = false)
     private int id;
 
     @Column(name = "ZIP", nullable = false, length = 10)
