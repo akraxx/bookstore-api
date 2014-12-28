@@ -97,5 +97,47 @@
             <value>2014-12-26 14:15:00</value>
             <value>2</value>
         </row>
+        <row>
+            <value>yhovart</value>
+            <value>2014-12-27 17:31:10</value>
+            <value>1</value>
+        </row>
+    </table>
+
+    <table name="ORDERS">
+        <column>USERS_LOGIN</column>
+        <column>ORDER_DATE</column>
+        <column>SHIPPING_ADR_ID</column>
+        <row>
+            <value>yhovart</value>
+            <value>2014-12-26 14:15:00</value>
+            <value>2</value>
+        </row>
+        <row>
+            <value>yhovart</value>
+            <value>2014-12-27 17:31:10</value>
+            <value>1</value>
+        </row>
+    </table>
+
+    <table name="ORDER_LINES">
+        <column>BOOKS_ID</column>
+        <column>ORDERS_ID</column>
+        <column>QUANTITY</column>
+        <row>
+            <value>978-1430219569</value>
+            <value>1</value>
+            <value>2</value>
+        </row>
+        <row>
+            <value>978-2070415731</value>
+            <value>2</value>
+            <value>1</value>
+        </row>
+        <row>
+            <value>978-1430219569</value>
+            <value>2</value>
+            <value>5</value>
+        </row>
     </table>
 </dataset>
