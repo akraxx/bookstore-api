@@ -17,7 +17,7 @@ import java.util.UUID;
  */
 @Slf4j
 public class SimpleAuthenticator implements Authenticator<String, User> {
-    public static final int ACCESS_TOKEN_EXPIRE_TIME_MIN = 1440;
+    public static final int ACCESS_TOKEN_EXPIRE_TIME_MIN = 30;
     private AccessTokenService accessTokenService;
 
     public SimpleAuthenticator(AccessTokenService accessTokenService) {
