@@ -3,8 +3,6 @@ package fr.flst.jee.mmarie.db.dao.hibernate;
 import fr.flst.jee.mmarie.TestUtils;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
