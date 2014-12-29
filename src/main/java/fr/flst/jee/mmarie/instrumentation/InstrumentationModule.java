@@ -2,9 +2,14 @@ package fr.flst.jee.mmarie.instrumentation;
 
 import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.annotation.Timed;
+import com.google.common.annotations.VisibleForTesting;
 import com.google.inject.AbstractModule;
+import com.google.inject.matcher.Matcher;
 import com.google.inject.matcher.Matchers;
 import fr.flst.jee.mmarie.instrumentation.interceptors.TimedInterceptor;
+import org.aopalliance.intercept.MethodInterceptor;
+
+import java.lang.reflect.Method;
 
 /**
  * Created by Maximilien on 18/10/2014.
