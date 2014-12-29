@@ -17,7 +17,6 @@ import fr.flst.jee.mmarie.db.dao.interfaces.OrderLineDAO;
 import fr.flst.jee.mmarie.db.dao.interfaces.UserDAO;
 import io.dropwizard.hibernate.HibernateBundle;
 import io.dropwizard.setup.Bootstrap;
-import io.dropwizard.setup.Environment;
 import org.hibernate.SessionFactory;
 
 /**

@@ -1,14 +1,13 @@
 package fr.flst.jee.mmarie.auth;
 
 import fr.flst.jee.mmarie.BookstoreConfiguration;
-import fr.flst.jee.mmarie.core.AccessToken;
 import fr.flst.jee.mmarie.services.AccessTokenService;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
