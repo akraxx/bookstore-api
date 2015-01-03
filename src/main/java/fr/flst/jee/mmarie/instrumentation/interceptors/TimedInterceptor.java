@@ -12,7 +12,7 @@ import java.lang.reflect.Method;
 import static com.codahale.metrics.MetricRegistry.name;
 
 /**
- * Created by Maximilien on 18/10/2014.
+ * Interceptor for method annotated with {@link com.codahale.metrics.annotation.Timed}
  */
 @Slf4j
 public class TimedInterceptor implements MethodInterceptor {
@@ -22,6 +22,17 @@ public class TimedInterceptor implements MethodInterceptor {
         this.metricRegistry = metricRegistry;
     }
 
+    /**
+     * <p>
+     *     Choose the name by the given method parameter.
+     * </p>
+     *
+     * @param explicitName Explicit name of the metric.
+     * @param absolute Define if the package name needs to be removed.
+     * @param method The method which will be timed.
+     * @param suffixes List of suffixes to append to the metric.
+     * @return The chosen name.
+     */
     public String chooseName(String explicitName, boolean absolute, Method method, String... suffixes) {
         if (explicitName != null && !explicitName.isEmpty()) {
             if (absolute) {
@@ -33,6 +44,13 @@ public class TimedInterceptor implements MethodInterceptor {
                 suffixes);
     }
 
+    /**
+     * Invoke the method, time it and register it into the dropwizard {@link com.codahale.metrics.MetricRegistry}
+     *
+     * @param methodInvocation {@link java.lang.reflect.Method} wrapper.
+     * @return the result of the method.
+     * @throws Throwable the method exception.
+     */
     @Override
     public Object invoke(MethodInvocation methodInvocation) throws Throwable {
         log.debug("Method [{}] has been invoked", methodInvocation.getMethod());
