@@ -4,6 +4,7 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.GenericType;
 import fr.flst.jee.mmarie.dto.BookDto;
 import fr.flst.jee.mmarie.services.BookService;
+import io.dropwizard.auth.oauth.OAuthProvider;
 import io.dropwizard.jersey.params.IntParam;
 import io.dropwizard.testing.junit.ResourceTestRule;
 import org.junit.After;
@@ -27,13 +28,16 @@ import static org.mockito.Mockito.when;
 /**
  * Created by Maximilien on 24/10/2014.
  */
-public class BookResourceTest {
+public class BookResourceTest extends ResourceTest {
+
+    private static final TestAuthenticator testAuthenticator = new TestAuthenticator();
 
     private static final BookService bookService = mock(BookService.class);
 
     @ClassRule
     public static final ResourceTestRule resources = ResourceTestRule.builder()
             .addResource(new BookResource(bookService))
+            .addProvider(new OAuthProvider<>(testAuthenticator, "CLIENT_SECRET"))
             .build();
 
     private BookDto bookDto1 = BookDto.builder()
@@ -60,6 +64,7 @@ public class BookResourceTest {
 
     @Before
     public void setup() {
+        setTokenAuthorization(resources, "good-token");
         when(bookService.findAll()).thenReturn(Arrays.asList(bookDto1, bookDto2, bookDto3));
         when(bookService.findById("ISBN-1")).thenReturn(bookDto1);
         when(bookService.findByAuthorId(new IntParam("2"))).thenReturn(Arrays.asList(bookDto2, bookDto3));
@@ -68,6 +73,7 @@ public class BookResourceTest {
     @After
     public void tearDown() {
         reset(bookService);
+        resources.client().removeAllFilters();
     }
 
     @Test
