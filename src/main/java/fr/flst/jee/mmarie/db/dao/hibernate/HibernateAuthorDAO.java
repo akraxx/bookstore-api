@@ -10,7 +10,7 @@ import io.dropwizard.hibernate.AbstractDAO;
 import org.hibernate.SessionFactory;
 
 /**
- * Created by Maximilien on 16/10/2014.
+ * Hibernate implementation of {@link fr.flst.jee.mmarie.db.dao.interfaces.AuthorDAO}
  */
 @LazySingleton
 public class HibernateAuthorDAO extends AbstractDAO<Author> implements AuthorDAO {
@@ -24,6 +24,9 @@ public class HibernateAuthorDAO extends AbstractDAO<Author> implements AuthorDAO
         super(sessionFactory);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Timed(absolute = true, name = "book.dao.findById")
     @Override
     public Optional<Author> findById(Integer id) {

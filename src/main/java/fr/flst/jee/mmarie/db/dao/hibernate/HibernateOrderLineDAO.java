@@ -11,7 +11,7 @@ import org.hibernate.SessionFactory;
 import java.util.List;
 
 /**
- * Created by Maximilien on 16/10/2014.
+ * Hibernate implementation of {@link fr.flst.jee.mmarie.db.dao.interfaces.OrderLineDAO}
  */
 @LazySingleton
 public class HibernateOrderLineDAO extends AbstractDAO<OrderLine> implements OrderLineDAO {
@@ -25,12 +25,18 @@ public class HibernateOrderLineDAO extends AbstractDAO<OrderLine> implements Ord
         super(sessionFactory);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Timed(absolute = true, name = "orderLine.dao.findByBookIsbn13")
     @Override
     public List<OrderLine> findByBookIsbn13(String bookIsbn13) {
         return list(namedQuery(OrderLine.FIND_BY_BOOK_ISBN13).setParameter("bookIsbn13", bookIsbn13));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Timed(absolute = true, name = "orderLine.dao.findByOrderId")
     @Override
     public List<OrderLine> findByOrderId(Integer orderId) {

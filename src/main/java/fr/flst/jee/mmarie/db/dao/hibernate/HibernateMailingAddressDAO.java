@@ -10,7 +10,7 @@ import io.dropwizard.hibernate.AbstractDAO;
 import org.hibernate.SessionFactory;
 
 /**
- * Created by Maximilien on 16/10/2014.
+ * Hibernate implementation of {@link fr.flst.jee.mmarie.db.dao.interfaces.MailingAddressDAO}
  */
 @LazySingleton
 public class HibernateMailingAddressDAO extends AbstractDAO<MailingAddress> implements MailingAddressDAO {
@@ -24,12 +24,18 @@ public class HibernateMailingAddressDAO extends AbstractDAO<MailingAddress> impl
         super(sessionFactory);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Timed(absolute = true, name = "mailingAddress.dao.findById")
     @Override
     public Optional<MailingAddress> findById(Integer id) {
         return Optional.fromNullable(get(id));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public MailingAddress persist(MailingAddress mailingAddress) {
         return super.persist(mailingAddress);

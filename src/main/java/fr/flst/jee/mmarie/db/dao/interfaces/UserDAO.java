@@ -25,10 +25,11 @@ public interface UserDAO {
     User persist(User user);
 
     /**
-     * Find an {@link fr.flst.jee.mmarie.core.User} by it's {@code login}.
+     * Find an {@link fr.flst.jee.mmarie.core.User} by it's {@code login} and {@code password}.
      *
      * @param login Login of the user.
+     * @param password Password of the user.
      * @return The user if it exists, {@link com.google.common.base.Optional#absent()} otherwise.
      */
-    Optional<User> findByLoginAndPassword(String username, String password);
+    Optional<User> findByLoginAndPassword(String login, String password);
 }
