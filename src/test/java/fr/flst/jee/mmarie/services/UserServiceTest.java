@@ -67,7 +67,7 @@ public class UserServiceTest {
     public void setup() {
         when(userDAO.findByLogin("login")).thenReturn(Optional.of(user1));
         when(userDAO.findByLogin("notExisting")).thenReturn(Optional.absent());
-        when(userDAO.findByUsernameAndPassword("username", "password")).thenReturn(Optional.of(user1));
+        when(userDAO.findByLoginAndPassword("username", "password")).thenReturn(Optional.of(user1));
         when(userDAO.persist(user1)).thenReturn(user1);
         when(userDAO.persist(notExisting)).thenReturn(notExisting);
 
@@ -135,7 +135,7 @@ public class UserServiceTest {
     public void testFindByUsernameAndPassword() {
         assertThat(userService.findByUsernameAndPassword("username", "password").get(), is(user1));
 
-        verify(userDAO, times(1)).findByUsernameAndPassword("username", "password");
+        verify(userDAO, times(1)).findByLoginAndPassword("username", "password");
     }
 
     @Test

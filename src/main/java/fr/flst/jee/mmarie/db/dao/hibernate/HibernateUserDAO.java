@@ -39,8 +39,8 @@ public class HibernateUserDAO extends AbstractDAO<User> implements UserDAO {
     }
 
     @Override
-    public Optional<User> findByUsernameAndPassword(String login, String password) {
-        return Optional.fromNullable(uniqueResult(namedQuery(User.FIND_BY_USERNAME_AND_PASSWORD)
+    public Optional<User> findByLoginAndPassword(String login, String password) {
+        return Optional.fromNullable(uniqueResult(namedQuery(User.FIND_BY_LOGIN_AND_PASSWORD)
                 .setParameter("login", login)
                 .setParameter("password", password)));
     }

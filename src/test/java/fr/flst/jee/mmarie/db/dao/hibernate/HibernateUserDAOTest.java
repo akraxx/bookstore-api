@@ -59,7 +59,7 @@ public class HibernateUserDAOTest extends AbstractDAOTestCase {
 
     @Test
     public void testFindByUsernameAndPassword() throws Exception {
-        Optional<User> byUsernameAndPassword = hibernateUserDAO.findByUsernameAndPassword("yhovart", "yhovartpwd");
+        Optional<User> byUsernameAndPassword = hibernateUserDAO.findByLoginAndPassword("yhovart", "yhovartpwd");
 
         assertThat(byUsernameAndPassword.isPresent(), is(true));
         assertThat(byUsernameAndPassword.get(), allOf(

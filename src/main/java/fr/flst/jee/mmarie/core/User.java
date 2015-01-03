@@ -50,12 +50,12 @@ import java.util.List;
 @Table(name = "USERS")
 @NamedQueries(value = {
         @NamedQuery(
-                name = User.FIND_BY_USERNAME_AND_PASSWORD,
+                name = User.FIND_BY_LOGIN_AND_PASSWORD,
                 query = "SELECT u FROM User u WHERE u.login = :login AND u.password = :password"
         )
 })
 public class User {
-    public static final String FIND_BY_USERNAME_AND_PASSWORD = "fr.flst.jee.mmarie.core.User.findByUsernameAndPassword";
+    public static final String FIND_BY_LOGIN_AND_PASSWORD = "fr.flst.jee.mmarie.core.User.findByLoginAndPassword";
 
     @Id
     @Column(name = "LOGIN", unique = true, nullable = false, length = 30)

@@ -72,7 +72,7 @@ public class UserService {
     }
 
     public Optional<User> findByUsernameAndPassword(String username, String password) {
-        return userDAO.findByUsernameAndPassword(username, password);
+        return userDAO.findByLoginAndPassword(username, password);
     }
 
     public UserDto findMe(User user) {
