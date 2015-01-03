@@ -20,9 +20,8 @@ import io.dropwizard.setup.Bootstrap;
 import org.hibernate.SessionFactory;
 
 /**
- * Created by Maximilien on 17/10/2014.
+ * {@link fr.flst.jee.mmarie.db.modules.HibernateModule} configure hibernate in the {@link fr.flst.jee.mmarie.BookstoreApplication}
  */
-
 public class HibernateModule extends AbstractModule {
 
     private final HibernateBundle<BookstoreConfiguration> hibernateBundle;
@@ -32,6 +31,9 @@ public class HibernateModule extends AbstractModule {
         bootstrap.addBundle(hibernateBundle);
     }
 
+    /**
+     * Bind interfaces to hibernate implementation
+     */
     @Override
     protected void configure() {
         bind(BookDAO.class).to(HibernateBookDAO.class);
@@ -42,6 +44,10 @@ public class HibernateModule extends AbstractModule {
         bind(OrderLineDAO.class).to(HibernateOrderLineDAO.class);
     }
 
+    /**
+     * Provides the session factory with {@link io.dropwizard.hibernate.HibernateBundle#getSessionFactory()}
+     * @return
+     */
     @Provides
     public SessionFactory provideSessionFactory() {
         return hibernateBundle.getSessionFactory();
