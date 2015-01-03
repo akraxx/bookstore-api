@@ -2,6 +2,7 @@ package fr.flst.jee.mmarie.resources.api;
 
 import fr.flst.jee.mmarie.dto.AuthorDto;
 import fr.flst.jee.mmarie.services.AuthorService;
+import io.dropwizard.auth.oauth.OAuthProvider;
 import io.dropwizard.jersey.params.IntParam;
 import io.dropwizard.testing.junit.ResourceTestRule;
 import org.junit.After;
@@ -23,9 +24,12 @@ public class AuthorResourceTest extends ResourceTest {
 
     private static final AuthorService authorService = mock(AuthorService.class);
 
+    private static final TestAuthenticator testAuthenticator = new TestAuthenticator();
+    
     @ClassRule
     public static final ResourceTestRule resources = ResourceTestRule.builder()
             .addResource(new AuthorResource(authorService))
+            .addProvider(new OAuthProvider<>(testAuthenticator, "CLIENT_SECRET"))
             .build();
 
     private AuthorDto authorDto1 = AuthorDto.builder()
