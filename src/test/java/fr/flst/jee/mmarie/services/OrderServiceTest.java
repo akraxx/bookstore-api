@@ -1,6 +1,7 @@
 package fr.flst.jee.mmarie.services;
 
 import com.google.common.base.Optional;
+import com.google.common.collect.Lists;
 import com.sun.jersey.api.NotFoundException;
 import fr.flst.jee.mmarie.core.MailingAddress;
 import fr.flst.jee.mmarie.core.Order;
@@ -18,6 +19,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.Date;
 
+import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.reset;
@@ -55,8 +57,11 @@ public class OrderServiceTest {
     @Before
     public void setup() {
         when(orderDAO.findById(1)).thenReturn(Optional.of(order1));
+        when(orderDAO.findByUserLogin("login")).thenReturn(Lists.newArrayList(order1));
         when(orderDAO.findById(0)).thenReturn(Optional.absent());
 
+        when(dtoMappingService.convertsListToDto(Lists.newArrayList(order1), OrderDto.class))
+                .thenReturn(Lists.newArrayList(orderDto1));
         when(dtoMappingService.convertsToDto(order1, OrderDto.class)).thenReturn(orderDto1);
 
         orderService = new OrderService(orderDAO, dtoMappingService);
@@ -72,6 +77,13 @@ public class OrderServiceTest {
         assertThat(orderService.findById(new IntParam("1")),
                 is(orderDto1));
         verify(orderDAO).findById(1);
+    }
+
+    @Test
+    public void testFindByUserLogin() {
+        assertThat(orderService.findByUserLogin("login"),
+                hasItem(orderDto1));
+        verify(orderDAO).findByUserLogin("login");
     }
 
     @Test(expected = NotFoundException.class)
