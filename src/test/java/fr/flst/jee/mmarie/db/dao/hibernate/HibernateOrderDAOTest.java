@@ -2,7 +2,6 @@ package fr.flst.jee.mmarie.db.dao.hibernate;
 
 import com.google.common.base.Optional;
 import fr.flst.jee.mmarie.core.Order;
-import fr.flst.jee.mmarie.core.OrderLine;
 import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
