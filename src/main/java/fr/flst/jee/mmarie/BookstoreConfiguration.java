@@ -12,7 +12,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 /**
- * Created by Maximilien on 19/10/2014.
+ * Configuration of the application.
  */
 @Getter
 @Setter

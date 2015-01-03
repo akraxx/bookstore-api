@@ -50,3 +50,4 @@ target
 *.log
 /coverage
 /Test Results - fr_flst_jee_mmarie_in_bookstore-api.html
+/doc
