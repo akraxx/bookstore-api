@@ -15,7 +15,7 @@ import javax.persistence.OneToOne;
 import java.io.Serializable;
 
 /**
- * Created by Maximilien on 21/10/2014.
+ * {@link fr.flst.jee.mmarie.core.OrderLineId} is {@link javax.persistence.Embeddable}.
  */
 @Embeddable
 @Getter

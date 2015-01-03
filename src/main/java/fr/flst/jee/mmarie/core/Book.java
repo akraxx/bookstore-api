@@ -23,7 +23,20 @@ import javax.persistence.Table;
 import java.util.Set;
 
 /**
- * Created by Maximilien on 19/10/2014.
+ * <p>
+ *     {@link fr.flst.jee.mmarie.core.Book} is an {@link javax.persistence.Entity}.
+ * </p>
+ *
+ * Table name : {@code BOOKS}
+ *
+ * Columns :
+ * <ul>
+ *     <li>{@link javax.persistence.Id} : {@code ISBN13} not {@code nullable}</li>
+ *     <li>{@code TITLE} not {@code nullable}</li>
+ *     <li>{@code UNIT_PRICE} not {@code nullable}</li>
+ *     <li>{@code EDITOR}</li>
+ *     <li>{@code AUTHORS_ID}</li>
+ * </ul>
  */
 @Getter
 @Setter

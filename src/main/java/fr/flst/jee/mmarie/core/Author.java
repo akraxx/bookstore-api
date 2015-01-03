@@ -21,7 +21,19 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by Maximilien on 19/10/2014.
+ * <p>
+ *     {@link fr.flst.jee.mmarie.core.Author} is an {@link javax.persistence.Entity}.
+ * </p>
+ *
+ * Table name : {@code AUTHORS}
+ *
+ * Columns :
+ * <ul>
+ *     <li>{@link javax.persistence.Id}, {@link javax.persistence.GeneratedValue} : {@code ID} not {@code nullable}</li>
+ *     <li>{@code FIRST_NAME} not {@code nullable}</li>
+ *     <li>{@code LAST_NAME} not {@code nullable}</li>
+ *     <li>{@code BIRTH_DATE}</li>
+ * </ul>
  */
 @Getter
 @Setter

@@ -21,7 +21,18 @@ import javax.persistence.Table;
 import java.beans.Transient;
 
 /**
- * Created by Maximilien on 21/10/2014.
+ * <p>
+ *     {@link fr.flst.jee.mmarie.core.OrderLine} is an {@link javax.persistence.Entity}.
+ * </p>
+ *
+ * Table name : {@code ORDER_LINES}
+ *
+ * Columns :
+ * <ul>
+ *     <li>{@code QUANTITY}</li>
+ *     <li>{@code BOOKS_ID}</li>
+ *     <li>{@code ORDERS_ID}</li>
+ * </ul>
  */
 @Getter
 @Setter

@@ -25,7 +25,19 @@ import javax.validation.constraints.Size;
 import java.util.List;
 
 /**
- * Created by Maximilien on 21/10/2014.
+ * <p>
+ *     {@link fr.flst.jee.mmarie.core.User} is an {@link javax.persistence.Entity}.
+ * </p>
+ *
+ * Table name : {@code USERS}
+ *
+ * Columns :
+ * <ul>
+ *     <li>{@code LOGIN}, {@code unique}, not {@code nullable}, {@code length} = 30</li>
+ *     <li>{@code EMAIL}, {@code unique}, not {@code nullable}, {@code length} = 80</li>
+ *     <li>{@code PWD}, not {@code nullable}, {@code length} = 20</li>
+ *     <li>{@code PERSONNAL_ADR_ID}</li>
+ * </ul>
  */
 @Getter
 @Setter

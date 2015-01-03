@@ -26,7 +26,19 @@ import java.util.Date;
 import java.util.Set;
 
 /**
- * Created by Maximilien on 21/10/2014.
+ * <p>
+ *     {@link fr.flst.jee.mmarie.core.Order} is an {@link javax.persistence.Entity}.
+ * </p>
+ *
+ * Table name : {@code ORDERS}
+ *
+ * Columns :
+ * <ul>
+ *     <li>{@link javax.persistence.Id}, {@link javax.persistence.GeneratedValue} : {@code ID} not {@code nullable}</li>
+ *     <li>{@code USERS_LOGIN}</li>
+ *     <li>{@code ORDER_DATE} not {@code nullable}</li>
+ *     <li>{@code SHIPPING_ADR_ID}</li>
+ * </ul>
  */
 @Getter
 @Setter

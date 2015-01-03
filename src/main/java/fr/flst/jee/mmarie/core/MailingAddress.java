@@ -16,7 +16,21 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * Created by Maximilien on 21/10/2014.
+ * <p>
+ *     {@link fr.flst.jee.mmarie.core.MailingAddress} is an {@link javax.persistence.Entity}.
+ * </p>
+ *
+ * Table name : {@code MAILING_ADDRESSES}
+ *
+ * Columns :
+ * <ul>
+ *     <li>{@link javax.persistence.Id}, {@link javax.persistence.GeneratedValue} : {@code ID} not {@code nullable}</li>
+ *     <li>{@code ZIP} not {@code nullable}, {@code length} = 10</li>
+ *     <li>{@code CITY} not {@code nullable}, {@code length} = 45</li>
+ *     <li>{@code LINE1} not {@code nullable}, {@code length} = 80</li>
+ *     <li>{@code LINE2}, {@code length} = 80</li>
+ *     <li>{@code LINE3}, {@code length} = 80</li>
+ * </ul>
  */
 @Getter
 @Setter

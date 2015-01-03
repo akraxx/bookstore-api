@@ -12,6 +12,9 @@ import org.joda.time.DateTime;
 import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
+/**
+ * {@link fr.flst.jee.mmarie.core.AccessToken} representation.
+ */
 @Getter
 @AllArgsConstructor
 @ToString
