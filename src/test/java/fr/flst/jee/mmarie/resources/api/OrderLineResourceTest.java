@@ -8,6 +8,7 @@ import fr.flst.jee.mmarie.core.OrderLine;
 import fr.flst.jee.mmarie.core.OrderLineId;
 import fr.flst.jee.mmarie.dto.OrderLineDto;
 import fr.flst.jee.mmarie.services.OrderLineService;
+import io.dropwizard.auth.oauth.OAuthProvider;
 import io.dropwizard.jersey.params.IntParam;
 import io.dropwizard.testing.junit.ResourceTestRule;
 import org.junit.After;
@@ -29,13 +30,16 @@ import static org.mockito.Mockito.when;
 /**
  * Created by Maximilien on 24/10/2014.
  */
-public class OrderLineResourceTest {
+public class OrderLineResourceTest extends ResourceTest {
 
     private static final OrderLineService orderLineService = mock(OrderLineService.class);
+
+    private static final TestAuthenticator testAuthenticator = new TestAuthenticator();
 
     @ClassRule
     public static final ResourceTestRule resources = ResourceTestRule.builder()
             .addResource(new OrderLineResource(orderLineService))
+            .addProvider(new OAuthProvider<>(testAuthenticator, "CLIENT_SECRET"))
             .build();
 
     private Book book1 = Book.builder()
@@ -86,6 +90,7 @@ public class OrderLineResourceTest {
 
     @Before
     public void setup() {
+        setTokenAuthorization(resources, "good-token");
         orderLine1.setBook(book1);
         orderLine1.setOrder(order1);
 
@@ -98,6 +103,7 @@ public class OrderLineResourceTest {
     @After
     public void tearDown() {
         reset(orderLineService);
+        resources.client().removeAllFilters();
     }
 
     @Test
