@@ -11,7 +11,7 @@ import lombok.experimental.Builder;
 import org.dozer.Mapping;
 
 /**
- * Created by Maximilien on 21/10/2014.
+ * {@link fr.flst.jee.mmarie.dto.Dto} implementation of {@link fr.flst.jee.mmarie.core.User}
  */
 @Getter
 @Setter

@@ -13,7 +13,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 /**
- * Created by Maximilien on 21/10/2014.
+ * {@link fr.flst.jee.mmarie.dto.Dto} implementation of {@link fr.flst.jee.mmarie.core.MailingAddress}
  */
 @Getter
 @Setter

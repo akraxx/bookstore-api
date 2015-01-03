@@ -14,7 +14,7 @@ import org.dozer.Mapping;
 import java.util.Date;
 
 /**
- * Created by Maximilien on 21/10/2014.
+ * {@link fr.flst.jee.mmarie.dto.Dto} implementation of {@link fr.flst.jee.mmarie.core.Order}
  */
 @Getter
 @Setter

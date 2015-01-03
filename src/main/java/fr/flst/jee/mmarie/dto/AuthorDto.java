@@ -13,7 +13,7 @@ import lombok.experimental.Builder;
 import java.util.Date;
 
 /**
- * Created by Maximilien on 19/10/2014.
+ * {@link fr.flst.jee.mmarie.dto.Dto} implementation of {@link fr.flst.jee.mmarie.core.Author}
  */
 @Getter
 @Setter
