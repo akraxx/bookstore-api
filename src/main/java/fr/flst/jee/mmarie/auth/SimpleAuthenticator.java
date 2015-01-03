@@ -4,7 +4,6 @@ import com.google.common.base.Optional;
 import fr.flst.jee.mmarie.core.AccessToken;
 import fr.flst.jee.mmarie.core.User;
 import fr.flst.jee.mmarie.services.AccessTokenService;
-import io.dropwizard.auth.AuthenticationException;
 import io.dropwizard.auth.Authenticator;
 import lombok.extern.slf4j.Slf4j;
 import org.joda.time.DateTime;
