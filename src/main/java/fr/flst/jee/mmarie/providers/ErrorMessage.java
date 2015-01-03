@@ -8,7 +8,7 @@ import lombok.Setter;
 import java.util.List;
 
 /**
- * Created by Maximilien on 14/11/2014.
+ * Represents a list of error messages.
  */
 @Getter
 @Setter
