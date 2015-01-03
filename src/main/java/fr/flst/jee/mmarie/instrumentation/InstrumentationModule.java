@@ -7,7 +7,8 @@ import com.google.inject.matcher.Matchers;
 import fr.flst.jee.mmarie.instrumentation.interceptors.TimedInterceptor;
 
 /**
- * Created by Maximilien on 18/10/2014.
+ * {@link fr.flst.jee.mmarie.instrumentation.InstrumentationModule} is useful to time methods and register it into
+ * the dropwizard {@link com.codahale.metrics.MetricRegistry} available <a href="http://localhost:9091/">here</a>.
  */
 public class InstrumentationModule extends AbstractModule {
 
@@ -17,6 +18,10 @@ public class InstrumentationModule extends AbstractModule {
         this.metricRegistry = metricRegistry;
     }
 
+    /**
+     * Intercept {@code any} method {@code annotatedWith} {@link com.codahale.metrics.annotation.Timed} with a
+     * {@link fr.flst.jee.mmarie.instrumentation.interceptors.TimedInterceptor}.
+     */
     @Override
     protected void configure() {
         bindInterceptor(Matchers.any(), Matchers.annotatedWith(Timed.class),
