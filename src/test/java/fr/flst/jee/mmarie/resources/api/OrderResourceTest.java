@@ -5,6 +5,7 @@ import fr.flst.jee.mmarie.core.Order;
 import fr.flst.jee.mmarie.core.User;
 import fr.flst.jee.mmarie.dto.OrderDto;
 import fr.flst.jee.mmarie.services.OrderService;
+import io.dropwizard.auth.oauth.OAuthProvider;
 import io.dropwizard.jersey.params.IntParam;
 import io.dropwizard.testing.junit.ResourceTestRule;
 import org.junit.After;
@@ -24,13 +25,16 @@ import static org.mockito.Mockito.when;
 /**
  * Created by Maximilien on 24/10/2014.
  */
-public class OrderResourceTest {
+public class OrderResourceTest extends ResourceTest {
 
     private static final OrderService orderService = mock(OrderService.class);
+
+    private static final TestAuthenticator testAuthenticator = new TestAuthenticator();
 
     @ClassRule
     public static final ResourceTestRule resources = ResourceTestRule.builder()
             .addResource(new OrderResource(orderService))
+            .addProvider(new OAuthProvider<>(testAuthenticator, "CLIENT_SECRET"))
             .build();
 
     private Order order1 = Order.builder()
@@ -50,12 +54,14 @@ public class OrderResourceTest {
 
     @Before
     public void setup() {
+        setTokenAuthorization(resources, "good-token");
         when(orderService.findById(new IntParam("1"))).thenReturn(orderDto1);
     }
 
     @After
     public void tearDown() {
         reset(orderService);
+        resources.client().removeAllFilters();
     }
 
     @Test
