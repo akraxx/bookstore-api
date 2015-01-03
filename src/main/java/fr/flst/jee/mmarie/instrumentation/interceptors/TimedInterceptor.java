@@ -3,10 +3,9 @@ package fr.flst.jee.mmarie.instrumentation.interceptors;
 import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.Timer;
 import com.codahale.metrics.annotation.Timed;
+import lombok.extern.slf4j.Slf4j;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Method;
 
@@ -15,9 +14,8 @@ import static com.codahale.metrics.MetricRegistry.name;
 /**
  * Created by Maximilien on 18/10/2014.
  */
+@Slf4j
 public class TimedInterceptor implements MethodInterceptor {
-    private static final Logger LOGGER = LoggerFactory.getLogger(TimedInterceptor.class);
-
     private MetricRegistry metricRegistry;
 
     public TimedInterceptor(MetricRegistry metricRegistry) {
@@ -37,7 +35,7 @@ public class TimedInterceptor implements MethodInterceptor {
 
     @Override
     public Object invoke(MethodInvocation methodInvocation) throws Throwable {
-        LOGGER.info("Method [{}] has been invoked", methodInvocation.getMethod());
+        log.debug("Method [{}] has been invoked", methodInvocation.getMethod());
 
         Timed annotation = methodInvocation.getMethod().getAnnotation(Timed.class);
         // If the metric does not exists, it will be created
