@@ -4,8 +4,6 @@ import com.codahale.metrics.annotation.Timed;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.jaxrs.annotation.JacksonFeatures;
 import com.google.inject.Inject;
-import com.wordnik.swagger.annotations.Api;
-import com.wordnik.swagger.annotations.ApiOperation;
 import fr.flst.jee.mmarie.core.User;
 import fr.flst.jee.mmarie.dto.OrderLineDto;
 import fr.flst.jee.mmarie.services.OrderLineService;
@@ -24,7 +22,6 @@ import java.util.List;
  * {@link fr.flst.jee.mmarie.resources.api.OrderLineResource} exposes the {@link fr.flst.jee.mmarie.core.OrderLine}.
  */
 @Path("/orderLine")
-@Api("/orderLine")
 @Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
 public class OrderLineResource {
     private OrderLineService orderLineService;
@@ -47,7 +44,6 @@ public class OrderLineResource {
      * @return List of order lines
      */
     @GET
-    @ApiOperation("Get order lines by book isbn13")
     @Timed
     @Path("/byBook/{bookIsbn13}")
     @UnitOfWork
@@ -69,7 +65,6 @@ public class OrderLineResource {
      * @return List of order lines
      */
     @GET
-    @ApiOperation("Get order lines by order id")
     @Timed
     @Path("/byOrder/{orderId}")
     @UnitOfWork

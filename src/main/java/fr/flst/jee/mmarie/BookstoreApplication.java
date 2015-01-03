@@ -16,14 +16,11 @@ import io.dropwizard.hibernate.ScanningHibernateBundle;
 import io.dropwizard.migrations.MigrationsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
-import io.federecio.dropwizard.swagger.SwaggerDropwizard;
 
 /**
  * Main class. Defines how the application will work.
  */
 public class BookstoreApplication extends Application<BookstoreConfiguration> {
-
-    private final SwaggerDropwizard swaggerDropwizard = new SwaggerDropwizard();
 
     private final HibernateBundle<BookstoreConfiguration> hibernateBundle =
             new ScanningHibernateBundle<BookstoreConfiguration>(getClass().getPackage().getName()) {
@@ -107,8 +104,6 @@ public class BookstoreApplication extends Application<BookstoreConfiguration> {
 
         bootstrap.setConfigurationSourceProvider(new ResourceConfigurationSourceProvider());
 
-        swaggerDropwizard.onInitialize(bootstrap);
-
         bootstrap.addBundle(new AssetsBundle("/assets/webapp", "/", "index.html", "static"));
     }
 
@@ -124,8 +119,6 @@ public class BookstoreApplication extends Application<BookstoreConfiguration> {
      */
     @Override
     public void run(BookstoreConfiguration configuration, Environment environment) throws Exception {
-        swaggerDropwizard.onRun(configuration, environment, "localhost");
-
         environment.jersey().setUrlPattern("/api/*");
     }
 

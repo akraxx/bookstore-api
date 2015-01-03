@@ -5,9 +5,6 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.jaxrs.annotation.JacksonFeatures;
 import com.google.common.base.Optional;
 import com.google.inject.Inject;
-import com.wordnik.swagger.annotations.Api;
-import com.wordnik.swagger.annotations.ApiOperation;
-import com.wordnik.swagger.annotations.ApiParam;
 import fr.flst.jee.mmarie.core.AccessToken;
 import fr.flst.jee.mmarie.core.User;
 import fr.flst.jee.mmarie.dto.UserDto;
@@ -37,7 +34,6 @@ import javax.ws.rs.core.Response;
  * {@link fr.flst.jee.mmarie.resources.api.UserResource} exposes the {@link fr.flst.jee.mmarie.core.User}.
  */
 @Path("/user")
-@Api("/user")
 @Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
 @Slf4j
 public class UserResource {
@@ -65,7 +61,6 @@ public class UserResource {
      * @throws com.sun.jersey.api.NotFoundException if the author has not been found.
      */
     @GET
-    @ApiOperation("Get user by login")
     @Timed
     @Path("/{userLogin}")
     @UnitOfWork
@@ -86,7 +81,6 @@ public class UserResource {
      * @return The logged user.
      */
     @GET
-    @ApiOperation("Get own informations")
     @Timed
     @Path("/me")
     @UnitOfWork
@@ -107,7 +101,6 @@ public class UserResource {
      * @return The logged user.
      */
     @PUT
-    @ApiOperation("Update a user")
     @Timed
     @Path("/updateEmail")
     @UnitOfWork
@@ -130,7 +123,6 @@ public class UserResource {
      * @return The logged user.
      */
     @PUT
-    @ApiOperation("Update the password of the logged user")
     @Timed
     @Path("/updatePassword")
     @UnitOfWork
@@ -153,13 +145,11 @@ public class UserResource {
      * @return The inserted user.
      */
     @POST
-    @ApiOperation("Create a user")
     @Timed
     @UnitOfWork
     @Consumes(MediaType.APPLICATION_JSON)
     @JacksonFeatures(serializationEnable = {SerializationFeature.INDENT_OUTPUT})
-    public UserDto insert(@ApiParam(value = "User login", required = true)
-                       @Valid User user) {
+    public UserDto insert(@Valid User user) {
         return userService.insert(user);
     }
 
@@ -177,7 +167,6 @@ public class UserResource {
      */
     @POST
     @Path("/authenticate")
-    @ApiOperation("Authenticate a user")
     @Timed
     @UnitOfWork
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)

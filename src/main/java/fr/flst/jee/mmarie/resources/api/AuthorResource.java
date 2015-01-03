@@ -4,8 +4,6 @@ import com.codahale.metrics.annotation.Timed;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.jaxrs.annotation.JacksonFeatures;
 import com.google.inject.Inject;
-import com.wordnik.swagger.annotations.Api;
-import com.wordnik.swagger.annotations.ApiOperation;
 import fr.flst.jee.mmarie.core.User;
 import fr.flst.jee.mmarie.dto.AuthorDto;
 import fr.flst.jee.mmarie.services.AuthorService;
@@ -23,7 +21,6 @@ import javax.ws.rs.core.MediaType;
  * {@link fr.flst.jee.mmarie.resources.api.AuthorResource} exposes the {@link fr.flst.jee.mmarie.core.Author}.
  */
 @Path("/author")
-@Api(value = "/author")
 @Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
 public class AuthorResource {
     private AuthorService authorService;
@@ -47,7 +44,6 @@ public class AuthorResource {
      * @throws com.sun.jersey.api.NotFoundException if the author has not been found.
      */
     @GET
-    @ApiOperation("Get the author by id")
     @Timed
     @Path("/{authorId}")
     @UnitOfWork

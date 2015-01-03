@@ -4,8 +4,6 @@ import com.codahale.metrics.annotation.Timed;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.jaxrs.annotation.JacksonFeatures;
 import com.google.inject.Inject;
-import com.wordnik.swagger.annotations.Api;
-import com.wordnik.swagger.annotations.ApiOperation;
 import fr.flst.jee.mmarie.core.MailingAddress;
 import fr.flst.jee.mmarie.core.User;
 import fr.flst.jee.mmarie.dto.MailingAddressDto;
@@ -29,7 +27,6 @@ import javax.ws.rs.core.MediaType;
  * {@link fr.flst.jee.mmarie.resources.api.MailingAddressResource} exposes the {@link fr.flst.jee.mmarie.core.MailingAddress}.
  */
 @Path("/mailingAddress")
-@Api("/mailingAddress")
 @Slf4j
 @Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
 public class MailingAddressResource {
@@ -56,7 +53,6 @@ public class MailingAddressResource {
      * @throws com.sun.jersey.api.NotFoundException if the author has not been found.
      */
     @GET
-    @ApiOperation("Get a mailing address by id")
     @Timed
     @Path("/{mailingAddressId}")
     @UnitOfWork
@@ -79,7 +75,6 @@ public class MailingAddressResource {
      * @throws com.sun.jersey.api.NotFoundException if the author has not been found.
      */
     @PUT
-    @ApiOperation("Update a mailing address")
     @Timed
     @UnitOfWork
     @Consumes(MediaType.APPLICATION_JSON)

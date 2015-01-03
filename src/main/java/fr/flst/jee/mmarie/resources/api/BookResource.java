@@ -4,8 +4,6 @@ import com.codahale.metrics.annotation.Timed;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.jaxrs.annotation.JacksonFeatures;
 import com.google.inject.Inject;
-import com.wordnik.swagger.annotations.Api;
-import com.wordnik.swagger.annotations.ApiOperation;
 import fr.flst.jee.mmarie.core.User;
 import fr.flst.jee.mmarie.dto.BookDto;
 import fr.flst.jee.mmarie.services.BookService;
@@ -24,7 +22,6 @@ import java.util.List;
  * {@link fr.flst.jee.mmarie.resources.api.BookResource} exposes the {@link fr.flst.jee.mmarie.core.Book}.
  */
 @Path("/book")
-@Api("/book")
 @Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
 public class BookResource {
     private BookService bookService;
@@ -46,7 +43,6 @@ public class BookResource {
      * @return Each book found in the database
      */
     @GET
-    @ApiOperation("Get all books")
     @Timed
     @UnitOfWork
     @JacksonFeatures(serializationEnable = {SerializationFeature.INDENT_OUTPUT})
@@ -68,7 +64,6 @@ public class BookResource {
      * @throws com.sun.jersey.api.NotFoundException if the author has not been found.
      */
     @GET
-    @ApiOperation("Get a book by isbn13")
     @Timed
     @Path("/{bookIsbn13}")
     @UnitOfWork
@@ -90,7 +85,6 @@ public class BookResource {
      * @return List of books
      */
     @GET
-    @ApiOperation("Get books by author id")
     @Timed
     @Path("/byAuthor/{authorId}")
     @UnitOfWork

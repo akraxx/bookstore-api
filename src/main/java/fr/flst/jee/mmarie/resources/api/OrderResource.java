@@ -4,8 +4,6 @@ import com.codahale.metrics.annotation.Timed;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.jaxrs.annotation.JacksonFeatures;
 import com.google.inject.Inject;
-import com.wordnik.swagger.annotations.Api;
-import com.wordnik.swagger.annotations.ApiOperation;
 import fr.flst.jee.mmarie.core.User;
 import fr.flst.jee.mmarie.dto.OrderDto;
 import fr.flst.jee.mmarie.services.OrderService;
@@ -23,7 +21,6 @@ import javax.ws.rs.core.MediaType;
  * {@link fr.flst.jee.mmarie.resources.api.OrderResource} exposes the {@link fr.flst.jee.mmarie.core.Order}.
  */
 @Path("/order")
-@Api("/order")
 @Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
 public class OrderResource {
 
@@ -48,7 +45,6 @@ public class OrderResource {
      * @throws com.sun.jersey.api.NotFoundException if the author has not been found.
      */
     @GET
-    @ApiOperation("Get order by id")
     @Timed
     @Path("/{orderId}")
     @UnitOfWork
