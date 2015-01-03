@@ -1,5 +1,7 @@
 package fr.flst.jee.mmarie.resources.api;
 
+import com.google.common.collect.Lists;
+import com.sun.jersey.api.client.GenericType;
 import fr.flst.jee.mmarie.core.MailingAddress;
 import fr.flst.jee.mmarie.core.Order;
 import fr.flst.jee.mmarie.core.User;
@@ -14,7 +16,9 @@ import org.junit.ClassRule;
 import org.junit.Test;
 
 import java.util.Date;
+import java.util.List;
 
+import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
@@ -56,6 +60,8 @@ public class OrderResourceTest extends ResourceTest {
     public void setup() {
         setTokenAuthorization(resources, "good-token");
         when(orderService.findById(new IntParam("1"))).thenReturn(orderDto1);
+        when(orderService.findByUserLogin(testAuthenticator.getAuthenticatedUser().getLogin()))
+                .thenReturn(Lists.newArrayList(orderDto1));
     }
 
     @After
@@ -69,5 +75,12 @@ public class OrderResourceTest extends ResourceTest {
         assertThat(resources.client().resource("/order/1").get(OrderDto.class),
                 is(orderDto1));
         verify(orderService).findById(new IntParam("1"));
+    }
+
+    @Test
+    public void testFindMyOrders() {
+        assertThat(resources.client().resource("/order/mine").get(new GenericType<List<OrderDto>>() {}),
+                hasItem(orderDto1));
+        verify(orderService).findByUserLogin(testAuthenticator.getAuthenticatedUser().getLogin());
     }
 }
