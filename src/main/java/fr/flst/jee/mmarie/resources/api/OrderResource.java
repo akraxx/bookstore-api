@@ -6,8 +6,10 @@ import com.fasterxml.jackson.jaxrs.annotation.JacksonFeatures;
 import com.google.inject.Inject;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
+import fr.flst.jee.mmarie.core.User;
 import fr.flst.jee.mmarie.dto.OrderDto;
 import fr.flst.jee.mmarie.services.OrderService;
+import io.dropwizard.auth.Auth;
 import io.dropwizard.hibernate.UnitOfWork;
 import io.dropwizard.jersey.params.IntParam;
 
@@ -38,7 +40,7 @@ public class OrderResource {
     @Path("/{orderId}")
     @UnitOfWork
     @JacksonFeatures(serializationEnable = {SerializationFeature.INDENT_OUTPUT})
-    public OrderDto findById(@PathParam("orderId") IntParam orderId) {
+    public OrderDto findById(@Auth User user, @PathParam("orderId") IntParam orderId) {
         return orderService.findById(orderId);
     }
 }
