@@ -7,7 +7,7 @@ import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 
 /**
- * Created by Maximilien on 06/12/2014.
+ * Misc tools for the application.
  */
 public class MiscModule extends AbstractModule {
     @Override
@@ -15,6 +15,11 @@ public class MiscModule extends AbstractModule {
 
     }
 
+    /**
+     * Provides a {@link com.google.inject.Singleton} of {@link org.dozer.DozerBeanMapper}
+     *
+     * @return An instance of {@link org.dozer.DozerBeanMapper}
+     */
     @Provides
     @Singleton
     public Mapper providesMapper() {
