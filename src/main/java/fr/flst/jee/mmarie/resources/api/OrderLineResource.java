@@ -21,7 +21,7 @@ import javax.ws.rs.core.MediaType;
 import java.util.List;
 
 /**
- * Created by Maximilien on 19/10/2014.
+ * {@link fr.flst.jee.mmarie.resources.api.OrderLineResource} exposes the {@link fr.flst.jee.mmarie.core.OrderLine}.
  */
 @Path("/orderLine")
 @Api("/orderLine")
@@ -34,6 +34,18 @@ public class OrderLineResource {
         this.orderLineService = orderLineService;
     }
 
+    /**
+     * <p>
+     *     Find a list of {@link fr.flst.jee.mmarie.dto.OrderLineDto} by the {@code bookIsbn13}.
+     * </p>
+     * <p>
+     *     Resource protected with {@link io.dropwizard.auth.Auth}.
+     * </p>
+     *
+     * @param user Logged {@link fr.flst.jee.mmarie.core.User}
+     * @param bookIsbn13 Isbn13 of the {@link fr.flst.jee.mmarie.core.Book}
+     * @return List of order lines
+     */
     @GET
     @ApiOperation("Get order lines by book isbn13")
     @Timed
@@ -44,6 +56,18 @@ public class OrderLineResource {
         return orderLineService.findByBookIsbn13(bookIsbn13);
     }
 
+    /**
+     * <p>
+     *     Find a list of {@link fr.flst.jee.mmarie.dto.OrderLineDto} by the {@code orderId}.
+     * </p>
+     * <p>
+     *     Resource protected with {@link io.dropwizard.auth.Auth}.
+     * </p>
+     *
+     * @param user Logged {@link fr.flst.jee.mmarie.core.User}
+     * @param orderId Id of the {@link fr.flst.jee.mmarie.core.Order}
+     * @return List of order lines
+     */
     @GET
     @ApiOperation("Get order lines by order id")
     @Timed

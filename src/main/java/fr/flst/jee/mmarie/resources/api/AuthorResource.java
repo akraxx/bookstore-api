@@ -20,8 +20,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 /**
- * {@link fr.flst.jee.mmarie.resources.api.AuthorResource}.
- * Expose the {@link fr.flst.jee.mmarie.core.Author}.
+ * {@link fr.flst.jee.mmarie.resources.api.AuthorResource} exposes the {@link fr.flst.jee.mmarie.core.Author}.
  */
 @Path("/author")
 @Api(value = "/author")

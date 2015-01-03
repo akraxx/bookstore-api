@@ -26,7 +26,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 /**
- * Created by Maximilien on 19/10/2014.
+ * {@link fr.flst.jee.mmarie.resources.api.MailingAddressResource} exposes the {@link fr.flst.jee.mmarie.core.MailingAddress}.
  */
 @Path("/mailingAddress")
 @Api("/mailingAddress")
@@ -42,6 +42,19 @@ public class MailingAddressResource {
         this.userService = userService;
     }
 
+    /**
+     * <p>
+     *     Find an {@link fr.flst.jee.mmarie.dto.MailingAddressDto} by the {@code mailingAddressId}.
+     * </p>
+     * <p>
+     *     Resource protected with {@link io.dropwizard.auth.Auth}.
+     * </p>
+     *
+     * @param user Logged {@link fr.flst.jee.mmarie.core.User}
+     * @param mailingAddressId Id of the {@link fr.flst.jee.mmarie.core.MailingAddress}
+     * @return The mailingAddress.
+     * @throws com.sun.jersey.api.NotFoundException if the author has not been found.
+     */
     @GET
     @ApiOperation("Get a mailing address by id")
     @Timed
@@ -52,6 +65,19 @@ public class MailingAddressResource {
         return mailingAddressService.findById(mailingAddressId);
     }
 
+    /**
+     * <p>
+     *     Update a {@link fr.flst.jee.mmarie.dto.MailingAddressDto}.
+     * </p>
+     * <p>
+     *     Resource protected with {@link io.dropwizard.auth.Auth}.
+     * </p>
+     *
+     * @param user Logged {@link fr.flst.jee.mmarie.core.User}
+     * @param mailingAddressDto {@link fr.flst.jee.mmarie.dto.MailingAddressDto} to update.
+     * @return The updated mailingAddress.
+     * @throws com.sun.jersey.api.NotFoundException if the author has not been found.
+     */
     @PUT
     @ApiOperation("Update a mailing address")
     @Timed

@@ -21,7 +21,7 @@ import javax.ws.rs.core.MediaType;
 import java.util.List;
 
 /**
- * Created by Maximilien on 19/10/2014.
+ * {@link fr.flst.jee.mmarie.resources.api.BookResource} exposes the {@link fr.flst.jee.mmarie.core.Book}.
  */
 @Path("/book")
 @Api("/book")
@@ -34,6 +34,17 @@ public class BookResource {
         this.bookService = bookService;
     }
 
+    /**
+     * <p>
+     *     Find all {@link fr.flst.jee.mmarie.dto.BookDto}.
+     * </p>
+     * <p>
+     *     Resource protected with {@link io.dropwizard.auth.Auth}.
+     * </p>
+     *
+     * @param user Logged {@link fr.flst.jee.mmarie.core.User}
+     * @return Each book found in the database
+     */
     @GET
     @ApiOperation("Get all books")
     @Timed
@@ -43,6 +54,19 @@ public class BookResource {
         return bookService.findAll();
     }
 
+    /**
+     * <p>
+     *     Find an {@link fr.flst.jee.mmarie.dto.BookDto} by the {@code bookIsbn13}.
+     * </p>
+     * <p>
+     *     Resource protected with {@link io.dropwizard.auth.Auth}.
+     * </p>
+     *
+     * @param user Logged {@link fr.flst.jee.mmarie.core.User}
+     * @param bookIsbn13 Isbn13 of the {@link fr.flst.jee.mmarie.core.Book}
+     * @return The book.
+     * @throws com.sun.jersey.api.NotFoundException if the author has not been found.
+     */
     @GET
     @ApiOperation("Get a book by isbn13")
     @Timed
@@ -53,6 +77,18 @@ public class BookResource {
         return bookService.findById(bookIsbn13);
     }
 
+    /**
+     * <p>
+     *     Find a list of {@link fr.flst.jee.mmarie.dto.BookDto} by the {@code authorId}.
+     * </p>
+     * <p>
+     *     Resource protected with {@link io.dropwizard.auth.Auth}.
+     * </p>
+     *
+     * @param user Logged {@link fr.flst.jee.mmarie.core.User}
+     * @param authorId Id of the {@link fr.flst.jee.mmarie.core.Author}
+     * @return List of books
+     */
     @GET
     @ApiOperation("Get books by author id")
     @Timed

@@ -34,7 +34,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 /**
- * Created by Maximilien on 19/10/2014.
+ * {@link fr.flst.jee.mmarie.resources.api.UserResource} exposes the {@link fr.flst.jee.mmarie.core.User}.
  */
 @Path("/user")
 @Api("/user")
@@ -51,6 +51,19 @@ public class UserResource {
         this.accessTokenService = accessTokenService;
     }
 
+    /**
+     * <p>
+     *     Find an {@link fr.flst.jee.mmarie.dto.UserDto} by the {@code userLogin}.
+     * </p>
+     * <p>
+     *     Resource protected with {@link io.dropwizard.auth.Auth}.
+     * </p>
+     *
+     * @param user Logged {@link fr.flst.jee.mmarie.core.User}
+     * @param userLogin Login of the {@link fr.flst.jee.mmarie.core.User}
+     * @return The user.
+     * @throws com.sun.jersey.api.NotFoundException if the author has not been found.
+     */
     @GET
     @ApiOperation("Get user by login")
     @Timed
@@ -61,6 +74,17 @@ public class UserResource {
         return userService.findByLogin(userLogin);
     }
 
+    /**
+     * <p>
+     *     Return the {@code user}.
+     * </p>
+     * <p>
+     *     Resource protected with {@link io.dropwizard.auth.Auth}.
+     * </p>
+     *
+     * @param user Logged {@link fr.flst.jee.mmarie.core.User}
+     * @return The logged user.
+     */
     @GET
     @ApiOperation("Get own informations")
     @Timed
@@ -71,30 +95,63 @@ public class UserResource {
         return userService.findMe(user);
     }
 
+    /**
+     * <p>
+     *     Update the mail of the logged {@link fr.flst.jee.mmarie.core.User}
+     * </p>
+     * <p>
+     *     Resource protected with {@link io.dropwizard.auth.Auth}.
+     * </p>
+     *
+     * @param user Logged {@link fr.flst.jee.mmarie.core.User}
+     * @return The logged user.
+     */
     @PUT
     @ApiOperation("Update a user")
     @Timed
     @Path("/updateEmail")
     @UnitOfWork
     @JacksonFeatures(serializationEnable = {SerializationFeature.INDENT_OUTPUT})
-    public UserDto updateEmail(@Auth User loggedUser, @Valid @Email String email) {
-        log.info("[{}] - Update email {}", loggedUser, email);
+    public UserDto updateEmail(@Auth User user, @Valid @Email String email) {
+        log.info("[{}] - Update email {}", user, email);
 
-        return userService.updateEmail(loggedUser, email);
+        return userService.updateEmail(user, email);
     }
 
+    /**
+     * <p>
+     *     Update the password of the logged {@link fr.flst.jee.mmarie.core.User}
+     * </p>
+     * <p>
+     *     Resource protected with {@link io.dropwizard.auth.Auth}.
+     * </p>
+     *
+     * @param user Logged {@link fr.flst.jee.mmarie.core.User}
+     * @return The logged user.
+     */
     @PUT
     @ApiOperation("Update the password of the logged user")
     @Timed
     @Path("/updatePassword")
     @UnitOfWork
     @JacksonFeatures(serializationEnable = {SerializationFeature.INDENT_OUTPUT})
-    public UserDto updatePassword(@Auth User loggedUser, @Valid @Size(min = 6, max = 20) String password) {
-        log.info("[{}] - Update password {}", loggedUser, password);
+    public UserDto updatePassword(@Auth User user, @Valid @Size(min = 6, max = 20) String password) {
+        log.info("[{}] - Update password {}", user, password);
 
-        return userService.updatePassword(loggedUser, password);
+        return userService.updatePassword(user, password);
     }
 
+    /**
+     * <p>
+     *     Insert a {@link fr.flst.jee.mmarie.core.User}
+     * </p>
+     * <p>
+     *     Resource protected with {@link io.dropwizard.auth.Auth}.
+     * </p>
+     *
+     * @param user {@link fr.flst.jee.mmarie.core.User} to insert
+     * @return The inserted user.
+     */
     @POST
     @ApiOperation("Create a user")
     @Timed
@@ -106,6 +163,18 @@ public class UserResource {
         return userService.insert(user);
     }
 
+    /**
+     * <p>
+     *     Authenticate a {@link fr.flst.jee.mmarie.core.User} by it's {@code username} and {@code password}
+     * </p>
+     * <p>
+     *     Resource protected with {@link io.dropwizard.auth.Auth}.
+     * </p>
+     *
+     * @param username Username of the {@link fr.flst.jee.mmarie.core.User}
+     * @param password Password of the {@link fr.flst.jee.mmarie.core.User}
+     * @return The token of the logged user.
+     */
     @POST
     @Path("/authenticate")
     @ApiOperation("Authenticate a user")

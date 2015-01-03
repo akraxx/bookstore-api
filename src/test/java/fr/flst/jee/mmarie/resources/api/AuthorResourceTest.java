@@ -25,7 +25,7 @@ public class AuthorResourceTest extends ResourceTest {
     private static final AuthorService authorService = mock(AuthorService.class);
 
     private static final TestAuthenticator testAuthenticator = new TestAuthenticator();
-    
+
     @ClassRule
     public static final ResourceTestRule resources = ResourceTestRule.builder()
             .addResource(new AuthorResource(authorService))

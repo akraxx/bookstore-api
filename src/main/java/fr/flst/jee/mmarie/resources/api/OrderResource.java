@@ -20,7 +20,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 /**
- * Created by Maximilien on 19/10/2014.
+ * {@link fr.flst.jee.mmarie.resources.api.OrderResource} exposes the {@link fr.flst.jee.mmarie.core.Order}.
  */
 @Path("/order")
 @Api("/order")
@@ -34,6 +34,19 @@ public class OrderResource {
         this.orderService = orderService;
     }
 
+    /**
+     * <p>
+     *     Find an {@link fr.flst.jee.mmarie.dto.OrderDto} by the {@code orderId}.
+     * </p>
+     * <p>
+     *     Resource protected with {@link io.dropwizard.auth.Auth}.
+     * </p>
+     *
+     * @param user Logged {@link fr.flst.jee.mmarie.core.User}
+     * @param orderId Id of the {@link fr.flst.jee.mmarie.core.Order}
+     * @return The order.
+     * @throws com.sun.jersey.api.NotFoundException if the author has not been found.
+     */
     @GET
     @ApiOperation("Get order by id")
     @Timed
