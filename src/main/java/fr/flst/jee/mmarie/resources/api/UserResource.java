@@ -42,7 +42,6 @@ public class UserResource {
 
     @Inject
     public UserResource(UserService userService, AccessTokenService accessTokenService) {
-        log.info("Initialize '{}'", getClass().getName());
         this.userService = userService;
         this.accessTokenService = accessTokenService;
     }
