@@ -13,7 +13,19 @@ import org.joda.time.Period;
 import java.util.UUID;
 
 /**
- * Created by Maximilien on 07/11/2014.
+ * <p>
+ *     A simple implementation of {@link io.dropwizard.auth.Authenticator}.
+ * </p>
+ *
+ * <p>
+ *     Here we will use the {@link fr.flst.jee.mmarie.services.AccessTokenService} to authenticate our
+ *     {@link fr.flst.jee.mmarie.core.User}.
+ * </p>
+ *
+ * <p>
+ *     Example of http request used by this {@link fr.flst.jee.mmarie.auth.SimpleAuthenticator} is :
+ *     <b>Authorization: Bearer 6e4f2d67-04d0-4d6d-8b69-0eaa4d08c993</b>
+ * </p>
  */
 @Slf4j
 public class SimpleAuthenticator implements Authenticator<String, User> {
@@ -24,8 +36,17 @@ public class SimpleAuthenticator implements Authenticator<String, User> {
         this.accessTokenService = accessTokenService;
     }
 
+    /**
+     * <p>
+     *     Authenticate the given {@code accessTokenId}. Search in the {@link fr.flst.jee.mmarie.services.AccessTokenService} if
+     *     the given {@code accessTokenId} is registered and has not expired.
+     * </p>
+     *
+     * @param accessTokenId token given by the user in the http header request
+     * @return The user if he has been successfully logged.
+     */
     @Override
-    public Optional<User> authenticate(String accessTokenId) throws AuthenticationException {
+    public Optional<User> authenticate(String accessTokenId) {
         log.info("Authenticate user with token {}", accessTokenId);
         // Check input, must be a valid UUID
         UUID accessTokenUUID;

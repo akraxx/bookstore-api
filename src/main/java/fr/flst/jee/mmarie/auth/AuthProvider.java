@@ -10,14 +10,24 @@ import io.dropwizard.auth.Authenticator;
 import io.dropwizard.auth.oauth.OAuthProvider;
 
 /**
- * Created by Maximilien on 11/11/2014.
+ * <p>
+ *     {@link fr.flst.jee.mmarie.auth.AuthProvider} is an {@link io.dropwizard.auth.oauth.OAuthProvider} which is automatically injected
+ *     by the {@link com.hubspot.dropwizard.guice.GuiceBundle} in the {@link fr.flst.jee.mmarie.BookstoreApplication}.
+ * </p>
+ *
+ * <p>
+ *     Thanks to this {@link com.sun.jersey.spi.inject.InjectableProvider}, we can protect our jersey resource with the
+ *     {@link io.dropwizard.auth.Auth} annotation.
+ * </p>
+ *
+ * @see <a href="http://dropwizard.io/manual/auth.html">Dropwizard authentication documentation</a>
  */
 public class AuthProvider extends OAuthProvider<User> implements InjectableProvider<Auth, Parameter> {
     /**
      * Creates a new OAuthProvider with the given {@link io.dropwizard.auth.Authenticator} and realm.
      *
      * @param authenticator the authenticator which will take the OAuth2 bearer token and convert
-     *                      them into instances of {@code T}
+     *                      them into instances of {@code User}
      * @param realm         the name of the authentication realm
      */
     @Inject
