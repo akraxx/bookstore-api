@@ -10,6 +10,8 @@ import fr.flst.jee.mmarie.dto.OrderDto;
 import fr.flst.jee.mmarie.misc.DtoMappingService;
 import io.dropwizard.jersey.params.IntParam;
 
+import java.util.List;
+
 /**
  * Created by Maximilien on 19/10/2014.
  */
@@ -35,5 +37,9 @@ public class OrderService {
 
     public OrderDto findById(IntParam orderId) {
         return dtoMappingService.convertsToDto(findSafely(orderId.get()), OrderDto.class);
+    }
+
+    public List<OrderDto> findByUserLogin(String login) {
+        return dtoMappingService.convertsListToDto(orderDAO.findByUserLogin(login), OrderDto.class);
     }
 }

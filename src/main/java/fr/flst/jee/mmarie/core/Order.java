@@ -19,6 +19,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -49,7 +51,15 @@ import java.util.Set;
 @Builder
 @Entity
 @Table(name = "ORDERS")
+@NamedQueries(value = {
+        @NamedQuery(
+                name = Order.FIND_BY_USER_LOGIN,
+                query = "SELECT o FROM Order o WHERE o.user.login = :login ORDER BY o.orderDate DESC"
+        )
+})
 public class Order {
+    public static final String FIND_BY_USER_LOGIN = "fr.flst.jee.mmarie.core.Book.findByUserLogin";
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;

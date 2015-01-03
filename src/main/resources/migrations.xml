@@ -194,13 +194,13 @@
 
         <insert tableName="orders">
             <column name="id" value="1"/>
-            <column name="order_date" value="now()"/>
+            <column name="order_date" value="2014-12-08 16:00:59"/>
             <column name="users_login" value="yhovart"/>
             <column name="shipping_adr_id" value="1"/>
         </insert>
         <insert tableName="orders">
             <column name="id" value="2"/>
-            <column name="order_date" value="now()"/>
+            <column name="order_date" value="2014-12-10 15:12:15"/>
             <column name="users_login" value="yhovart"/>
             <column name="shipping_adr_id" value="2"/>
         </insert>
