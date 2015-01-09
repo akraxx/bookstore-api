@@ -10,6 +10,10 @@ import lombok.ToString;
 import lombok.experimental.Builder;
 import org.dozer.Mapping;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 /**
  * {@link fr.flst.jee.mmarie.dto.Dto} implementation of {@link fr.flst.jee.mmarie.core.OrderLine}
  */
@@ -21,8 +25,11 @@ import org.dozer.Mapping;
 @EqualsAndHashCode
 @Builder
 public class OrderLineDto implements Dto<OrderLine> {
+    @Min(1)
     private int quantity;
 
+    @NotNull
+    @Size(min = 14, max = 14)
     @Mapping("pk.book.isbn13")
     private String bookIsbn13;
 
