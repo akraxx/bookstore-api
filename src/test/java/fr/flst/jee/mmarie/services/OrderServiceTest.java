@@ -64,7 +64,7 @@ public class OrderServiceTest {
                 .thenReturn(Lists.newArrayList(orderDto1));
         when(dtoMappingService.convertsToDto(order1, OrderDto.class)).thenReturn(orderDto1);
 
-        orderService = new OrderService(orderDAO, dtoMappingService);
+        orderService = new OrderService(orderDAO, dtoMappingService, null, null, null, null);
     }
 
     @After

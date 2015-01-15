@@ -7,6 +7,7 @@ import com.netflix.governator.guice.lazy.LazySingleton;
 import fr.flst.jee.mmarie.core.Order;
 import fr.flst.jee.mmarie.db.dao.interfaces.OrderDAO;
 import io.dropwizard.hibernate.AbstractDAO;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.SessionFactory;
 
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.List;
  * Hibernate implementation of {@link fr.flst.jee.mmarie.db.dao.interfaces.OrderDAO}
  */
 @LazySingleton
+@Slf4j
 public class HibernateOrderDAO extends AbstractDAO<Order> implements OrderDAO {
     /**
      * Creates a new DAO with a given session provider.
@@ -38,6 +40,15 @@ public class HibernateOrderDAO extends AbstractDAO<Order> implements OrderDAO {
     @Override
     public List<Order> findByUserLogin(String login) {
         return list(namedQuery(Order.FIND_BY_USER_LOGIN).setParameter("login", login));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Order persist(Order order) {
+        log.info(order.toString());
+        return super.persist(order);
     }
 
 }

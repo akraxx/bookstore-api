@@ -86,6 +86,11 @@ public class OrderResource {
     @JacksonFeatures(serializationEnable = {SerializationFeature.INDENT_OUTPUT})
     public OrderDto insertOrder(@Auth User user, @Valid NewOrderDto orderDto) {
         log.info("[{}] - Insert new order [{}]", user, orderDto);
-        return null;
+
+        if(!(orderDto.getOrderLines().size() > 0)) {
+            throw new IllegalArgumentException("No order lines to insert.");
+        }
+
+        return orderService.insertNewOrder(orderDto, user.getLogin());
     }
 }

@@ -25,4 +25,12 @@ public interface OrderDAO {
      * @return The list of orders.
      */
     List<Order> findByUserLogin(String login);
+
+    /**
+     * Persist the {code order} into the database.
+     *
+     * @param order The {@link fr.flst.jee.mmarie.core.Order} to persist.
+     * @return The persisted instance.
+     */
+    Order persist(Order order);
 }
