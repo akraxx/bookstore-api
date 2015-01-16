@@ -1,5 +1,6 @@
 package fr.flst.jee.mmarie.resources.api;
 
+import com.google.common.collect.ImmutableMap;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.GenericType;
 import fr.flst.jee.mmarie.dto.BookDto;
@@ -12,9 +13,12 @@ import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Test;
 
+import javax.ws.rs.core.MediaType;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
+import static org.hamcrest.Matchers.hasEntry;
 import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.core.Is.is;
@@ -22,6 +26,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -68,6 +73,8 @@ public class BookResourceTest extends ResourceTest {
         when(bookService.findAll()).thenReturn(Arrays.asList(bookDto1, bookDto2, bookDto3));
         when(bookService.findById("ISBN-1")).thenReturn(bookDto1);
         when(bookService.findByAuthorId(new IntParam("2"))).thenReturn(Arrays.asList(bookDto2, bookDto3));
+        when(bookService.findByCriteriasLike(ImmutableMap.of("criteriaType", "criteriaValue"))).thenReturn(Arrays.asList(bookDto2, bookDto3));
+        when(bookService.availableCriterias()).thenReturn(ImmutableMap.of("key", "value"));
     }
 
     @After
@@ -105,5 +112,27 @@ public class BookResourceTest extends ResourceTest {
         assertThat(books, hasSize(2));
         assertThat(books, hasItems(bookDto2, bookDto3));
         verify(bookService).findByAuthorId(new IntParam("2"));
+    }
+
+    @Test
+    public void testFindByCriteriasLike() throws Exception {
+        Map<String, String> criterias = ImmutableMap.of("criteriaType", "criteriaValue");
+        List<BookDto> books = resources.client().resource("/book/byCriterias")
+                .entity(Map.class)
+                .type(MediaType.APPLICATION_JSON)
+                .post(new GenericType<List<BookDto>>() {
+                }, criterias);
+        assertThat(books, hasSize(2));
+        assertThat(books, hasItems(bookDto2, bookDto3));
+        verify(bookService).findByCriteriasLike(ImmutableMap.of("criteriaType", "criteriaValue"));
+    }
+
+    @Test
+    public void testAvailableCriterias() throws Exception {
+        Map<String, String> criterias = resources.client().resource("/book/criterias").get(new GenericType<Map<String, String>>() {
+        });
+
+        assertThat(criterias, hasEntry("key", "value"));
+        verify(bookService, times(1)).availableCriterias();
     }
 }

@@ -1,4 +1,4 @@
-<div class="row marketing"> <h4>Books</h4> <table ng-table="tableParams" show-filter="true" class="table"> <tr ng-repeat="book in books"> <td data-title="'ISBN13'" filter="{ 'isbn13': 'text' }" sortable="'isbn13'"> {{book.isbn13}}  <td data-title="'Title'" filter="{ 'title': 'text' }" sortable="'title'"> {{book.title}}  <td data-title="'Unit Price'" filter="{ 'unitPrice': 'unitPrice' }" sortable="'unitPrice'"> {{book.unitPrice}}  <td data-title="'Editor'" filter="{ 'editor': 'text' }" sortable="'editor'"> {{book.editor}}  <td data-title="'Author'" filter="{ 'author': 'text' }" sortable="'author.fullName'"> {{book.author.fullName}}  <td> <button class="btn btn-default" ng-click="openDetails(book, 'lg')">More</button>   </table> <script type="text/ng-template" id="ng-table/filters/unitPrice.html"><div class="row">
+<div class="row marketing"> <h4>Books</h4> <div class="text-right"> <h5><button class="btn btn-primary" ng-click="showAdvanced =! showAdvanced"> <span ng-show="!showAdvanced">Show</span><span ng-show="showAdvanced">Hide</span> Advanced Search</button> </h5> <div ng-show="showAdvanced" class="well text-left"> <div class="row"> <div class="col-sm-4"> <div class="panel panel-default"> <div class="panel-body"> <span ng-show="!isAnyUserCriterias()">No criterions have been added yet.</span> <div class="row" ng-repeat="(type, value) in userCriterias"> <div class="col-lg-12"> <a ng-href="" ng-click="removeCriteria(type)"><span class="glyphicon glyphicon-remove"></span> </a> {{ criterias[type] }} : <b>{{ value }}</b> </div> </div> </div> </div> </div> <div class="col-sm-8"> <form class="form-horizontal" ng-submit="addCriteria(criteriaType, criteriaValue)" name="criteriaForm" novalidate> <div class="col-lg-4"> <select ng-options="id as value for (id, value) in criterias" name="criteriaField" class="form-control" ng-model="criteriaType" ng-required="true"> <p ng-show="criteriaForm.criteriaField.$error.required" class="help-block" style="color: red">Type is required.</p> </div> <div class="col-lg-5"> <input type="text" class="form-control" name="criteriaValue" ng-required="true" ng-minlength="3" ng-maxlength="80" ng-model="criteriaValue" placeholder="Your criteria..."> <p ng-show="criteriaForm.criteriaValue.$error.minlength || criteriaForm.criteriaValue.$error.required" class="help-block" style="color: red">Criteria is too short.</p> <p ng-show="criteriaForm.criteriaValue.$error.maxlength" class="help-block" style="color: red">Criteria is too long.</p> </div> <div class="col-lg-2"> <button class="btn btn-primary" type="submit" ng-disabled="criteriaForm.$invalid">Add criterion</button> </div> </form> </div> </div> </div> </div> <table ng-table="tableParams" show-filter="true" class="table"> <tr ng-repeat="book in books"> <td data-title="'ISBN13'" filter="{ 'isbn13': 'text' }" sortable="'isbn13'"> {{book.isbn13}}  <td data-title="'Title'" filter="{ 'title': 'text' }" sortable="'title'"> {{book.title}}  <td data-title="'Unit Price'" filter="{ 'unitPrice': 'unitPrice' }" sortable="'unitPrice'"> {{book.unitPrice}} €  <td data-title="'Editor'" filter="{ 'editor': 'text' }" sortable="'editor'"> {{book.editor}}  <td data-title="'Author'" filter="{ 'author': 'text' }" sortable="'author.fullName'"> {{book.author.fullName}}  <td> <button class="btn btn-default" ng-click="openDetails(book, 'lg')">More <span class="glyphicon glyphicon-shopping-cart"></span></button>   </table> <script type="text/ng-template" id="ng-table/filters/unitPrice.html"><div class="row">
       <div class="col-lg-5">
         <select name="filter-unitPrice" class="form-control" ng-model="params.operatorPrice"
                 ng-change="reassessUnitPriceFilter()">
@@ -32,6 +32,14 @@
             </div>
             <div class="col-lg-8">
               <b>{{ book.editor }}</b>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-4">
+              <b>Unit price :</b>
+            </div>
+            <div class="col-lg-8">
+              <b>{{ book.unitPrice }} € </b>
             </div>
           </div>
         </div>
@@ -69,6 +77,14 @@
       </div>
     </div>
     <div class="modal-footer">
-      <button class="btn btn-default" ng-click="cancel()">Add to basket</button>
-      <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+      <div style="display: inline-block;">
+        <form class="form-inline" ng-submit="addToCart(quantity)">
+          <input ng-model="quantity" ng-init="quantity = 1" type="number" min="1" max="20" />
+          <span><b>{{ book.unitPrice * quantity | number:2 }} €</b></span>
+          <button type="submit" class="btn btn-default">Add to cart</button>
+        </form>
+      </div>
+      <div style="display: inline-block">
+        <button class="form-inline btn btn-warning" ng-click="cancel()">Cancel</button>
+      </div>
     </div></script> </div>

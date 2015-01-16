@@ -24,4 +24,12 @@ public interface OrderLineDAO {
      * @return List of {@link fr.flst.jee.mmarie.core.OrderLine} which have an order with id {@code orderId}.
      */
     List<OrderLine> findByOrderId(Integer orderId);
+
+    /**
+     * Persist the {code orderLine} into the database.
+     *
+     * @param orderLine The {@link fr.flst.jee.mmarie.core.OrderLine} to persist.
+     * @return The persisted instance.
+     */
+    OrderLine persist(OrderLine orderLine);
 }

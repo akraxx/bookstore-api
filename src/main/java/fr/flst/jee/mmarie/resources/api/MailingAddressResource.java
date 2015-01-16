@@ -17,6 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -72,7 +73,7 @@ public class MailingAddressResource {
      * @param user Logged {@link fr.flst.jee.mmarie.core.User}
      * @param mailingAddressDto {@link fr.flst.jee.mmarie.dto.MailingAddressDto} to update.
      * @return The updated mailingAddress.
-     * @throws com.sun.jersey.api.NotFoundException if the author has not been found.
+     * @throws com.sun.jersey.api.NotFoundException if the address has not been found.
      */
     @PUT
     @Timed
@@ -87,6 +88,31 @@ public class MailingAddressResource {
         if(user.getMailingAddress() == null || user.getMailingAddress().getId() != mailingAddressDto.getId()) {
             userService.updateMailingAddress(user, persistedAddress);
         }
+
+        return mailingAddressService.converts(persistedAddress);
+    }
+
+    /**
+     * <p>
+     *     Insert a {@link fr.flst.jee.mmarie.dto.MailingAddressDto}.
+     * </p>
+     * <p>
+     *     Resource protected with {@link io.dropwizard.auth.Auth}.
+     * </p>
+     *
+     * @param user Logged {@link fr.flst.jee.mmarie.core.User}
+     * @param mailingAddressDto {@link fr.flst.jee.mmarie.dto.MailingAddressDto} to insert.
+     * @return The updated mailingAddress.
+     */
+    @POST
+    @Timed
+    @UnitOfWork
+    @Consumes(MediaType.APPLICATION_JSON)
+    @JacksonFeatures(serializationEnable = {SerializationFeature.INDENT_OUTPUT})
+    public MailingAddressDto insertNew(@Auth User user, @Valid MailingAddressDto mailingAddressDto) {
+        log.info("[{}] - Insert mailing address [{}]", user, mailingAddressDto);
+
+        MailingAddress persistedAddress = mailingAddressService.persist(mailingAddressDto);
 
         return mailingAddressService.converts(persistedAddress);
     }

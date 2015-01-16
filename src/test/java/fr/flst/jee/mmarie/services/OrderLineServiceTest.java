@@ -20,8 +20,10 @@ import java.util.Arrays;
 import java.util.Date;
 
 import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -93,6 +95,7 @@ public class OrderLineServiceTest {
         orderLine2.setBook(book2);
         orderLine2.setOrder(order2);
         when(orderLineDAO.findByOrderId(1)).thenReturn(Arrays.asList(orderLine1));
+        when(orderLineDAO.persist(orderLine1)).thenReturn(orderLine1);
         when(orderLineDAO.findByBookIsbn13("ISBN-2")).thenReturn(Arrays.asList(orderLine2));
 
         when(dtoMappingService.convertsListToDto(Arrays.asList(orderLine1), OrderLineDto.class))
@@ -100,6 +103,9 @@ public class OrderLineServiceTest {
 
         when(dtoMappingService.convertsListToDto(Arrays.asList(orderLine2), OrderLineDto.class))
                 .thenReturn(Arrays.asList(orderLineDto2));
+
+        when(dtoMappingService.convertsToDto(orderLine1, OrderLineDto.class))
+                .thenReturn(orderLineDto1);
 
         orderLineService = new OrderLineService(orderLineDAO, dtoMappingService);
     }
@@ -121,5 +127,14 @@ public class OrderLineServiceTest {
         assertThat(orderLineService.findByBookIsbn13("ISBN-2"),
                 hasItem(orderLineDto2));
         verify(orderLineDAO).findByBookIsbn13("ISBN-2");
+    }
+
+    @Test
+    public void testPersist() throws Exception {
+        OrderLineDto orderLineDto = orderLineService.persist(orderLine1);
+
+        assertThat(orderLineDto, is(orderLineDto1));
+
+        verify(orderLineDAO, times(1)).persist(orderLine1);
     }
 }

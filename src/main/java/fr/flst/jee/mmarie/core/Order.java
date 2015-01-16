@@ -46,7 +46,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(exclude = {"orderDate"})
+@EqualsAndHashCode(exclude = {"orderDate", "orderLines"})
 @ToString(exclude = "orderLines")
 @Builder
 @Entity
@@ -61,7 +61,7 @@ public class Order {
     public static final String FIND_BY_USER_LOGIN = "fr.flst.jee.mmarie.core.Book.findByUserLogin";
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @ManyToOne

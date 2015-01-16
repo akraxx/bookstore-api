@@ -12,11 +12,13 @@ import io.dropwizard.hibernate.UnitOfWork;
 import io.dropwizard.jersey.params.IntParam;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
+import java.util.Map;
 
 /**
  * {@link fr.flst.jee.mmarie.resources.api.BookResource} exposes the {@link fr.flst.jee.mmarie.core.Book}.
@@ -91,6 +93,47 @@ public class BookResource {
     @JacksonFeatures(serializationEnable = {SerializationFeature.INDENT_OUTPUT})
     public List<BookDto> findByAuthorId(@Auth User user, @PathParam("authorId") IntParam authorId) {
         return bookService.findByAuthorId(authorId);
+    }
+
+    /**
+     * <p>
+     *     Find a list of {@link fr.flst.jee.mmarie.dto.BookDto} by some criterias.
+     * </p>
+     * <p>
+     *     Resource protected with {@link io.dropwizard.auth.Auth}.
+     * </p>
+     *
+     * @param user Logged {@link fr.flst.jee.mmarie.core.User}
+     * @param criterias Map of criterias
+     * @return List of books
+     */
+    @POST
+    @Timed
+    @Path("/byCriterias")
+    @UnitOfWork
+    @JacksonFeatures(serializationEnable = {SerializationFeature.INDENT_OUTPUT})
+    public List<BookDto> findByCriteriasLike(@Auth User user, Map<String, String> criterias) {
+        return bookService.findByCriteriasLike(criterias);
+    }
+
+    /**
+     * <p>
+     *     Return all available criterias for a book complex search.
+     * </p>
+     * <p>
+     *     Resource protected with {@link io.dropwizard.auth.Auth}.
+     * </p>
+     *
+     * @param user Logged {@link fr.flst.jee.mmarie.core.User}
+     * @return Map of available criterias for books
+     */
+    @GET
+    @Timed
+    @Path("/criterias")
+    @UnitOfWork
+    @JacksonFeatures(serializationEnable = {SerializationFeature.INDENT_OUTPUT})
+    public Map<String, String> availableCriterias(@Auth User user) {
+        return bookService.availableCriterias();
     }
 
 }

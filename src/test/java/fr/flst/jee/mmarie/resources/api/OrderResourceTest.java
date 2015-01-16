@@ -1,11 +1,14 @@
 package fr.flst.jee.mmarie.resources.api;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.sun.jersey.api.client.GenericType;
 import fr.flst.jee.mmarie.core.MailingAddress;
 import fr.flst.jee.mmarie.core.Order;
 import fr.flst.jee.mmarie.core.User;
+import fr.flst.jee.mmarie.dto.NewOrderDto;
 import fr.flst.jee.mmarie.dto.OrderDto;
+import fr.flst.jee.mmarie.dto.OrderLineDto;
 import fr.flst.jee.mmarie.services.OrderService;
 import io.dropwizard.auth.oauth.OAuthProvider;
 import io.dropwizard.jersey.params.IntParam;
@@ -15,6 +18,7 @@ import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Test;
 
+import javax.ws.rs.core.MediaType;
 import java.util.Date;
 import java.util.List;
 
@@ -23,6 +27,7 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -82,5 +87,32 @@ public class OrderResourceTest extends ResourceTest {
         assertThat(resources.client().resource("/order/mine").get(new GenericType<List<OrderDto>>() {}),
                 hasItem(orderDto1));
         verify(orderService).findByUserLogin(testAuthenticator.getAuthenticatedUser().getLogin());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testInsertOrder_NoLines() throws Exception {
+        NewOrderDto orderDto = NewOrderDto.builder().orderLines(Lists.newArrayList()).build();
+
+        assertThat(resources.client().resource("/order")
+                        .type(MediaType.APPLICATION_JSON)
+                        .post(new GenericType<List<OrderDto>>() {
+                        }, objectMapper.writeValueAsString(orderDto)),
+                hasItem(orderDto1));
+    }
+
+    @Test
+    public void testInsertOrder() throws Exception {
+        NewOrderDto orderDto = NewOrderDto.builder().orderLines(ImmutableList.of(
+                        OrderLineDto.builder().quantity(1).bookIsbn13("ISBN1").build(),
+                        OrderLineDto.builder().quantity(1).bookIsbn13("ISBN2").build())
+        ).build();
+
+        when(orderService.insertNewOrder(orderDto, testAuthenticator.getAuthenticatedUser().getLogin())).thenReturn(new OrderDto());
+
+        resources.client().resource("/order")
+                        .type(MediaType.APPLICATION_JSON)
+                        .post(OrderDto.class, objectMapper.writeValueAsString(orderDto));
+
+        verify(orderService, times(1)).insertNewOrder(orderDto, testAuthenticator.getAuthenticatedUser().getLogin());
     }
 }

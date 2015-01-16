@@ -45,7 +45,7 @@ import java.util.Set;
 @ToString(exclude = "orderLines")
 @Builder
 @Entity
-@EqualsAndHashCode
+@EqualsAndHashCode(of = "isbn13")
 @Table(name = "BOOKS")
 @NamedQueries(value = {
         @NamedQuery(

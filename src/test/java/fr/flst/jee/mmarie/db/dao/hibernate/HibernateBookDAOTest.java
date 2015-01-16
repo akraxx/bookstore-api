@@ -1,6 +1,7 @@
 package fr.flst.jee.mmarie.db.dao.hibernate;
 
 import com.google.common.base.Optional;
+import com.google.common.collect.ImmutableMap;
 import fr.flst.jee.mmarie.core.Book;
 import org.hamcrest.Matchers;
 import org.junit.Before;
@@ -10,6 +11,7 @@ import java.util.List;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasItems;
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.core.Is.is;
@@ -50,5 +52,16 @@ public class HibernateBookDAOTest extends AbstractDAOTestCase {
         assertThat(books, hasItems(Matchers.<Book>hasProperty("isbn13", equalTo("978-1430219569")),
                 Matchers.<Book>hasProperty("isbn13", equalTo("978-1932394887")),
                 Matchers.<Book>hasProperty("isbn13", equalTo("978-2070415731"))));
+    }
+
+    @Test
+    public void testFindByCriteriasLike() throws Exception {
+        List<Book> books = hibernateBookDAO.findByCriteriasLike(
+                ImmutableMap.of(
+                        "title", "java",
+                        "author.firstName", "me"));
+
+        assertThat(books, hasSize(1));
+        assertThat(books.get(0).getIsbn13(), is("978-1932394887"));
     }
 }
