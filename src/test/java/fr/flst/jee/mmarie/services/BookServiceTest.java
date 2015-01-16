@@ -1,6 +1,7 @@
 package fr.flst.jee.mmarie.services;
 
 import com.google.common.base.Optional;
+import com.google.common.collect.ImmutableMap;
 import com.sun.jersey.api.NotFoundException;
 import fr.flst.jee.mmarie.core.Author;
 import fr.flst.jee.mmarie.core.Book;
@@ -94,7 +95,7 @@ public class BookServiceTest {
         when(dtoMappingService.convertsListToDto(Arrays.asList(book2, book3), BookDto.class))
                 .thenReturn(Arrays.asList(bookDto2, bookDto3));
 
-        bookService = new BookService(bookDAO, dtoMappingService);
+        bookService = new BookService(bookDAO, dtoMappingService, ImmutableMap.of("title", "Title", "author.firstName", "Author's First Name"));
     }
 
     @After
