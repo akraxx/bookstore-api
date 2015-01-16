@@ -97,14 +97,14 @@ public class BookResource {
 
     /**
      * <p>
-     *     Find a list of {@link fr.flst.jee.mmarie.dto.BookDto} by the {@code title}.
+     *     Find a list of {@link fr.flst.jee.mmarie.dto.BookDto} by some criterias.
      * </p>
      * <p>
      *     Resource protected with {@link io.dropwizard.auth.Auth}.
      * </p>
      *
      * @param user Logged {@link fr.flst.jee.mmarie.core.User}
-     * @param title Title of the {@link fr.flst.jee.mmarie.core.Book} like
+     * @param criterias Map of criterias
      * @return List of books
      */
     @POST
@@ -112,7 +112,7 @@ public class BookResource {
     @Path("/byCriterias")
     @UnitOfWork
     @JacksonFeatures(serializationEnable = {SerializationFeature.INDENT_OUTPUT})
-    public List<BookDto> findByTitleLike(Map<String, String> criterias) {
+    public List<BookDto> findByTitleLike(@Auth User user, Map<String, String> criterias) {
         return bookService.findByCriteriasLike(criterias);
     }
 
@@ -125,7 +125,6 @@ public class BookResource {
      * </p>
      *
      * @param user Logged {@link fr.flst.jee.mmarie.core.User}
-     * @param title Title of the {@link fr.flst.jee.mmarie.core.Book} like
      * @return Map of available criterias for books
      */
     @GET
@@ -133,7 +132,7 @@ public class BookResource {
     @Path("/criterias")
     @UnitOfWork
     @JacksonFeatures(serializationEnable = {SerializationFeature.INDENT_OUTPUT})
-    public Map<String, String> availableCriterias() {
+    public Map<String, String> availableCriterias(@Auth User user) {
         return bookService.availableCriterias();
     }
 
