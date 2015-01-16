@@ -168,4 +168,32 @@ public class MailingAddressResourceTest extends ResourceTest {
         verify(mailingAddressService, times(1)).converts(mailingAddress);
         verify(userService, times(0)).updateMailingAddress(testAuthenticator.getAuthenticatedUser(), mailingAddress);
     }
+
+    @Test
+    public void testInsertNew() throws Exception {
+        MailingAddressDto addressDto = MailingAddressDto.builder()
+                .zip("59000")
+                .city("Lille")
+                .id(1)
+                .line1("41 bd vauban")
+                .build();
+
+        MailingAddress mailingAddress = MailingAddress.builder()
+                .zip("59000")
+                .city("Lille")
+                .line1("41 bd vauban")
+                .build();
+
+        when(mailingAddressService.persist(addressDto)).thenReturn(mailingAddress);
+        when(mailingAddressService.converts(mailingAddress)).thenReturn(addressDto);
+
+        assertThat(resources.client().resource("/mailingAddress")
+                        .accept(MediaType.APPLICATION_JSON)
+                        .type(MediaType.APPLICATION_JSON)
+                        .post(MailingAddressDto.class, objectMapper.writeValueAsString(addressDto)),
+                is(addressDto));
+
+        verify(mailingAddressService, times(1)).persist(addressDto);
+        verify(mailingAddressService, times(1)).converts(mailingAddress);
+    }
 }

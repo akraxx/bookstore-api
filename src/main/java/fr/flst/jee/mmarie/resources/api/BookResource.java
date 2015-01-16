@@ -112,7 +112,7 @@ public class BookResource {
     @Path("/byCriterias")
     @UnitOfWork
     @JacksonFeatures(serializationEnable = {SerializationFeature.INDENT_OUTPUT})
-    public List<BookDto> findByTitleLike(@Auth User user, Map<String, String> criterias) {
+    public List<BookDto> findByCriteriasLike(@Auth User user, Map<String, String> criterias) {
         return bookService.findByCriteriasLike(criterias);
     }
 

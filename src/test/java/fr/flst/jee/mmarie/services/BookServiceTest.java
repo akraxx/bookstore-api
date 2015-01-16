@@ -24,6 +24,7 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -82,6 +83,8 @@ public class BookServiceTest {
 
     private BookService bookService;
 
+    private ImmutableMap<String, String> criterias =
+            ImmutableMap.of("title", "Title", "author.firstName", "Author's First Name");
     @Before
     public void setup() {
         when(bookDAO.findAll()).thenReturn(Arrays.asList(book1, book2, book3));
@@ -95,7 +98,7 @@ public class BookServiceTest {
         when(dtoMappingService.convertsListToDto(Arrays.asList(book2, book3), BookDto.class))
                 .thenReturn(Arrays.asList(bookDto2, bookDto3));
 
-        bookService = new BookService(bookDAO, dtoMappingService, ImmutableMap.of("title", "Title", "author.firstName", "Author's First Name"));
+        bookService = new BookService(bookDAO, dtoMappingService, criterias);
     }
 
     @After
@@ -131,4 +134,24 @@ public class BookServiceTest {
         verify(bookDAO).findByAuthorId(2);
     }
 
+    @Test
+    public void testFindByCriteriasLike() throws Exception {
+        ImmutableMap<String, String> myCriterias = ImmutableMap.of("title", "max");
+        bookService.findByCriteriasLike(myCriterias);
+
+        verify(bookDAO, times(1)).findByCriteriasLike(myCriterias);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testFindByCriteriasLike_BadCriteria() throws Exception {
+        ImmutableMap<String, String> myCriterias = ImmutableMap.of("badCriteria", "max");
+        bookService.findByCriteriasLike(myCriterias);
+
+        verify(bookDAO, times(0)).findByCriteriasLike(myCriterias);
+    }
+
+    @Test
+    public void testAvailableCriterias() throws Exception {
+        assertThat(bookService.availableCriterias(), is(criterias));
+    }
 }

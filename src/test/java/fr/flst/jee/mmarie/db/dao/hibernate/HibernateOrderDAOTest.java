@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import static org.hamcrest.Matchers.allOf;
@@ -53,6 +54,20 @@ public class HibernateOrderDAOTest extends AbstractDAOTestCase {
                 )
         );
 
+    }
+
+    @Test
+    public void testPersist() throws Exception {
+        Order order = Order.builder()
+                .orderDate(new Date())
+                .build();
+
+        hibernateOrderDAO.persist(order);
+
+        Optional<Order> insertedOrder = hibernateOrderDAO.findById(3);
+
+        assertThat(insertedOrder.isPresent(), is(true));
+        assertThat(insertedOrder.get(), is(order));
     }
 
 }

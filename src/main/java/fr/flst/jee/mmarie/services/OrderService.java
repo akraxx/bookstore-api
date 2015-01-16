@@ -30,7 +30,6 @@ public class OrderService {
     private final MailingAddressService mailingAddressService;
     private final UserService userService;
     private final BookService bookService;
-    private final OrderLineService orderLineService;
 
     public Order findSafely(Integer id) {
         final Optional<Order> order = orderDAO.findById(id);
@@ -45,14 +44,12 @@ public class OrderService {
                         DtoMappingService dtoMappingService,
                         MailingAddressService mailingAddressService,
                         UserService userService,
-                        BookService bookService,
-                        OrderLineService orderLineService) {
+                        BookService bookService) {
         this.orderDAO = orderDAO;
         this.dtoMappingService = dtoMappingService;
         this.mailingAddressService = mailingAddressService;
         this.userService = userService;
         this.bookService = bookService;
-        this.orderLineService = orderLineService;
     }
 
     public OrderDto findById(IntParam orderId) {
@@ -70,7 +67,6 @@ public class OrderService {
         order.setOrderDate(new Date());
         order.setUser(userService.findSafely(login));
         order.setOrderLines(new HashSet<>());
-        Order persistedOrder = orderDAO.persist(order);
 
         for (OrderLineDto orderLineDto : newOrderDto.getOrderLines()) {
 
@@ -79,9 +75,9 @@ public class OrderService {
             orderLine.setPk(orderLineId);
             orderLine.setQuantity(orderLineDto.getQuantity());
 
-            persistedOrder.getOrderLines().add(orderLine);
+            order.getOrderLines().add(orderLine);
         }
 
-        return dtoMappingService.convertsToDto(persistedOrder, OrderDto.class);
+        return dtoMappingService.convertsToDto(orderDAO.persist(order), OrderDto.class);
     }
 }
